@@ -72,9 +72,6 @@ public class Capitulo implements ICapitulo,Serializable{
 		this.reminders = remiders;
 	}
 	
-
-	
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -98,6 +95,7 @@ public class Capitulo implements ICapitulo,Serializable{
 			return false;
 		return true;
 	}
+	
 	@Override
 	public String toString() {
 		return "Capitulo [id=" + id + ", name=" + name + ", text=" + text + ", parts=" + parts + ", reminders="
