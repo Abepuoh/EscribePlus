@@ -1,9 +1,6 @@
 package model.DataObject;
 
 
-public class Usuario {
-
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -95,6 +92,7 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @return the id
      */
+    @Override
     public Long getId() {
         return id;
     }
@@ -102,13 +100,15 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @param id the id to set
      */
-    public void setId(Long id) {
+    @Override
+    public void setID(Long id) {
         this.id = id;
     }
 
     /**
      * @return the nombre
      */
+    @Override
     public String getNombre() {
         return nombre;
     }
@@ -116,6 +116,7 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @param nombre the nombre to set
      */
+    @Override
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -123,6 +124,7 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @return the email
      */
+    @Override
     public String getEmail() {
         return email;
     }
@@ -130,6 +132,7 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @param email the email to set
      */
+    @Override
     public void setEmail(String email) {
         this.email = email;
     }
@@ -137,6 +140,7 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @return the contraseña
      */
+    @Override
     public String getContraseña() {
         return contraseña;
     }
@@ -144,6 +148,7 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @param contraseña the contraseña to set
      */
+    @Override
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
@@ -151,14 +156,16 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @return the phone
      */
-    public String getPhone() {
+    @Override
+    public String getTelefono() {
         return phone;
     }
 
     /**
      * @param phone the phone to set
      */
-    public void setPhone(String phone) {
+    @Override
+    public void setTelefono(String phone) {
         this.phone = phone;
     }
 

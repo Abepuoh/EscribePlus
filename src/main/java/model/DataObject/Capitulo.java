@@ -1,6 +1,5 @@
 package model.DataObject;
 
-public class Capitulo {
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -101,7 +100,8 @@ public class Capitulo implements ICapitulo,Serializable{
 	@Override
 	public String toString() {
 		return "Capitulo [id=" + id + ", name=" + name + ", text=" + text + ", parts=" + parts + ", reminders="
-				+ reminders +
+				+ reminders;
 	
 	
+}
 }
