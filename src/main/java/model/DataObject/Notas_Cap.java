@@ -4,12 +4,16 @@ package model.DataObject;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import model.IDataObject.INotas_cap;
 
+@Entity
+@Table(name="Notas_Cap")
 public class Notas_Cap implements INotas_cap, Serializable{
 
 
