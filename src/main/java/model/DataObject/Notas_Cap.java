@@ -1,8 +1,6 @@
 package model.DataObject;
 
 
-public class Notas_Cap {
-
 import java.io.Serializable;
 
 import javax.persistence.Column;
