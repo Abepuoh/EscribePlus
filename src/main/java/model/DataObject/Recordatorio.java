@@ -1,7 +1,5 @@
 package model.DataObject;
 
-import model.IDataObject.IRecordatorio;
-
-public class Recordatorio implements IRecordatorio {
+public class Recordatorio  {
 
 }
