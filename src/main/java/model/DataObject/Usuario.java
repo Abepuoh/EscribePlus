@@ -1,10 +1,9 @@
 package model.DataObject;
 
-
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +15,8 @@ import javax.persistence.Table;
 import model.IDataObject.IUsuario;
 
 @Entity
-@Table(name="usuario")
-
-public class Usuario implements IUsuario, Serializable {
+@Table(name="User")
+public class Usuario implements Serializable {
 
     private static long serialVersionUID = 1L;
     
@@ -26,53 +24,73 @@ public class Usuario implements IUsuario, Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private Long id;
-    @Column(name="nombre")
-    private String nombre;
+    @Column(name="name")
+    private String name;
     @Column(name="email")
     private String email;
-    @Column(name="contraseña")
-    private String contraseña;
+    @Column(name="password")
+    private String password;
     @Column(name="phone")
     private String phone;
-    @OneToMany(mappedBy = "usuario", cascade = { CascadeType.ALL }, orphanRemoval = true)
-    private Set<Libro> books = new HashSet<Libro>();
+    @OneToMany(mappedBy = "User", cascade = { CascadeType.ALL }, orphanRemoval = true)
+    private List<Libro> books = new ArrayList<Libro>();
+    
 
     public Usuario() {
-        this(-1L,"","","","", new HashSet<Libro>());
+        this(-1L,"","","","", new ArrayList<Libro>());
     }
 
-    public Usuario(Long id, String nombre, String email, String contraseña, String phone) {
+    public Usuario(Long id, String name, String email, String password, String phone) {
         this.id = id;
-        this.nombre = nombre;
+        this.name = name;
         this.email = email;
-        this.contraseña = contraseña;
+        this.password = password;
         this.phone = phone;
     }
     
-    public Usuario(String nombre, String email, String contraseña, String phone) {
+    public Usuario(String name, String email, String password, String phone) {
         this.id = -1L;
-        this.nombre = nombre;
+        this.name = name;
         this.email = email;
-        this.contraseña = contraseña;
+        this.password = password;
         this.phone = phone;
     }
     
-    public Usuario(Long id, String nombre, String email, String contraseña, String phone, Set<Libro> books) {
+    public Usuario(Long id, String name, String email, String password, String phone, List<Libro> books) {
         this.id = id;
-        this.nombre = nombre;
+        this.name = name;
         this.email = email;
-        this.contraseña = contraseña;
+        this.password = password;
         this.phone = phone;
         this.books = books;
+        
+        
     }
     
-    public Usuario(String nombre, String email, String contraseña, String phone, Set<Libro> books) {
-        this.id = -1L;
-        this.nombre = nombre;
-        this.email = email;
-        this.contraseña = contraseña;
-        this.phone = phone;
-        this.books = books;
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (getId() == null) {
+			if (other.getId() != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.getId());
+        return hash;
     }
 
     /**
@@ -92,7 +110,6 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @return the id
      */
-    @Override
     public Long getId() {
         return id;
     }
@@ -100,31 +117,27 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @param id the id to set
      */
-    @Override
-    public void setID(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the nombre
+     * @return the name
      */
-    @Override
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @param nombre the nombre to set
+     * @param name the name to set
      */
-    @Override
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
      * @return the email
      */
-    @Override
     public String getEmail() {
         return email;
     }
@@ -132,85 +145,55 @@ public class Usuario implements IUsuario, Serializable {
     /**
      * @param email the email to set
      */
-    @Override
     public void setEmail(String email) {
         this.email = email;
     }
 
     /**
-     * @return the contraseña
+     * @return the password
      */
-    @Override
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param contraseña the contraseña to set
+     * @param password the password to set
      */
-    @Override
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
      * @return the phone
      */
-    @Override
-    public String getTelefono() {
+    public String getPhone() {
         return phone;
     }
 
     /**
      * @param phone the phone to set
      */
-    @Override
-    public void setTelefono(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.id);
-        return hash;
     }
 
     /**
      * @return the books
      */
-    public Set<Libro> getBooks() {
+    public List<Libro> getBooks() {
         return books;
     }
 
     /**
      * @param books the books to set
      */
-    public void setBooks(Set<Libro> books) {
+    public void setBooks(List<Libro> books) {
         this.books = books;
     }
-   
+
+    
+
+    
+    
 
 }
