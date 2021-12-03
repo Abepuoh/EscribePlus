@@ -17,17 +17,10 @@ public class Partes {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //Autoincrement
 	@Column(name="Id")
 	private Long id;
-<<<<<<< HEAD
 	@Column(name="nombre")
 	private String nombre;
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_libro")
-=======
-	@Column(name="Nombre")
-	private String nombre;
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="Id_libro")
->>>>>>> 96cb7f4fb3bda393f46a4ecca6cccb893091726e
 	private Libro libro;
 	public Partes(Long id, String nombre, Libro libro) {
 		super();
