@@ -31,7 +31,7 @@ public class Personaje implements IPersonaje, Serializable{
 	private String alineamiento;
 	@Column(name = "foto")
 	private String foto;
-	@ManyToMany
+	@ManyToMany(mappedBy = "PersonajeLibro")
 	private Libro libroRef;
 	
 	public Personaje() {

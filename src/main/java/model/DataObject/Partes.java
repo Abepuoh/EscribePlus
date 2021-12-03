@@ -16,13 +16,13 @@ public class Partes {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //Autoincrement
 	@Column(name="Id")
-	private int id;
+	private Long id;
 	@Column(name="nombre")
 	private String nombre;
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_libro")
 	private Libro libro;
-	public Partes(int id, String nombre, Libro libro) {
+	public Partes(Long id, String nombre, Libro libro) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -36,12 +36,12 @@ public class Partes {
 	}
 
 	public Partes() {
-		super();
+		this(-1L,"Default",new Libro());
 	}
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -57,4 +57,28 @@ public class Partes {
 		this.libro = libro;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Partes other = (Partes) obj;
+		if (id != other.id)
+			return false;
+		if (libro == null) {
+			if (other.libro != null)
+				return false;
+		} else if (!libro.equals(other.libro))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+	}
+	
 }
