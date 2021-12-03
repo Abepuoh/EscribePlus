@@ -1,5 +1,8 @@
 package model.DataObject;
 
+
+public class Notas_Cap {
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -10,6 +13,7 @@ import javax.persistence.Id;
 import model.IDataObject.INotas_cap;
 
 public class Notas_Cap implements INotas_cap, Serializable{
+
 
 	private static final long serialVersionUID = 1L;
 	@Id

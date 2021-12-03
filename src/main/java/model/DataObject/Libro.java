@@ -1,5 +1,7 @@
 package model.DataObject;
 
+public class Libro   {
+
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.CascadeType;

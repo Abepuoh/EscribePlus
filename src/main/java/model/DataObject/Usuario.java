@@ -1,5 +1,9 @@
 package model.DataObject;
 
+
+public class Usuario {
+
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -200,6 +204,6 @@ public class Usuario implements IUsuario, Serializable {
     public void setBooks(Set<Libro> books) {
         this.books = books;
     }
-    
+   
 
 }
