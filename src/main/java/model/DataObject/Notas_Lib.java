@@ -65,7 +65,6 @@ public class Notas_Lib implements INotas_lib, Serializable {
 		this.libro = libro;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -75,7 +74,7 @@ public class Notas_Lib implements INotas_lib, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Notas_Lib other = (Notas_Lib) obj;
-		return Objects.equals(id, other.id);
+		return Objects.equals(id, other.id) && Objects.equals(texto, other.texto);
 	}
 
 	@Override

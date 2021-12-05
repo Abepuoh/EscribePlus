@@ -2,6 +2,7 @@ package model.DataObject;
 
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Notas_Cap implements INotas_cap, Serializable{
 	
 	
 	public Notas_Cap() {
-		this(-1L,"");
+		this(-1L,"Por defecto");
 	}
 	public Notas_Cap(String text) {
 		this(-1L,text);
@@ -45,18 +46,7 @@ public class Notas_Cap implements INotas_cap, Serializable{
 	public void setText(String text) {
 		this.text = text;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((text == null) ? 0 : text.hashCode());
-		return result;
-	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -66,19 +56,8 @@ public class Notas_Cap implements INotas_cap, Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Notas_Cap other = (Notas_Cap) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (text == null) {
-			if (other.text != null)
-				return false;
-		} else if (!text.equals(other.text))
-			return false;
-		return true;
+		return Objects.equals(id, other.id) && Objects.equals(text, other.text);
 	}
-	
 	@Override
 	public String toString() {
 		return "Notas_Cap [id=" + id + ", text=" + text + "]";

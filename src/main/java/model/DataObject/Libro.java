@@ -3,6 +3,7 @@ package model.DataObject;
 
 import java.io.Serializable;
 import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 import model.IDataObject.ILibro;
 
 
@@ -20,26 +22,28 @@ import model.IDataObject.ILibro;
 @Table(name="libro")
 
 public class Libro implements ILibro, Serializable  {
-private static long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     protected Long id;
-    @Column(name="title")
+    @Column(name="tittle")
     protected String titulo;
     @Column(name="year")
     protected int año;
-    @Column(name="genero")
+    @Column(name="genre")
     protected String genero;
-    @Column(name="descripcion")
+    @Column(name="description")
     protected String descripcion;
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
+    
 
     public Libro() {
-        this(-1L,"",-1,"","");
+        this(-1L,"Por defecto",-1,"Por defecto","Por defecto");
     }
 
     public Libro(Long id, String titulo, int año, String genero, String descripcion) {
@@ -56,20 +60,6 @@ private static long serialVersionUID = 1L;
         this.año = año;
         this.genero = genero;
         this.descripcion = descripcion;
-    }
-
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    /**
-     * @param aSerialVersionUID the serialVersionUID to set
-     */
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
     }
 
     /**
@@ -146,9 +136,8 @@ private static long serialVersionUID = 1L;
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    @Override
+  
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -157,22 +146,10 @@ private static long serialVersionUID = 1L;
 		if (getClass() != obj.getClass())
 			return false;
 		Libro other = (Libro) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+		return Objects.equals(id, other.id) && Objects.equals(titulo, other.titulo);
 	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    /**
+	/**
      * @return the usuario
      */
     public Usuario getUsuario() {
