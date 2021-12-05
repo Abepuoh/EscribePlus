@@ -31,6 +31,9 @@ public class Libro implements ILibro, Serializable  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 68d7724192480b27cd38fe1e96888a08d8eb095f
     protected Long id;
     @Column(name="tittle")
     protected String titulo;
@@ -47,6 +50,7 @@ public class Libro implements ILibro, Serializable  {
 
     public Libro() {
         this(-1L,"Por defecto",-1,"Por defecto","Por defecto");
+<<<<<<< HEAD
 =======
     private Long id;
     @Column(name="title")
@@ -69,6 +73,8 @@ public class Libro implements ILibro, Serializable  {
     public Libro() {
         this(-1L,"",-1,"","", -1, new ArrayList<Notas_Lib>(), new ArrayList<Partes>());
 >>>>>>> 0d0eddc24703da245581c1c5c43c99c109e4e8ee
+=======
+>>>>>>> 68d7724192480b27cd38fe1e96888a08d8eb095f
     }
     
     public Libro(Long id, String title, int year, String genre, String description, int id_user, List<Notas_Lib> notas_libro, List<Partes> partes) {
@@ -205,6 +211,19 @@ public class Libro implements ILibro, Serializable  {
         return id_user;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+    /**
+     * @param id_user the id_user to set
+     */
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
+
+    /**
+     * @return the notas_libro
+>>>>>>> 68d7724192480b27cd38fe1e96888a08d8eb095f
   
 	@Override
 	public boolean equals(Object obj) {
@@ -220,6 +239,7 @@ public class Libro implements ILibro, Serializable  {
 
 	/**
      * @return the usuario
+<<<<<<< HEAD
 =======
 
     /**
@@ -232,6 +252,8 @@ public class Libro implements ILibro, Serializable  {
     /**
      * @return the notas_libro
 >>>>>>> 0d0eddc24703da245581c1c5c43c99c109e4e8ee
+=======
+>>>>>>> 68d7724192480b27cd38fe1e96888a08d8eb095f
      */
     public List<Notas_Lib> getBook_notes() {
         return book_notes;

@@ -2,6 +2,7 @@ package model.DataObject;
 
 import java.io.Serializable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -9,6 +10,11 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.List;
 >>>>>>> 0d0eddc24703da245581c1c5c43c99c109e4e8ee
+=======
+
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 68d7724192480b27cd38fe1e96888a08d8eb095f
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -95,10 +101,13 @@ public class Capitulo implements ICapitulo, Serializable{
 		return Objects.equals(id, other.id) || Objects.equals(name, other.name);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 	
 =======
 >>>>>>> 0d0eddc24703da245581c1c5c43c99c109e4e8ee
+=======
+>>>>>>> 68d7724192480b27cd38fe1e96888a08d8eb095f
 	@Override
 	public String toString() {
 		return "Capitulo [id=" + id + ", name=" + name + ", text=" + text + ", parts=" + parts + "]";
