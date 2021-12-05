@@ -1,20 +1,29 @@
 package model.DataObject;
 
-
 import java.io.Serializable;
+<<<<<<< HEAD
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> 0d0eddc24703da245581c1c5c43c99c109e4e8ee
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import model.IDataObject.ICapitulo;
 
-public class Capitulo implements ICapitulo,Serializable{
+@Entity
+@Table(name="Capitulo")
+public class Capitulo implements ICapitulo, Serializable{
 
 	private static long serialVersionUID = 1L;
 	@Id
@@ -26,52 +35,48 @@ public class Capitulo implements ICapitulo,Serializable{
 	@Column(name="text")
 	protected String text;
 	@OneToMany(mappedBy = "capitulo",cascade = CascadeType.ALL, orphanRemoval = true)
-	protected Set<Notas_Cap> parts;
-	@OneToMany(mappedBy = "recordatorio",cascade = CascadeType.ALL, orphanRemoval = true)
-	protected Set<Recordatorio> reminders;
+	protected List<Notas_Cap> parts;
 	
+	
+
+
 	public Capitulo() {
-		this(-1L,"","",new HashSet<Notas_Cap>(),new HashSet<Recordatorio>());
+		this(-1L,"","",new ArrayList<Notas_Cap>());
 	}
 	public Capitulo(String name, String text) {
-		this(-1L,name,text,new HashSet<Notas_Cap>(),new HashSet<Recordatorio>());
+		this(-1L,name,text,new ArrayList<Notas_Cap>());
 	}
 	public Capitulo(String name, String text, Notas_Cap Note_cap) {
 		this.id = -1L;
 		this.name = name;
 		this.text = text;
-		this.parts = new HashSet<Notas_Cap>();
+		this.parts = new ArrayList<Notas_Cap>();
 		this.parts.add(Note_cap);
-		this.reminders = new HashSet<Recordatorio>();
 	}
-	public Capitulo(String name, String text, Set<Notas_Cap> part) {
+	public Capitulo(String name, String text, List<Notas_Cap> part) {
 		this.id = -1L;
 		this.name = name;
 		this.text = text;
 		this.parts = part;
-		this.reminders = new HashSet<Recordatorio>();
 	}
 	public Capitulo(Long id, String name, String text) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
-		this.parts = new HashSet<Notas_Cap>();
-		this.reminders = new HashSet<Recordatorio>();
+		this.parts = new ArrayList<Notas_Cap>();
 	}
 	public Capitulo(Long id, String name, String text, Notas_Cap Note_cap) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
-		this.parts = new HashSet<Notas_Cap>();
+		this.parts = new ArrayList<Notas_Cap>();
 		this.parts.add(Note_cap);
-		this.reminders = new HashSet<Recordatorio>();
 	}
-	public Capitulo(Long id, String name, String text, Set<Notas_Cap> part, Set<Recordatorio> remiders) {
+	public Capitulo(Long id, String name, String text, List<Notas_Cap> part) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
 		this.parts = part;
-		this.reminders = remiders;
 	}
 	
 	@Override
@@ -89,13 +94,14 @@ public class Capitulo implements ICapitulo,Serializable{
 		Capitulo other = (Capitulo) obj;
 		return Objects.equals(id, other.id) || Objects.equals(name, other.name);
 	}
+<<<<<<< HEAD
 	
 	
+=======
+>>>>>>> 0d0eddc24703da245581c1c5c43c99c109e4e8ee
 	@Override
 	public String toString() {
-		return "Capitulo [id=" + id + ", name=" + name + ", text=" + text + ", parts=" + parts + ", reminders="
-				+ reminders;
+		return "Capitulo [id=" + id + ", name=" + name + ", text=" + text + ", parts=" + parts + "]";
+	}
 	
-	
-}
 }
