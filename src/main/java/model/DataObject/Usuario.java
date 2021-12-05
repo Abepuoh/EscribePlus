@@ -12,13 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import model.IDataObject.IUsuario;
 
 @Entity
 @Table(name="User")
 public class Usuario implements Serializable {
 
-    private static long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -91,20 +92,6 @@ public class Usuario implements Serializable {
         int hash = 7;
         hash = 41 * hash + Objects.hashCode(this.getId());
         return hash;
-    }
-
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    /**
-     * @param aSerialVersionUID the serialVersionUID to set
-     */
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
     }
 
     /**

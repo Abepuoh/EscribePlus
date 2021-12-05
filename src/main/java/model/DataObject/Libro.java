@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import model.IDataObject.ILibro;
 
 
@@ -22,31 +24,28 @@ import model.IDataObject.ILibro;
 @Table(name="Book")
 
 public class Libro implements ILibro, Serializable  {
-private static long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long id;
-    @Column(name="title")
-    private String title;
+    protected Long id;
+    @Column(name="tittle")
+    protected String titulo;
     @Column(name="year")
-    private int year;
+    protected int año;
     @Column(name="genre")
-    private String genre;
+    protected String genero;
     @Column(name="description")
-    private String description;
+    protected String descripcion;
     @ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    @JoinColumn(name = "id_user")
-    private int id_user;
-    @OneToMany(mappedBy = "Book", cascade = { CascadeType.ALL }, orphanRemoval = true)
-    private List<Notas_Lib> book_notes = new ArrayList<Notas_Lib>();
-    @OneToMany(mappedBy = "Book", cascade = { CascadeType.ALL }, orphanRemoval = true)
-    private List<Partes> parts = new ArrayList<Partes>();
+    @JoinColumn(name = "id_usuario")
+    private Usuario usuario;
     
 
     public Libro() {
-        this(-1L,"",-1,"","", -1, new ArrayList<Notas_Lib>(), new ArrayList<Partes>());
+        this(-1L,"Por defecto",-1,"Por defecto","Por defecto");
     }
     
     public Libro(Long id, String title, int year, String genre, String description, int id_user, List<Notas_Lib> notas_libro, List<Partes> partes) {
@@ -104,20 +103,6 @@ private static long serialVersionUID = 1L;
         int hash = 7;
         hash = 29 * hash + Objects.hashCode(this.getId());
         return hash;
-    }
-
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    /**
-     * @param aSerialVersionUID the serialVersionUID to set
-     */
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
     }
 
     /**
@@ -206,6 +191,21 @@ private static long serialVersionUID = 1L;
 
     /**
      * @return the notas_libro
+  
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Libro other = (Libro) obj;
+		return Objects.equals(id, other.id) && Objects.equals(titulo, other.titulo);
+	}
+
+	/**
+     * @return the usuario
      */
     public List<Notas_Lib> getBook_notes() {
         return book_notes;
