@@ -4,14 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import java.util.Set;
 
-=======
->>>>>>> 0d0eddc24703da245581c1c5c43c99c109e4e8ee
-=======
->>>>>>> 68d7724192480b27cd38fe1e96888a08d8eb095f
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,8 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import model.IDataObject.IUsuario;
 
 @Entity
 @Table(name="User")
@@ -76,8 +67,6 @@ public class Usuario implements Serializable {
         
     }
     
-    
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
