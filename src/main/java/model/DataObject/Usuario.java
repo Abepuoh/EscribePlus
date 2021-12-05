@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import model.IDataObject.IUsuario;
 
 @Entity
 @Table(name="User")
 public class Usuario implements Serializable {
 
-    private static long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,8 +67,6 @@ public class Usuario implements Serializable {
         
     }
     
-    
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -91,20 +89,6 @@ public class Usuario implements Serializable {
         int hash = 7;
         hash = 41 * hash + Objects.hashCode(this.getId());
         return hash;
-    }
-
-    /**
-     * @return the serialVersionUID
-     */
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    /**
-     * @param aSerialVersionUID the serialVersionUID to set
-     */
-    public static void setSerialVersionUID(long aSerialVersionUID) {
-        serialVersionUID = aSerialVersionUID;
     }
 
     /**
