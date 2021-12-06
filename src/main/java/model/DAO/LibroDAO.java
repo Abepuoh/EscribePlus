@@ -24,7 +24,6 @@ public class LibroDAO implements ILibroDAO{
 	private String getById = "SELECT p FROM Book p WHERE p.id = :idLibro";
 	private String getByName = "SELECT p FROM Book p WHERE p.nombre = :nombreLibro";
 	private String getAllNotes = "SELECT p.book_notes FROM Book p ";
-	private String getNote = "SELECT p.book_notes FROM Book p WHERE p.bo";
     private String getFromAuthor="SELECT p FROM Partes p WHERE p.id_libro=:idlibro";
 
 
