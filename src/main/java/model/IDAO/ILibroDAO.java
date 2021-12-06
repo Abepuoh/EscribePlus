@@ -4,9 +4,10 @@ import java.util.List;
 
 import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
+import model.DataObject.Usuario;
 import model.IDataObject.ILibro;
 
-public interface ILibroDAO  extends IDAO<ILibro, Long>{
+public interface ILibroDAO  extends IDAO<Libro, Long>{
     /**
      * Metodo que devuelve un libro a partir de su nombre
      * @param name Nombre del libro
@@ -19,7 +20,7 @@ public interface ILibroDAO  extends IDAO<ILibro, Long>{
      * @param author
      * @return
      */
-    public List<Libro> getBooksByAuthor(String author) throws DAOException;
+    public List<Libro> getBooksByAuthor(Usuario author) throws DAOException;
     /**
      * Metodo que devuelve una lista de notas.
      * @return la listas de libros

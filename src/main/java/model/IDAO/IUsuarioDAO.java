@@ -3,7 +3,7 @@ package model.IDAO;
 import model.DataObject.Usuario;
 import model.IDataObject.IUsuario;
 
-public interface IUsuarioDAO extends IDAO<IUsuario, Long>{
+public interface IUsuarioDAO extends IDAO<Usuario, Long>{
 	
     /**
 	 * Metodo que busca un usuario por su nombre 

@@ -3,6 +3,7 @@ package model.IDAO;
 import java.util.List;
 
 import model.DataObject.Personaje;
+import model.DataObject.Usuario;
 import model.IDataObject.IPersonaje;
 
 public interface IPersonajeDAO extends IDAO<IPersonaje, Long>{
@@ -16,5 +17,5 @@ public interface IPersonajeDAO extends IDAO<IPersonaje, Long>{
      * Metodo que devuele una lista de personajes.
      * @return
      */
-    public List<Personaje> getCharactersByUser(String user) throws DAOException;
+    public List<Personaje> getCharactersByUser(Usuario user) throws DAOException;
 }
