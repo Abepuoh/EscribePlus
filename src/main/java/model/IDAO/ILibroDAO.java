@@ -5,7 +5,6 @@ import java.util.List;
 import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
 import model.DataObject.Usuario;
-import model.IDataObject.ILibro;
 
 public interface ILibroDAO  extends IDAO<Libro, Long>{
     /**

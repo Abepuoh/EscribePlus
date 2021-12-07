@@ -1,7 +1,6 @@
 package model.IDAO;
 
 import model.DataObject.Usuario;
-import model.IDataObject.IUsuario;
 
 public interface IUsuarioDAO extends IDAO<Usuario, Long>{
 	
