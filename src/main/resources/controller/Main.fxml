@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="480.0" prefWidth="980.0" styleClass="parent" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+   <children>
+      <Pane layoutY="49.0" prefHeight="400.0" prefWidth="980.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="167.0" layoutX="247.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="167.0" layoutX="568.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="589.0" layoutY="203.0" prefHeight="64.0" prefWidth="108.0" text="ESCRIBEPLUS" textFill="#461e1e" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="268.0" layoutY="203.0" prefHeight="64.0" prefWidth="108.0" text="ESCRIBEPLUS" textFill="#461e1e" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="98.0" text="¿No tienes cuenta?" textFill="#461e1e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="21.0" layoutY="134.0" prefHeight="64.0" prefWidth="222.0" text="Registrate con solo unos sencillos pasos" textFill="#461e1e" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="21.0" layoutY="200.0" mnemonicParsing="false" onAction="#open_signup" prefHeight="32.0" prefWidth="93.0" styleClass="trans-btn-white-border" text="Sign Up" />
+            <Label layoutX="759.0" layoutY="53.0" text="¿Tienes cuenta?" textFill="#461e1e">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label layoutX="759.0" layoutY="83.0" prefHeight="64.0" prefWidth="167.0" text="Entra y reescribe tu propia historia." textFill="#461e1e" wrapText="true">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="759.0" layoutY="166.0" mnemonicParsing="false" onAction="#open_signin" prefHeight="32.0" prefWidth="93.0" styleClass="trans-btn-white-border" text="Sign In" />
+            <VBox id="vbox" fx:id="vbox" layoutX="21.0" layoutY="-51.0" prefHeight="480.0" prefWidth="480.0" styleClass="white-pane" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
