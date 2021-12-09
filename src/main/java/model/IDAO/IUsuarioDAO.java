@@ -10,7 +10,7 @@ public interface IUsuarioDAO extends IDAO<Usuario, Long> {
 	 * @param name Nombre del usuario
 	 * @return Usuario encontrado
 	 */
-	public Usuario getUserByName(String name) throws DAOException;
+	public Usuario getUserByName(String name);
 
 	/**
 	 * Método que buscar un usuario por su email // Método opcional que no es
@@ -19,7 +19,7 @@ public interface IUsuarioDAO extends IDAO<Usuario, Long> {
 	 * @param email Email del usuario
 	 * @return Usuario encontrado
 	 */
-	public Usuario getUserByEmail(String email) throws DAOException;
+	public Usuario getUserByEmail(String email);
 
 	/**
 	 * Método que devuelve true o false en función de si el usuario esta logueado o
@@ -30,7 +30,7 @@ public interface IUsuarioDAO extends IDAO<Usuario, Long> {
 	 * @return true o false si esta logged
 	 * @throws DAOException
 	 */
-	public boolean logIn(String nombre, String contraseña) throws DAOException;
+	public boolean logIn(String nombre, String contraseña);
 
 	/**
 	 * Método que devuelve el usuario mediante dos parámetros que introduzcamos
@@ -39,5 +39,5 @@ public interface IUsuarioDAO extends IDAO<Usuario, Long> {
 	 * @param cAux es la contraseña del usuario
 	 * @throws DAOException
 	 */
-	Usuario getUsuarioByNombreContraseña(String nAux, String cAux) throws DAOException;
+	Usuario getUsuarioByNombreContraseña(String nAux, String cAux);
 }

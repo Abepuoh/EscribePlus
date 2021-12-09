@@ -26,7 +26,7 @@ public class Partes implements IPartes, Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Autoincrement 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name="Id")
 	protected Long id;
 	@Column(name="nombre")

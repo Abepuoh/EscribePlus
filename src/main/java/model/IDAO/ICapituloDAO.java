@@ -1,8 +1,8 @@
 package model.IDAO;
 
 
-import model.IDataObject.ICapitulo;
+import model.DataObject.Capitulo;
 
-public interface ICapituloDAO  extends IDAO<ICapitulo, Long>{
+public interface ICapituloDAO  extends IDAO<Capitulo, Long>{
 	
 }

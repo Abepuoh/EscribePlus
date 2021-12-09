@@ -79,32 +79,8 @@ public class Usuario implements Serializable {
     }
     
     public Usuario(String email, String password) {
-    	this(-1L,"Por defecto","Por defecto",email,password, new ArrayList<Libro>());
+    	this(-1L,"","",email,password, new ArrayList<Libro>());
 	}
-
-	@Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (getId() == null) {
-			if (other.getId() != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.getId());
-        return hash;
-    }
 
     /**
      * @return the id
@@ -189,10 +165,34 @@ public class Usuario implements Serializable {
     public void setBooks(List<Libro> books) {
         this.books = books;
     }
-
     
-
-    
-    
-
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.getId());
+        return hash;
+    }
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (getId() == null) {
+			if (other.getId() != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+    }
+	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="
+				+ phone + ", books=" + books + "]";
+	}
 }
+
