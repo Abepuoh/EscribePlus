@@ -1,7 +1,5 @@
 package model.IDAO;
 
-import com.Abe.Spoti.Model.IDAO.DAOException;
-
 import model.DataObject.Usuario;
 
 public interface IUsuarioDAO extends IDAO<Usuario, Long> {

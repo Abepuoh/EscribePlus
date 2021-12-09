@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.Abe.Spoti.MariaDBConnection.MariaDBConexion;
-
 import model.DataObject.Usuario;
 import model.IDAO.DAOException;
 import model.IDAO.IUsuarioDAO;

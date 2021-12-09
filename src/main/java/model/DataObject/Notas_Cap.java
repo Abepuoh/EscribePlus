@@ -9,14 +9,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import model.IDataObject.INotas_cap;
 
 @Entity
 @Table(name="Notas_Cap")
+@NamedQueries({
+	@NamedQuery(name="getAll", query = "SELECT * FROM Notas_Cap")
+})
 public class Notas_Cap implements INotas_cap, Serializable{
-
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -25,7 +29,6 @@ public class Notas_Cap implements INotas_cap, Serializable{
 	protected Long id;	
 	@Column(name="text")
 	protected String text;
-	
 	
 	public Notas_Cap() {
 		this(-1L,"Por defecto");
@@ -62,10 +65,9 @@ public class Notas_Cap implements INotas_cap, Serializable{
 		Notas_Cap other = (Notas_Cap) obj;
 		return Objects.equals(id, other.id) && Objects.equals(text, other.text);
 	}
+	
 	@Override
 	public String toString() {
 		return "Notas_Cap [id=" + id + ", text=" + text + "]";
 	}
-	
-	
 }

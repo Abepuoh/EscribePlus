@@ -63,7 +63,7 @@
             <Insets left="15.0" right="15.0" top="20.0" />
          </VBox.margin>
       </HBox>
-      <Button fx:id="buttRegistro" mnemonicParsing="false" onAction="#registro" prefHeight="38.0" prefWidth="456.0" style="-fx-background-color: #461e1e;" styleClass="blue-panel" text="Registrate" textFill="WHITE">
+      <Button fx:id="buttRegistro" mnemonicParsing="false" onAction="#saveUser" prefHeight="38.0" prefWidth="456.0" style="-fx-background-color: #461e1e;" styleClass="blue-panel" text="Registrate" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>

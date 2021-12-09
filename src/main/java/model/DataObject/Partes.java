@@ -1,5 +1,7 @@
 package model.DataObject;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,36 +10,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import model.IDataObject.IPartes;
 
 @Entity
 @Table(name="Partes")
-public class Partes {
+@NamedQueries({
+	@NamedQuery(name="getAll", query = "SELECT * FROM Partes"),
+	@NamedQuery(name="getFromBook", query = "SELECT p FROM Partes p WHERE p.id_libro=:idlibro")
+})
+public class Partes implements IPartes, Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Autoincrement
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //Autoincrement 
 	@Column(name="Id")
-	private Long id;
+	protected Long id;
 	@Column(name="nombre")
-	private String nombre;
+	protected String nombre;
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_libro")
-	private Libro libro;
+	protected Libro libro;
+	
+	public Partes() {
+		this(-1L,"",new Libro());
+	}
+	
+	public Partes(String nombre, Libro libro) {
+		this.id = -1L;
+		this.nombre = nombre;
+		this.libro = libro;
+	}
+	
 	public Partes(Long id, String nombre, Libro libro) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.libro = libro;
 	}
 	
-	public Partes(String nombre, Libro libro) {
-		super();
-		this.nombre = nombre;
-		this.libro = libro;
-	}
-
-	public Partes() {
-		this(-1L,"Default",new Libro());
-	}
 	public Long getId() {
 		return id;
 	}
@@ -80,5 +93,9 @@ public class Partes {
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Partes [id=" + id + ", nombre=" + nombre + ", libro=" + libro + "]";
+	}
 }
