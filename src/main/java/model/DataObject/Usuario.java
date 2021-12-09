@@ -37,7 +37,7 @@ public class Usuario implements Serializable {
     
 
     public Usuario() {
-        this(-1L,"","","","", new ArrayList<Libro>());
+        this(-1L,"Por defecto","Por defecto","Por defecto","Por defecto", new ArrayList<Libro>());
     }
 
     public Usuario(Long id, String name, String email, String password, String phone) {
@@ -62,12 +62,14 @@ public class Usuario implements Serializable {
         this.email = email;
         this.password = password;
         this.phone = phone;
-        this.books = books;
-        
-        
+        this.books = books;  
     }
     
-    @Override
+    public Usuario(String email, String password) {
+    	this(-1L,"Por defecto","Por defecto",email,password, new ArrayList<Libro>());
+	}
+
+	@Override
     public boolean equals(Object obj) {
         if (this == obj)
 			return true;

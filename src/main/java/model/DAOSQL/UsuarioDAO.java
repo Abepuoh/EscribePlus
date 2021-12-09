@@ -15,7 +15,7 @@ import model.IDAO.DAOException;
 import model.IDAO.IUsuarioDAO;
 
 public class UsuarioDAO implements IUsuarioDAO{
-
+	private final static String GETUSERBYNAMEPASS = "SELECT id,name, email, password ,phone FROM usuario WHERE email= ? AND password = ?";
 	private final static String LOGINMENU = "SELECT name,password FROM User WHERE name LIKE ? AND password LIKE ?";
 	private final static String GETUSERBYID = "SELECT id,name, email, password ,phone FROM User WHERE id = ?";
 	private final static String GETUSERBYNAME = "SELECT id,name, email, password ,phone FROM User WHERE name = ?";
@@ -206,7 +206,6 @@ public class UsuarioDAO implements IUsuarioDAO{
 		}
 		return result;
 	}
-	}
 
 	@Override
 	public Usuario getUserByName(String name) throws DAOException {
@@ -246,7 +245,7 @@ public class UsuarioDAO implements IUsuarioDAO{
 		}
 		return result;
 	}
-	}
+	
 
 	@Override
 	public Usuario getUserByEmail(String email) throws DAOException {
@@ -307,7 +306,47 @@ public class UsuarioDAO implements IUsuarioDAO{
 		}
 		return logResult;
 	}
-	
+
+	@Override
+	public Usuario getUsuarioByNombreContraseña(String eAux, String cAux) throws DAOException {
+
+		Usuario result = new Usuario();
+
+		con = MariaDBConexion.getConexion();
+		if (con != null) {
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				ps = con.prepareStatement(GETUSERBYNAMEPASS);
+				ps.setString(1, eAux);
+				ps.setString(2, cAux);
+				rs = ps.executeQuery();
+				if (rs.next()) {
+					result = convertir(rs);
+				} else {
+					throw new DAOException("No se ha encontrado ese registro");
+				}
+			} catch (SQLException err) {
+				throw new DAOException("Error SQL : ", err);
+			} finally {
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException err) {
+						throw new DAOException("Error SQL :", err);
+					}
+				}
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException err) {
+						throw new DAOException("Error SQL :", err);
+					}
+				}
+			}
+		}
+		return result;
+	}
 	public Usuario convertir(ResultSet rs) throws SQLException {
 		Usuario user = new Usuario();
 		user.setId(rs.getLong("id"));

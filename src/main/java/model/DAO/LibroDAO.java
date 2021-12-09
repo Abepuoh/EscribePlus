@@ -13,7 +13,6 @@ import model.DataObject.Notas_Lib;
 import model.DataObject.Usuario;
 import model.IDAO.DAOException;
 import model.IDAO.ILibroDAO;
-import model.IDataObject.ILibro;
 
 public class LibroDAO implements ILibroDAO{
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("MySQL");

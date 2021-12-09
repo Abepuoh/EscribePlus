@@ -93,4 +93,10 @@ public class UsuarioDAO implements IUsuarioDAO{
 		return false;
 	}
 
+	@Override
+	public Usuario getUsuarioByNombreContraseña(String nAux, String cAux) throws DAOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditarNotasController">
+   <children>
+      <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Volver" />
+              <MenuItem mnemonicParsing="false" text="Cerrar" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <SplitPane dividerPositions="0.3377926421404682, 0.6956521739130435" layoutY="25.0" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="pane" stylesheets="@../css/styles.css">
+               <children>
+                  <ChoiceBox fx:id="CBEditNLibros" layoutX="26.0" layoutY="74.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="CBEditNotas" layoutX="25.0" layoutY="136.0" prefWidth="150.0" />
+                  <TextField fx:id="TFNotaDescripcion" layoutX="26.0" layoutY="217.0" promptText="Descripcion" />
+                  <Label layoutX="67.0" layoutY="14.0" text="EDITAR NOTA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="84.0" layoutY="46.0" text="LIBRO" />
+                  <Label layoutX="84.0" layoutY="113.0" text="NOTA" />
+                  <Button fx:id="buttEditarNota" layoutX="56.0" layoutY="298.0" mnemonicParsing="false" onAction="#editarNota" prefHeight="26.0" prefWidth="86.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="EDITAR" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="pane" stylesheets="@../css/styles.css">
+               <children>
+                  <ChoiceBox fx:id="C" layoutX="29.0" layoutY="72.0" prefWidth="150.0" />
+                  <Label layoutX="75.0" layoutY="14.0" text="CREAR NOTA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="88.0" layoutY="46.0" text="LIBROS" />
+                  <TextField fx:id="TFCrearNNombre" layoutX="30.0" layoutY="137.0" promptText="Nombre" />
+                  <TextField fx:id="TFCrearNDescripcion" layoutX="29.0" layoutY="187.0" promptText="Descripcion" />
+                  <Button fx:id="buttCrear" layoutX="59.0" layoutY="298.0" mnemonicParsing="false" onAction="#crearNota" prefHeight="26.0" prefWidth="86.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="CREAR" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="pane" stylesheets="@../css/styles.css">
+               <children>
+                  <ChoiceBox fx:id="CBRemoveNLibro" layoutX="15.0" layoutY="70.0" prefWidth="150.0" />
+                  <Label layoutX="59.0" layoutY="14.0" text="BORRAR NOTA">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <ChoiceBox fx:id="CBRemoveNota" layoutX="15.0" layoutY="138.0" prefWidth="150.0" />
+                  <Button fx:id="buttBorrar" layoutX="47.0" layoutY="298.0" mnemonicParsing="false" onAction="#borrarNota" prefHeight="26.0" prefWidth="86.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="BORRAR">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></Button>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
