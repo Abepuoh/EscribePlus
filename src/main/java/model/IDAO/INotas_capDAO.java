@@ -1,7 +1,7 @@
 package model.IDAO;
 
-import model.IDataObject.INotas_cap;
+import model.DataObject.Notas_Cap;
 
-public interface INotas_capDAO extends IDAO<INotas_cap, Long>{
+public interface INotas_capDAO extends IDAO<Notas_Cap, Long>{
 
 }

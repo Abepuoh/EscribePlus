@@ -1,7 +1,7 @@
 package model.IDAO;
 
-import model.IDataObject.IPartes;
+import model.DataObject.Partes;
 
-public interface IPartesDAO  extends IDAO<IPartes, Long>{
+public interface IPartesDAO  extends IDAO<Partes, Long>{
 
 }

@@ -3,63 +3,102 @@ package model.DAO;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
+
 import model.DataObject.Capitulo;
 import model.IDAO.ICapituloDAO;
-import model.IDataObject.ICapitulo;
+import utils.ConnectionUtil;
 
 /**
  *
  * @author adryc
  */
 public class CapituloDAO implements ICapituloDAO{
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("MySQL");
-    EntityManager em = emf.createEntityManager();
+	
+	public static EntityManager createEM() {
+		EntityManagerFactory emf = ConnectionUtil.getInstace();
+		return emf.createEntityManager();
+	}
+	EntityManager em = createEM();
     
     //Queries
     private final String getAll="Select * from Capitulo";
 
     @Override
-    public void crear(ICapitulo aux) {
-        em.getTransaction().begin();
-        em.persist(aux);
-        em.getTransaction().commit();
+    public void crear(Capitulo aux) {
+        try {
+        	em.getTransaction().begin();
+        	em.persist(aux);
+        	em.getTransaction().commit();        	
+        } catch (EntityExistsException e) {
+			throw new EntityExistsException("El usuario ya existe");
+		} catch	(IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+		}
     }
 
     @Override
-    public void editar(ICapitulo aux) {
-        em.getTransaction().begin();
+    public void editar(Capitulo aux) {
+        try {
+    	em.getTransaction().begin();
         em.persist(aux);
         em.getTransaction().commit();
+        } catch	(IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+		}
     }
 
     @Override
     public void borrar(Long id) {
-        ICapitulo deleted = mostrarPorId(id);
+        Capitulo deleted = mostrarPorId(id);
+        try {
         em.getTransaction().begin();
         em.remove(deleted);
         em.getTransaction().commit();
+        } catch	(IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+		}
     }
 
     @Override
-    public List<ICapitulo> mostrarTodos() {
-        List<ICapitulo> result = new ArrayList<>();
+    public List<Capitulo> mostrarTodos() {
+        List<Capitulo> result = new ArrayList<>();
+        try {
         em.getTransaction().begin();
-        TypedQuery<ICapitulo> q = em.createQuery(getAll, ICapitulo.class);
+        TypedQuery<Capitulo> q = em.createQuery(getAll, Capitulo.class);
         result = q.getResultList();
         em.getTransaction().commit();
-        return result;
+        return result;       
+		} catch	(IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+		}
     }
 
     @Override
-    public ICapitulo mostrarPorId(Long id) {
-        Capitulo result = null;
+    public Capitulo mostrarPorId(Long id) {
+        Capitulo result = new Capitulo();
+        try {
         em.getTransaction().begin();
         result = em.find(Capitulo.class, id);
         em.getTransaction().commit();
         return result;
+		} catch	(IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+		}
     }
 }

@@ -40,7 +40,14 @@ public class Usuario implements Serializable {
         this(-1L,"Por defecto","Por defecto","Por defecto","Por defecto", new ArrayList<Libro>());
     }
 
-    public Usuario(Long id, String name, String email, String password, String phone) {
+    public Usuario(String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+
+	public Usuario(Long id, String name, String email, String password, String phone) {
         this.id = id;
         this.name = name;
         this.email = email;
