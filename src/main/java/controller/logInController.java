@@ -13,7 +13,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DAO.UsuarioDAO;
-import model.IDAO.DAOException;
 import utils.UsuarioSingleton;
 
 public class logInController {
@@ -56,7 +55,7 @@ public class logInController {
 				alert.setContentText("Has introducido mal algun dato");
 				alert.showAndWait();
 			}
-		} catch (DAOException | IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

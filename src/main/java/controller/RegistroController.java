@@ -8,7 +8,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.DAO.UsuarioDAO;
 import model.DataObject.Usuario;
-import model.IDAO.DAOException;
 
 public class RegistroController {
 
@@ -49,7 +48,7 @@ public class RegistroController {
 					alert.setContentText("Se ha añadido correctamente");
 					alert.showAndWait();
 				}
-			} catch (DAOException e) {
+			} catch (Exception e) {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText(null);
 				alert.setTitle("Error de creacion");

@@ -7,7 +7,7 @@ public class ConnectionUtil {
 
 	private static final String PUN = "ApplicationMariaDB";
 	private static EntityManagerFactory emf;
-
+	
 	public static EntityManagerFactory getInstace(String name) {
 		if (emf == null) {
 			emf = Persistence.createEntityManagerFactory(name);
