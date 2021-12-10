@@ -60,7 +60,7 @@ public class Notas_LibDAO implements INotas_libDAO {
 		INotas_lib delete = mostrarPorId(id);
 		try {
 			em.getTransaction().begin();
-			em.persist(delete);
+			em.remove(delete);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");

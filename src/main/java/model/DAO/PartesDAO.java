@@ -60,7 +60,7 @@ public class PartesDAO implements IPartesDAO {
 	public void borrar(Long id) {
 		Partes delete = mostrarPorId(id);
 		em.getTransaction().begin();
-		em.persist(delete);
+		em.remove(delete);
 		em.getTransaction().commit();
 	}
 

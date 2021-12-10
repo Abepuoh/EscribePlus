@@ -66,7 +66,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 		Personaje delete = mostrarPorId(id);
 		try {
 			em.getTransaction().begin();
-			em.persist(delete);
+			em.remove(delete);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
