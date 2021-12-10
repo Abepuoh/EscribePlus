@@ -1,5 +1,7 @@
 package model.IDataObject;
 
+import java.util.List;
+
 import model.DataObject.Libro;
 
 public interface IPersonaje {
@@ -10,7 +12,7 @@ public interface IPersonaje {
 	public String getDescripcion();
 	public String getAlineamiento();
 	public String getFoto();
-	public Libro getLibroRef();
+	public List<Libro> getLibroRef();
 	
 	public void setId(Long aux);
 	public void setNombre(String aux);
@@ -18,5 +20,5 @@ public interface IPersonaje {
 	public void setDescripcion(String aux);
 	public void setAlineamiento(String aux);
 	public void setFoto(String aux);
-	public void setLibroRef(Libro aux);
+	public void setLibroRef(List<Libro> aux);
 }
