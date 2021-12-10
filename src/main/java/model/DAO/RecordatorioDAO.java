@@ -16,7 +16,7 @@ import utils.ConnectionUtil;
 public class RecordatorioDAO implements IRecordatorioDAO {
 
 	public static EntityManager createEM() {
-		EntityManagerFactory emf = ConnectionUtil.getInstace();
+		EntityManagerFactory emf = ConnectionUtil.getInstance();
 		return emf.createEntityManager();
 	}
 

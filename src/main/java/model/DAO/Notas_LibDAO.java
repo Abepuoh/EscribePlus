@@ -18,7 +18,7 @@ import utils.ConnectionUtil;
 public class Notas_LibDAO implements INotas_libDAO {
 
 	public static EntityManager createEM() {
-		EntityManagerFactory emf = ConnectionUtil.getInstace();
+		EntityManagerFactory emf = ConnectionUtil.getInstance();
 		return emf.createEntityManager();
 	}
 

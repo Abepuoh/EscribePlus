@@ -18,7 +18,7 @@ import utils.ConnectionUtil;
 public class Notas_CapDAO implements INotas_capDAO {
 
 	public static EntityManager createEM() {
-		EntityManagerFactory emf = ConnectionUtil.getInstace();
+		EntityManagerFactory emf = ConnectionUtil.getInstance();
 		return emf.createEntityManager();
 	}
 

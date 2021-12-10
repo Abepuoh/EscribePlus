@@ -14,14 +14,11 @@ import model.DataObject.Capitulo;
 import model.IDAO.ICapituloDAO;
 import utils.ConnectionUtil;
 
-/**
- *
- * @author adryc
- */
+
 public class CapituloDAO implements ICapituloDAO {
 
 	public static EntityManager createEM() {
-		EntityManagerFactory emf = ConnectionUtil.getInstace();
+		EntityManagerFactory emf = ConnectionUtil.getInstance();
 		return emf.createEntityManager();
 	}
 

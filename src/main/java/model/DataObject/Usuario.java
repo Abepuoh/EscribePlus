@@ -38,48 +38,48 @@ public class Usuario implements Serializable {
     @Column(name="password")
     protected String password;
     @Column(name="phone")
-    protected String phone;
+    protected int phone;
     @OneToMany(mappedBy = "User", cascade = { CascadeType.ALL }, orphanRemoval = true)
     protected List<Libro> books = new ArrayList<Libro>();
 
     public Usuario() {
-        this(-1L,"","","","", new ArrayList<Libro>());
+        this(-1L,"","","",-1, new ArrayList<Libro>());
     }
     public Usuario(String name, String email, String password) {
         this.id = -1L;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = "";
+        this.phone = -1;
         this.books = new ArrayList<Libro>();
     }
-    public Usuario(String name, String email, String password, String phone) {
+    public Usuario(String name, String email, String password, int phone) {
         this.id = -1L;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.phone =-1;
         this.books = new ArrayList<Libro>();
     }
-    public Usuario(Long id, String name, String email, String password, String phone) {
+    public Usuario(Long id, String name, String email, String password, int phone) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.phone = -1;
         this.books = new ArrayList<Libro>();
     }
-    public Usuario(Long id, String name, String email, String password, String phone, List<Libro> books) {
+    public Usuario(Long id, String name, String email, String password, int phone, List<Libro> books) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.phone = -1;
         this.books = books;  
     }
     
     public Usuario(String email, String password) {
-    	this(-1L,"","",email,password, new ArrayList<Libro>());
+    	this(-1L,"",email,password,-1, new ArrayList<Libro>());
 	}
 
     /**
@@ -141,14 +141,14 @@ public class Usuario implements Serializable {
     /**
      * @return the phone
      */
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
     /**
      * @param phone the phone to set
      */
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
