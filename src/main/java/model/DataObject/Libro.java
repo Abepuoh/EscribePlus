@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -45,38 +48,44 @@ public class Libro implements ILibro, Serializable {
 	protected String genre;
 	@Column(name = "description")
 	protected String description;
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "id_user")
-	protected int id_user;
-	@OneToMany(mappedBy = "Book", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="user_id")
+	protected Usuario user;
+	
+	@OneToMany(mappedBy = "libro", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	protected List<Notas_Lib> book_notes = new ArrayList<Notas_Lib>();
-	@OneToMany(mappedBy = "Book", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	
+	@OneToMany(mappedBy = "libro", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	protected List<Recordatorio> recordatorios = new ArrayList<Recordatorio>();
-	@OneToMany(mappedBy = "Book", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	
+	@OneToMany(mappedBy = "libro", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	protected List<Partes> parts = new ArrayList<Partes>();
+	
+	 @ManyToMany(mappedBy = "libroRef")
+	 private List<Personaje> personajes;
 
 	public Libro() {
-        this(-1L,"",-1,"","", -1, new ArrayList<Notas_Lib>(), new ArrayList<Recordatorio>(), new ArrayList<Partes>());
+        this(-1L,"",-1,"","", new Usuario(), new ArrayList<Notas_Lib>(), new ArrayList<Recordatorio>(), new ArrayList<Partes>());
 	}
-	public Libro(String title, int year, String genre, String description, int id_user) {
+	public Libro(String title, int year, String genre, String description, Usuario id_user) {
 		this.id = -1L;
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
 		this.description = description;
-		this.id_user = id_user;
+		this.user = id_user;
 		this.book_notes = new ArrayList<Notas_Lib>();
 		this.recordatorios =  new ArrayList<Recordatorio>();
 		this.parts = new ArrayList<Partes>();
 	}
-	public Libro(String title, int year, String genre, String description, int id_user, List<Notas_Lib> notas_libro,
+	public Libro(String title, int year, String genre, String description, Usuario id_user, List<Notas_Lib> notas_libro,
 			List<Partes> partes) {
 		this.id = -1L;
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
 		this.description = description;
-		this.id_user = id_user;
+		this.user = id_user;
 		this.book_notes = notas_libro;
 		this.recordatorios =  new ArrayList<Recordatorio>();
 		this.parts = partes;
@@ -88,20 +97,20 @@ public class Libro implements ILibro, Serializable {
 		this.year = year;
 		this.genre = genre;
 		this.description = description;
-		this.id_user = -1;
+		this.user = new Usuario();
 		this.book_notes = new ArrayList<Notas_Lib>();
 		this.recordatorios =  new ArrayList<Recordatorio>();
 		this.parts = new ArrayList<Partes>();
 	}
 
-	public Libro(Long id, String title, int year, String genre, String description, int id_user,
+	public Libro(Long id, String title, int year, String genre, String description, Usuario id_user,
 			List<Notas_Lib> book_notes, List<Recordatorio> recordatorio, List<Partes> parts) {
 		this.id = id;
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
 		this.description = description;
-		this.id_user = id_user;
+		this.user = id_user;
 		this.book_notes = book_notes;
 		this.recordatorios = recordatorio;
 		this.parts = parts;
@@ -169,11 +178,11 @@ public class Libro implements ILibro, Serializable {
 	/**
 	 * @return the id_user
 	 */
-	public int getId_user() {
-		return id_user;
+	public Usuario getId_user() {
+		return user;
 	}
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public void setId_user(Usuario id_user) {
+		this.user = id_user;
 	}
 	/**
 	 * @return the notas_libro 
@@ -225,7 +234,7 @@ public class Libro implements ILibro, Serializable {
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", title=" + title + ", year=" + year + ", genre=" + genre + ", description="
-				+ description + ", id_user=" + id_user + ", book_notes=" + book_notes + ", recordatorios="
+				+ description + ", id_user=" + user + ", book_notes=" + book_notes + ", recordatorios="
 				+ recordatorios + ", parts=" + parts + "]";
 	}
 

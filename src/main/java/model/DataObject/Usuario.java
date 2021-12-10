@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class Usuario implements Serializable {
     protected String password;
     @Column(name="phone")
     protected int phone;
-    @OneToMany(mappedBy = "User", cascade = { CascadeType.ALL }, orphanRemoval = true)
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     protected List<Libro> books = new ArrayList<Libro>();
 
     public Usuario() {

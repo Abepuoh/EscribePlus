@@ -1,13 +1,18 @@
 package model.DataObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -16,18 +21,16 @@ import javax.persistence.Table;
 import model.IDataObject.IPersonaje;
 
 @Entity
-@Table (name = "Personaje")
-@NamedQueries({
-	@NamedQuery(name="getAllPersonajes", query = "SELECT * FROM Personaje"),
-	@NamedQuery(name="getPersonajeByName", query = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje"),
-	@NamedQuery(name="getPersonajeFromBook", query = "SELECT p FROM Personaje p WHERE p.id_libro=:idlibro"),
-	@NamedQuery(name="getPersonajeFromUser", query = "SELECT p FROM Personaje p JOIN Book b JOIN PersonajeLibro pl WHERE pl.personajeid = p.id AND pl.libroid = b.id AND b.id_user=:iduser")
-})
-public class Personaje implements IPersonaje, Serializable{
-	
+@Table(name = "Personaje")
+@NamedQueries({ @NamedQuery(name = "getAllPersonajes", query = "SELECT * FROM Personaje"),
+		@NamedQuery(name = "getPersonajeByName", query = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje"),
+		@NamedQuery(name = "getPersonajeFromBook", query = "SELECT p FROM Personaje p WHERE p.id_libro=:idlibro"),
+		@NamedQuery(name = "getPersonajeFromUser", query = "SELECT p FROM Personaje p JOIN Book b JOIN PersonajeLibro pl WHERE pl.personajeid = p.id AND pl.libroid = b.id AND b.id_user=:iduser") })
+public class Personaje implements IPersonaje, Serializable {
+
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy =GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 	@Column(name = "nombre")
 	protected String nombre;
@@ -39,15 +42,18 @@ public class Personaje implements IPersonaje, Serializable{
 	protected String alineamiento;
 	@Column(name = "foto")
 	protected String foto;
-	@ManyToMany(mappedBy = "PersonajeLibro")
-	protected Libro libroRef;
-	
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "libro_personaje", joinColumns = { @JoinColumn(name = "personaje_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "libro_id") })
+	private List<Libro> libroRef;
+
 	public Personaje() {
-		this(-1L,"Por defecto",-1,"Por defecto","Por defecto","Por defecto", new Libro());
+		this(-1L, "Por defecto", -1, "Por defecto", "Por defecto", "Por defecto", new ArrayList<Libro>());
 	}
-	
-	public Personaje(Long id, String nombre, int edad, String descripcion, String alineamiento, String foto, Libro libroRef) {
-		
+
+	public Personaje(Long id, String nombre, int edad, String descripcion, String alineamiento, String foto,
+			List<Libro> libroRef) {
+
 		this.id = id;
 		this.nombre = nombre;
 		this.edad = edad;
@@ -56,60 +62,74 @@ public class Personaje implements IPersonaje, Serializable{
 		this.foto = foto;
 		this.libroRef = libroRef;
 	}
+
 	@Override
 	public String getAlineamiento() {
 		return alineamiento;
 	}
+
 	@Override
 	public void setAlineamiento(String alineamiento) {
 		this.alineamiento = alineamiento;
 	}
+
 	@Override
 	public Long getId() {
 		return id;
 	}
+
 	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	@Override
 	public String getNombre() {
 		return nombre;
 	}
+
 	@Override
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	@Override
 	public int getEdad() {
 		return edad;
 	}
+
 	@Override
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
+
 	@Override
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	@Override
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 	@Override
 	public String getFoto() {
 		return foto;
 	}
+
 	@Override
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
 	@Override
-	public Libro getLibroRef() {
+	public List<Libro> getLibroRef() {
 		return libroRef;
 	}
+
 	@Override
-	public void setLibroRef(Libro libroRef) {
+	public void setLibroRef(List<Libro> libroRef) {
 		this.libroRef = libroRef;
 	}
 
@@ -129,6 +149,6 @@ public class Personaje implements IPersonaje, Serializable{
 	public String toString() {
 		return "Personaje [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", descripcion=" + descripcion
 				+ ", alineamiento=" + alineamiento + ", foto=" + foto + ", libroRef=" + libroRef + "]";
-	}	
-	
+	}
+
 }
