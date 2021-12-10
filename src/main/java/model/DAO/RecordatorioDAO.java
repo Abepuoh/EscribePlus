@@ -22,8 +22,6 @@ public class RecordatorioDAO implements IRecordatorioDAO {
 
 	EntityManager em = createEM();
 
-	private final String getAll = "SELECT * FROM Recordatorio";
-
 	@Override
 	public void crear(Recordatorio aux) {
 		try {
@@ -71,7 +69,7 @@ public class RecordatorioDAO implements IRecordatorioDAO {
 		List<Recordatorio> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Recordatorio> q = em.createQuery(getAll, Recordatorio.class);
+			TypedQuery<Recordatorio> q = em.createNamedQuery("getAllRecordatorios", Recordatorio.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {

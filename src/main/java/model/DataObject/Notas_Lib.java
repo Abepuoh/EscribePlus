@@ -20,7 +20,7 @@ import model.IDataObject.INotas_lib;
 @Entity
 @Table (name = "Notas_Lib")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT * FROM Notas_Lib")
+	@NamedQuery(name="getAllNotas_Lib", query = "SELECT * FROM Notas_Lib")
 })
 public class Notas_Lib implements INotas_lib, Serializable {
 	

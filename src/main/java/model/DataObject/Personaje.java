@@ -18,10 +18,10 @@ import model.IDataObject.IPersonaje;
 @Entity
 @Table (name = "Personaje")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT * FROM Personaje"),
-	@NamedQuery(name="getByName", query = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje"),
-	@NamedQuery(name="getFromBook", query = "SELECT p FROM Personaje p WHERE p.id_libro=:idlibro"),
-	@NamedQuery(name="getFromUser", query = "SELECT p FROM Personaje p JOIN Book b JOIN PersonajeLibro pl WHERE pl.personajeid = p.id AND pl.libroid = b.id AND b.id_user=:iduser")
+	@NamedQuery(name="getAllPersonajes", query = "SELECT * FROM Personaje"),
+	@NamedQuery(name="getPersonajeByName", query = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje"),
+	@NamedQuery(name="getPersonajeFromBook", query = "SELECT p FROM Personaje p WHERE p.id_libro=:idlibro"),
+	@NamedQuery(name="getPersonajeFromUser", query = "SELECT p FROM Personaje p JOIN Book b JOIN PersonajeLibro pl WHERE pl.personajeid = p.id AND pl.libroid = b.id AND b.id_user=:iduser")
 })
 public class Personaje implements IPersonaje, Serializable{
 	

@@ -24,11 +24,11 @@ import model.IDataObject.ILibro;
 @Entity
 @Table(name = "Book")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT * FROM Book"),
-	@NamedQuery(name="getById", query = "SELECT p FROM Book p WHERE p.id = :idLibro"),
-	@NamedQuery(name="getByName", query = "SELECT p FROM Book p WHERE p.nombre = :nombreLibro"),
-	@NamedQuery(name="getAllNotes", query = "SELECT p.book_notes FROM Book p"),
-	@NamedQuery(name="getFromAuthor", query = "SELECT p FROM Partes p WHERE p.id_libro=:idlibro")
+	@NamedQuery(name="getAllBooks", query = "SELECT * FROM Book"),
+	@NamedQuery(name="getBookById", query = "SELECT p FROM Book p WHERE p.id = :idLibro"),
+	@NamedQuery(name="getBookByName", query = "SELECT p FROM Book p WHERE p.nombre = :nombreLibro"),
+	@NamedQuery(name="getAllBookNotes", query = "SELECT p.book_notes FROM Book p"),
+	@NamedQuery(name="getBookFromAuthor", query = "SELECT p FROM Partes p WHERE p.id_libro=:idlibro")
 })
 public class Libro implements ILibro, Serializable {
 

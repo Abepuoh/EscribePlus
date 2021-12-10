@@ -24,9 +24,9 @@ public class PartesDAO implements IPartesDAO {
 
 	EntityManager em = createEM();
 
-	// Queries
-	private final String getAll = "SELECT * FROM Partes";
-	private String getFromBook = "SELECT p FROM Partes p WHERE p.id_libro=:idlibro";
+//	// Queries
+//	private final String getAllPartes = "SELECT * FROM Partes";
+//	private String getParteFromBook = "SELECT p FROM Partes p WHERE p.id_libro=:idlibro";
 
 	@Override
 	public void crear(Partes aux) {
@@ -68,7 +68,7 @@ public class PartesDAO implements IPartesDAO {
 	public List<Partes> mostrarTodos() {
 		List<Partes> result = new ArrayList<>();
 		em.getTransaction().begin();
-		TypedQuery<Partes> q = em.createQuery(getAll, Partes.class);
+		TypedQuery<Partes> q = em.createQuery("getAllPartes", Partes.class);
 		result = q.getResultList();
 		em.getTransaction().commit();
 		return result;
@@ -93,7 +93,7 @@ public class PartesDAO implements IPartesDAO {
 		List<Partes> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Partes> q = em.createQuery(getFromBook, Partes.class).setParameter("idlibro", l.getId());
+			TypedQuery<Partes> q = em.createQuery("getParteFromBook", Partes.class).setParameter("idlibro", l.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;

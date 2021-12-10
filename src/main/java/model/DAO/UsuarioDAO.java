@@ -22,11 +22,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	EntityManager em = createEM();
 
-	// Queries
-	private final String getAll = "SELECT * FROM User";
-	private String getById = "SELECT p FROM User p WHERE p.id = :idUsuario";
-	private String getByName = "SELECT p FROM User p WHERE p.nombre = :nombreUsuario";
-	private String getByEmail = "SELECT p FROM User p WHERE p.correo=:emailUsuario";
 
 	@Override
 	public void crear(Usuario aux) {
@@ -75,7 +70,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		List<Usuario> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Usuario> q = em.createQuery(getAll, Usuario.class);
+			TypedQuery<Usuario> q = em.createNamedQuery("getAllUsers", Usuario.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
@@ -91,7 +86,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		Usuario result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Usuario> q = em.createQuery(getById, Usuario.class).setParameter("idUsuario", id);
+			TypedQuery<Usuario> q = em.createNamedQuery("getUserById", Usuario.class).setParameter("idUsuario", id);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;
@@ -107,7 +102,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		Usuario result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Usuario> q = em.createQuery(getByName, Usuario.class).setParameter("nombreUsuario", name);
+			TypedQuery<Usuario> q = em.createNamedQuery("getUserByName", Usuario.class).setParameter("nombreUsuario", name);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;
@@ -123,7 +118,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		Usuario result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Usuario> q = em.createQuery(getByEmail, Usuario.class).setParameter("emailUsuario", email);
+			TypedQuery<Usuario> q = em.createNamedQuery("getUserByEmail", Usuario.class).setParameter("emailUsuario", email);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;

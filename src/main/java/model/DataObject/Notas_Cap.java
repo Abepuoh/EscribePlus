@@ -18,7 +18,7 @@ import model.IDataObject.INotas_cap;
 @Entity
 @Table(name="Notas_Cap")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT * FROM Notas_Cap")
+	@NamedQuery(name="getAllNotas_Cap", query = "SELECT * FROM Notas_Cap")
 })
 public class Notas_Cap implements INotas_cap, Serializable{
 

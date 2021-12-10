@@ -20,7 +20,7 @@ import model.IDataObject.IRecordatorio;
 @Entity
 @Table (name = "Recordatorio")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT * FROM Recordatorio")
+	@NamedQuery(name="getAllRecordatorios", query = "SELECT * FROM Recordatorio")
 })
 public class Recordatorio implements IRecordatorio, Serializable {
 	

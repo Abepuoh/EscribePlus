@@ -25,7 +25,7 @@ public class Notas_LibDAO implements INotas_libDAO {
 	EntityManager em = createEM();
 
 	// Queries
-	private final String getAll = "Select * from Notas_Lib";
+	//private final String getAll = "Select * from Notas_Lib";
 
 	@Override
 	public void crear(Notas_Lib aux) {
@@ -74,7 +74,7 @@ public class Notas_LibDAO implements INotas_libDAO {
 		List<Notas_Lib> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Lib> q = em.createQuery(getAll, Notas_Lib.class);
+			TypedQuery<Notas_Lib> q = em.createQuery("getAllNotas_Lib", Notas_Lib.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;

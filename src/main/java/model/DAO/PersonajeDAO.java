@@ -25,13 +25,13 @@ public class PersonajeDAO implements IPersonajeDAO {
 
 	EntityManager em = createEM();
 
-	// Queries
-	private final String getAll = "SELECT * FROM Personaje";
-	private String getByName = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje";
-	private String getFromBook = "SELECT p FROM Personaje p WHERE p.id_libro=:idlibro";
-	private String getFromUser = "SELECT p FROM Personaje p JOIN Book b JOIN PersonajeLibro pl WHERE pl.personajeid = p.id AND pl.libroid = b.id AND b.id_user=:iduser";
-	// A la espera de usar la base de datos, para saber cual es el nombre
-	// de las variables idpersonaje e idlibro
+//	// Queries
+//	private final String getAllPersonajes = "SELECT * FROM Personaje";
+//	private String getPersonajeByName = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje";
+//	private String getPersonajeFromBook = "SELECT p FROM Personaje p WHERE p.id_libro=:idlibro";
+//	private String getPersonajeFromUser = "SELECT p FROM Personaje p JOIN Book b JOIN PersonajeLibro pl WHERE pl.personajeid = p.id AND pl.libroid = b.id AND b.id_user=:iduser";
+//	// A la espera de usar la base de datos, para saber cual es el nombre
+//	// de las variables idpersonaje e idlibro
 
 	@Override
 	public void crear(Personaje aux) {
@@ -80,7 +80,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 		List<Personaje> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Personaje> q = em.createQuery(getAll, Personaje.class);
+			TypedQuery<Personaje> q = em.createQuery("getAllPersonajes", Personaje.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
@@ -110,7 +110,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 		List<Personaje> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Personaje> q = em.createQuery(getFromBook, Personaje.class).setParameter("idlibro", l.getId());
+			TypedQuery<Personaje> q = em.createQuery("getPersonajeFromBook", Personaje.class).setParameter("idlibro", l.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
@@ -126,7 +126,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 		Personaje result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Personaje> q = em.createQuery(getByName, Personaje.class).setParameter("nombrepersonaje",
+			TypedQuery<Personaje> q = em.createQuery("getPersonajeByName", Personaje.class).setParameter("nombrepersonaje",
 					nombre);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
@@ -143,7 +143,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 		List<Personaje> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Personaje> q = em.createQuery(getFromUser, Personaje.class).setParameter("iduser", user.getId());
+			TypedQuery<Personaje> q = em.createQuery("getPersonajeFromUser", Personaje.class).setParameter("iduser", user.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;

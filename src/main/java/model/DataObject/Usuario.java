@@ -19,10 +19,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="User")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT * FROM User"),
-	@NamedQuery(name="getById", query = "SELECT p FROM User p WHERE p.id = :idUsuario"),
-	@NamedQuery(name="getByName", query = "SELECT p FROM User p WHERE p.nombre = :nombreUsuario"),
-	@NamedQuery(name="getByEmail", query = "SELECT p FROM User p WHERE p.correo=:emailUsuario")
+	@NamedQuery(name="getAllUsers", query = "SELECT u FROM User u"),
+	@NamedQuery(name="getUserById", query = "SELECT p FROM User p WHERE p.id = :idUsuario"),
+	@NamedQuery(name="getUserByName", query = "SELECT p FROM User p WHERE p.nombre = :nombreUsuario"),
+	@NamedQuery(name="getUserByEmail", query = "SELECT p FROM User p WHERE p.correo=:emailUsuario")
 })
 public class Usuario implements Serializable {
 

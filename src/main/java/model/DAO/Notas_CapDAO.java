@@ -25,7 +25,7 @@ public class Notas_CapDAO implements INotas_capDAO {
 	EntityManager em = createEM();
 
 	// Queries
-	private final String getAll = "Select * from Notas_Cap";
+	//private final String getAll = "Select * from Notas_Cap";
 
 	@Override
 	public void crear(Notas_Cap aux) {
@@ -74,7 +74,7 @@ public class Notas_CapDAO implements INotas_capDAO {
 		List<Notas_Cap> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Cap> q = em.createQuery(getAll, Notas_Cap.class);
+			TypedQuery<Notas_Cap> q = em.createQuery("getAllNotas_Cap", Notas_Cap.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
