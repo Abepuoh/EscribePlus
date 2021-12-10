@@ -17,7 +17,7 @@ import utils.ConnectionUtil;
 
 public class CapituloDAO implements ICapituloDAO {
 
-	public static EntityManager createEM() {
+	public static EntityManager createEM () {
 		EntityManagerFactory emf = ConnectionUtil.getInstance();
 		return emf.createEntityManager();
 	}
