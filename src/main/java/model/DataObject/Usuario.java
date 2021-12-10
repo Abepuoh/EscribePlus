@@ -11,58 +11,64 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="User")
+@NamedQueries({
+	@NamedQuery(name="getAll", query = "SELECT * FROM User"),
+	@NamedQuery(name="getById", query = "SELECT p FROM User p WHERE p.id = :idUsuario"),
+	@NamedQuery(name="getByName", query = "SELECT p FROM User p WHERE p.nombre = :nombreUsuario"),
+	@NamedQuery(name="getByEmail", query = "SELECT p FROM User p WHERE p.correo=:emailUsuario")
+})
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
-    private Long id;
+    protected Long id;
     @Column(name="name")
-    private String name;
+    protected String name;
     @Column(name="email")
-    private String email;
+    protected String email;
     @Column(name="password")
-    private String password;
+    protected String password;
     @Column(name="phone")
-    private String phone;
+    protected String phone;
     @OneToMany(mappedBy = "User", cascade = { CascadeType.ALL }, orphanRemoval = true)
-    private List<Libro> books = new ArrayList<Libro>();
-    
+    protected List<Libro> books = new ArrayList<Libro>();
 
     public Usuario() {
-        this(-1L,"Por defecto","Por defecto","Por defecto","Por defecto", new ArrayList<Libro>());
+        this(-1L,"","","","", new ArrayList<Libro>());
     }
-
     public Usuario(String name, String email, String password) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-	}
-
-	public Usuario(Long id, String name, String email, String password, String phone) {
-        this.id = id;
+        this.id = -1L;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = phone;
+        this.phone = "";
+        this.books = new ArrayList<Libro>();
     }
-    
     public Usuario(String name, String email, String password, String phone) {
         this.id = -1L;
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
+        this.books = new ArrayList<Libro>();
     }
-    
+    public Usuario(Long id, String name, String email, String password, String phone) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.books = new ArrayList<Libro>();
+    }
     public Usuario(Long id, String name, String email, String password, String phone, List<Libro> books) {
         this.id = id;
         this.name = name;
@@ -73,32 +79,8 @@ public class Usuario implements Serializable {
     }
     
     public Usuario(String email, String password) {
-    	this(-1L,"Por defecto","Por defecto",email,password, new ArrayList<Libro>());
+    	this(-1L,"","",email,password, new ArrayList<Libro>());
 	}
-
-	@Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (getId() == null) {
-			if (other.getId() != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.getId());
-        return hash;
-    }
 
     /**
      * @return the id
@@ -183,10 +165,34 @@ public class Usuario implements Serializable {
     public void setBooks(List<Libro> books) {
         this.books = books;
     }
-
     
-
-    
-    
-
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.getId());
+        return hash;
+    }
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (getId() == null) {
+			if (other.getId() != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+    }
+	
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="
+				+ phone + ", books=" + books + "]";
+	}
 }
+

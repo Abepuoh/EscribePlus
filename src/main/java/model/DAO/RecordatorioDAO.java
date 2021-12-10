@@ -1,4 +1,3 @@
-
 package model.DAO;
 
 import java.util.ArrayList;
@@ -10,12 +9,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
-import model.DataObject.Notas_Lib;
-import model.IDAO.INotas_libDAO;
-import model.IDataObject.INotas_lib;
+import model.DataObject.Recordatorio;
+import model.IDAO.IRecordatorioDAO;
 import utils.ConnectionUtil;
 
-public class Notas_LibDAO implements INotas_libDAO {
+public class RecordatorioDAO implements IRecordatorioDAO {
 
 	public static EntityManager createEM() {
 		EntityManagerFactory emf = ConnectionUtil.getInstace();
@@ -24,26 +22,25 @@ public class Notas_LibDAO implements INotas_libDAO {
 
 	EntityManager em = createEM();
 
-	// Queries
-	private final String getAll = "Select * from Notas_Lib";
+	private final String getAll = "SELECT * FROM Recordatorio";
 
 	@Override
-	public void crear(Notas_Lib aux) {
+	public void crear(Recordatorio aux) {
 		try {
 			em.getTransaction().begin();
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
-			throw new EntityExistsException("El usuario ya existe");
+			throw new EntityExistsException("El recordatorio ya existe");
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
 	@Override
-	public void editar(Notas_Lib aux) {
+	public void editar(Recordatorio aux) {
 		try {
 			em.getTransaction().begin();
 			em.persist(aux);
@@ -51,53 +48,53 @@ public class Notas_LibDAO implements INotas_libDAO {
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
 	@Override
 	public void borrar(Long id) {
-		INotas_lib delete = mostrarPorId(id);
+		Recordatorio delete = mostrarPorId(id);
 		try {
 			em.getTransaction().begin();
-			em.persist(delete);
+			em.remove(delete);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
 	@Override
-	public List<Notas_Lib> mostrarTodos() {
-		List<Notas_Lib> result = new ArrayList<>();
+	public List<Recordatorio> mostrarTodos() {
+		List<Recordatorio> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Lib> q = em.createQuery(getAll, Notas_Lib.class);
+			TypedQuery<Recordatorio> q = em.createQuery(getAll, Recordatorio.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 	@Override
-	public Notas_Lib mostrarPorId(Long id) {
-		Notas_Lib result = new Notas_Lib();
+	public Recordatorio mostrarPorId(Long id) {
+		Recordatorio result = null;
 		try {
 			em.getTransaction().begin();
-			result = em.find(Notas_Lib.class, id);
+			result = em.find(Recordatorio.class, id);
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 }

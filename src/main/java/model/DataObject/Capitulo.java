@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,6 +19,9 @@ import model.IDataObject.ICapitulo;
 
 @Entity
 @Table(name="Capitulo")
+@NamedQueries({
+	@NamedQuery(name="getAll", query = "SELECT * FROM Capitulo")
+})
 public class Capitulo implements ICapitulo, Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -73,6 +78,31 @@ public class Capitulo implements ICapitulo, Serializable{
 		this.parts = part;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public List<Notas_Cap> getParts() {
+		return parts;
+	}
+	public void setParts(List<Notas_Cap> parts) {
+		this.parts = parts;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,5 +131,4 @@ public class Capitulo implements ICapitulo, Serializable{
 	public String toString() {
 		return "Capitulo [id=" + id + ", name=" + name + ", text=" + text + ", parts=" + parts + "]";
 	}
-	
 }

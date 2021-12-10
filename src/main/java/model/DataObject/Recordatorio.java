@@ -1,45 +1,76 @@
 package model.DataObject;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-public class Recordatorio  {
+import model.IDataObject.IRecordatorio;
+
+@Entity
+@Table (name = "Recordatorio")
+@NamedQueries({
+	@NamedQuery(name="getAll", query = "SELECT * FROM Recordatorio")
+})
+public class Recordatorio implements IRecordatorio, Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) //Autoincrement
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	@Column(name="Id")
-	private Long id;
+	protected Long id;
 	@Column(name="Fecha", columnDefinition = "DATE")
-	private LocalDate fecha;
+	protected LocalDate fecha;
 	@Column(name="Comentario")
-	private String comentario;
+	protected String texto;
 	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="Id_Capitulo")
-	private Capitulo capitulo;
-	public Recordatorio(Long id, LocalDate fecha, String comentario, Capitulo capitulo) {
-		super();
+    @JoinColumn(name="Id_Libro")
+	protected Libro libro;
+	
+	
+	public Recordatorio() {
+		this(-1L,LocalDate.now(),"", new Libro());
+	}
+	public Recordatorio(String texto) {
+		this.id = -1L;
+		this.fecha = LocalDate.now();
+		this.texto = texto;
+		this.libro = new Libro();
+	}
+	public Recordatorio(String texto, Libro libro) {
+		this.id = -1L;
+		this.fecha = LocalDate.now();
+		this.texto = texto;
+		this.libro = libro;
+	}
+	public Recordatorio(LocalDate fecha, String texto) {
+		this.id = -1L;
+		this.fecha = fecha;
+		this.texto = texto;
+		this.libro = new Libro();
+	}
+	public Recordatorio(LocalDate fecha, String texto, Libro libro) {
+		this.fecha = fecha;
+		this.texto = texto;
+		this.libro = libro;
+	}
+	public Recordatorio(Long id, LocalDate fecha, String texto, Libro libro) {
 		this.id = id;
 		this.fecha = fecha;
-		this.comentario = comentario;
-		this.capitulo = capitulo;
+		this.texto = texto;
+		this.libro = libro;
 	}
-	public Recordatorio(LocalDate fecha, String comentario, Capitulo capitulo) {
-		super();
-		this.fecha = fecha;
-		this.comentario = comentario;
-		this.capitulo = capitulo;
-	}
-	public Recordatorio(LocalDate fecha, String comentario) {
-		super();
-		this.fecha = fecha;
-		this.comentario = comentario;
-	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -52,17 +83,28 @@ public class Recordatorio  {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-	public String getComentario() {
-		return comentario;
+	public String getTexto() {
+		return texto;
 	}
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
+	public void setTexto(String texto) {
+		this.texto = texto;
 	}
-	public Capitulo getCapitulo() {
-		return capitulo;
+	public Libro getLibro() {
+		return libro;
 	}
-	public void setCapitulo(Capitulo capitulo) {
-		this.capitulo = capitulo;
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((libro == null) ? 0 : libro.hashCode());
+		result = prime * result + ((texto == null) ? 0 : texto.hashCode());
+		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -73,16 +115,6 @@ public class Recordatorio  {
 		if (getClass() != obj.getClass())
 			return false;
 		Recordatorio other = (Recordatorio) obj;
-		if (capitulo == null) {
-			if (other.capitulo != null)
-				return false;
-		} else if (!capitulo.equals(other.capitulo))
-			return false;
-		if (comentario == null) {
-			if (other.comentario != null)
-				return false;
-		} else if (!comentario.equals(other.comentario))
-			return false;
 		if (fecha == null) {
 			if (other.fecha != null)
 				return false;
@@ -93,8 +125,20 @@ public class Recordatorio  {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (libro == null) {
+			if (other.libro != null)
+				return false;
+		} else if (!libro.equals(other.libro))
+			return false;
+		if (texto == null) {
+			if (other.texto != null)
+				return false;
+		} else if (!texto.equals(other.texto))
+			return false;
 		return true;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Recordatorio [id=" + id + ", fecha=" + fecha + ", texto=" + texto + ", libro=" + libro + "]";
+	}
 }

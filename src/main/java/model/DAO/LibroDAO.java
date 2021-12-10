@@ -33,28 +33,28 @@ public class LibroDAO implements ILibroDAO {
 	@Override
 	public void crear(Libro aux) {
 		try {
-		em.getTransaction().begin();
-		em.persist(aux);
-		em.getTransaction().commit();
+			em.getTransaction().begin();
+			em.persist(aux);
+			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
 			throw new EntityExistsException("El usuario ya existe");
-		} catch	(IllegalStateException e) {
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
 	@Override
 	public void editar(Libro aux) {
 		try {
-		em.getTransaction().begin();
-		em.persist(aux);
-		em.getTransaction().commit();
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			em.persist(aux);
+			em.getTransaction().commit();
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 
 	}
@@ -63,13 +63,13 @@ public class LibroDAO implements ILibroDAO {
 	public void borrar(Long id) {
 		Libro delete = mostrarPorId(id);
 		try {
-		em.getTransaction().begin();
-		em.remove(delete);
-		em.getTransaction().commit();
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			em.remove(delete);
+			em.getTransaction().commit();
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 
 	}
@@ -78,15 +78,15 @@ public class LibroDAO implements ILibroDAO {
 	public List<Libro> mostrarTodos() {
 		List<Libro> result = new ArrayList<>();
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Libro> q = em.createQuery(getAll, Libro.class);
-		result = q.getResultList();
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Libro> q = em.createQuery(getAll, Libro.class);
+			result = q.getResultList();
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -94,15 +94,15 @@ public class LibroDAO implements ILibroDAO {
 	public Libro mostrarPorId(Long id) {
 		Libro result = null;
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Libro> q = em.createQuery(getById, Libro.class).setParameter("idLibro", id);
-		result = q.getResultList().get(0);
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Libro> q = em.createQuery(getById, Libro.class).setParameter("idLibro", id);
+			result = q.getResultList().get(0);
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -110,15 +110,15 @@ public class LibroDAO implements ILibroDAO {
 	public Libro getBookByName(String name) {
 		Libro result = null;
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Libro> q = em.createQuery(getByName, Libro.class).setParameter("nombreLibro", name);
-		result = q.getResultList().get(0);
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Libro> q = em.createQuery(getByName, Libro.class).setParameter("nombreLibro", name);
+			result = q.getResultList().get(0);
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -126,15 +126,15 @@ public class LibroDAO implements ILibroDAO {
 	public List<Libro> getBooksByAuthor(Usuario author) {
 		List<Libro> result = new ArrayList<>();
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Libro> q = em.createQuery(getFromAuthor, Libro.class).setParameter("author", author.getId());
-		result = q.getResultList();
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Libro> q = em.createQuery(getFromAuthor, Libro.class).setParameter("author", author.getId());
+			result = q.getResultList();
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -142,15 +142,15 @@ public class LibroDAO implements ILibroDAO {
 	public List<Notas_Lib> getNotes() {
 		List<Notas_Lib> result = new ArrayList<Notas_Lib>();
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Notas_Lib> q = em.createQuery(getAllNotes, Notas_Lib.class);
-		result = q.getResultList();
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Notas_Lib> q = em.createQuery(getAllNotes, Notas_Lib.class);
+			result = q.getResultList();
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -158,17 +158,17 @@ public class LibroDAO implements ILibroDAO {
 	public Notas_Lib getNote(Long id) {
 		Notas_Lib result = null;
 		try {
-		List<Notas_Lib> list = getNotes();
-		for (Notas_Lib notas_Lib : list) {
-			if (notas_Lib.getId() == id) {
-				result = notas_Lib;
+			List<Notas_Lib> list = getNotes();
+			for (Notas_Lib notas_Lib : list) {
+				if (notas_Lib.getId() == id) {
+					result = notas_Lib;
+				}
 			}
-		}
-		return result;
-		} catch	(IllegalStateException e) {
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 }

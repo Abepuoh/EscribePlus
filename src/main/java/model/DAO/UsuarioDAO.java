@@ -13,19 +13,20 @@ import model.DataObject.Usuario;
 import model.IDAO.IUsuarioDAO;
 import utils.ConnectionUtil;
 
-public class UsuarioDAO implements IUsuarioDAO{
+public class UsuarioDAO implements IUsuarioDAO {
 
 	public static EntityManager createEM() {
 		EntityManagerFactory emf = ConnectionUtil.getInstace();
 		return emf.createEntityManager();
 	}
+
 	EntityManager em = createEM();
-    
-    //Queries
-    private final String getAll="SELECT * FROM User";
-    private String getById="SELECT p FROM User p WHERE p.id = :idUsuario";
-    private String getByName="SELECT p FROM User p WHERE p.nombre = :nombreUsuario";
-    private String getByEmail="SELECT p FROM User p WHERE p.correo=:emailUsuario";
+
+	// Queries
+	private final String getAll = "SELECT * FROM User";
+	private String getById = "SELECT p FROM User p WHERE p.id = :idUsuario";
+	private String getByName = "SELECT p FROM User p WHERE p.nombre = :nombreUsuario";
+	private String getByEmail = "SELECT p FROM User p WHERE p.correo=:emailUsuario";
 
 	@Override
 	public void crear(Usuario aux) {
@@ -35,53 +36,53 @@ public class UsuarioDAO implements IUsuarioDAO{
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
 			throw new EntityExistsException("El usuario ya existe");
-		} catch	(IllegalStateException e) {
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
-		}	
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+		}
 	}
 
 	@Override
 	public void editar(Usuario aux) {
-		try{
+		try {
 			em.getTransaction().begin();
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al editar el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al editar el usuario deshaciendo la transaccion");
 		}
 	}
 
 	@Override
 	public void borrar(Long id) {
 		Usuario delete = mostrarPorId(id);
-		try{
-		em.getTransaction().begin();
-		em.remove(delete);
-		em.getTransaction().commit();
+		try {
+			em.getTransaction().begin();
+			em.remove(delete);
+			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al editar el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al editar el usuario deshaciendo la transaccion");
 		}
 	}
 
 	@Override
 	public List<Usuario> mostrarTodos() {
 		List<Usuario> result = new ArrayList<>();
-		try{
-		em.getTransaction().begin();
-		TypedQuery<Usuario> q = em.createQuery(getAll, Usuario.class);
-		result = q.getResultList();
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Usuario> q = em.createQuery(getAll, Usuario.class);
+			result = q.getResultList();
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -89,15 +90,15 @@ public class UsuarioDAO implements IUsuarioDAO{
 	public Usuario mostrarPorId(Long id) {
 		Usuario result = null;
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Usuario> q = em.createQuery(getById, Usuario.class).setParameter("idUsuario", id);
-		result = q.getResultList().get(0);
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Usuario> q = em.createQuery(getById, Usuario.class).setParameter("idUsuario", id);
+			result = q.getResultList().get(0);
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -105,15 +106,15 @@ public class UsuarioDAO implements IUsuarioDAO{
 	public Usuario getUserByName(String name) {
 		Usuario result = null;
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Usuario> q = em.createQuery(getByName, Usuario.class).setParameter("nombreUsuario", name);
-		result = q.getResultList().get(0);
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Usuario> q = em.createQuery(getByName, Usuario.class).setParameter("nombreUsuario", name);
+			result = q.getResultList().get(0);
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
@@ -121,15 +122,15 @@ public class UsuarioDAO implements IUsuarioDAO{
 	public Usuario getUserByEmail(String email) {
 		Usuario result = null;
 		try {
-		em.getTransaction().begin();
-		TypedQuery<Usuario> q = em.createQuery(getByEmail, Usuario.class).setParameter("emailUsuario", email);
-		result = q.getResultList().get(0);
-		em.getTransaction().commit();
-		return result;
-		} catch	(IllegalStateException e) {
+			em.getTransaction().begin();
+			TypedQuery<Usuario> q = em.createQuery(getByEmail, Usuario.class).setParameter("emailUsuario", email);
+			result = q.getResultList().get(0);
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion"); 
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 

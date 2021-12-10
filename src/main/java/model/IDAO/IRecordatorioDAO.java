@@ -1,7 +1,7 @@
 package model.IDAO;
 
-import model.IDataObject.IRecordatorio;
+import model.DataObject.Recordatorio;
 
-public interface IRecordatorioDAO extends IDAO<IRecordatorio, Long>{
+public interface IRecordatorioDAO extends IDAO<Recordatorio, Long>{
 
 }

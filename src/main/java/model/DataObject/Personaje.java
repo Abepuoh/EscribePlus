@@ -9,30 +9,38 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import model.IDataObject.IPersonaje;
 
 @Entity
 @Table (name = "Personaje")
+@NamedQueries({
+	@NamedQuery(name="getAll", query = "SELECT * FROM Personaje"),
+	@NamedQuery(name="getByName", query = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje"),
+	@NamedQuery(name="getFromBook", query = "SELECT p FROM Personaje p WHERE p.id_libro=:idlibro"),
+	@NamedQuery(name="getFromUser", query = "SELECT p FROM Personaje p JOIN Book b JOIN PersonajeLibro pl WHERE pl.personajeid = p.id AND pl.libroid = b.id AND b.id_user=:iduser")
+})
 public class Personaje implements IPersonaje, Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy =GenerationType.IDENTITY)
-	private Long id;
+	protected Long id;
 	@Column(name = "nombre")
-	private String nombre;
+	protected String nombre;
 	@Column(name = "edad")
-	private int edad;
+	protected int edad;
 	@Column(name = "descripcion")
-	private String descripcion;
+	protected String descripcion;
 	@Column(name = "alineamiento")
-	private String alineamiento;
+	protected String alineamiento;
 	@Column(name = "foto")
-	private String foto;
+	protected String foto;
 	@ManyToMany(mappedBy = "PersonajeLibro")
-	private Libro libroRef;
+	protected Libro libroRef;
 	
 	public Personaje() {
 		this(-1L,"Por defecto",-1,"Por defecto","Por defecto","Por defecto", new Libro());
