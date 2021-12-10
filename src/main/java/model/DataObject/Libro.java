@@ -61,8 +61,8 @@ public class Libro implements ILibro, Serializable {
 	@OneToMany(mappedBy = "libro", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	protected List<Partes> parts = new ArrayList<Partes>();
 	
-	 @ManyToMany(mappedBy = "libroRef")
-	 private List<Personaje> personajes;
+//	 @ManyToMany(mappedBy = "libroRef")
+//	 private List<Personaje> personajes;
 
 	public Libro() {
         this(-1L,"",-1,"","", new Usuario(), new ArrayList<Notas_Lib>(), new ArrayList<Recordatorio>(), new ArrayList<Partes>());

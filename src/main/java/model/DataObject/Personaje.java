@@ -42,10 +42,10 @@ public class Personaje implements IPersonaje, Serializable {
 	protected String alineamiento;
 	@Column(name = "foto")
 	protected String foto;
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "libro_personaje", joinColumns = { @JoinColumn(name = "personaje_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "libro_id") })
-	private List<Libro> libroRef;
+//	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+//	@JoinTable(name = "libro_personaje", joinColumns = { @JoinColumn(name = "personaje_id") }, inverseJoinColumns = {
+//			@JoinColumn(name = "libro_id") })
+//	private List<Libro> libroRef;
 
 	public Personaje() {
 		this(-1L, "Por defecto", -1, "Por defecto", "Por defecto", "Por defecto", new ArrayList<Libro>());
@@ -60,7 +60,7 @@ public class Personaje implements IPersonaje, Serializable {
 		this.descripcion = descripcion;
 		this.alineamiento = alineamiento;
 		this.foto = foto;
-		this.libroRef = libroRef;
+		//this.libroRef = libroRef;
 	}
 
 	@Override
@@ -125,12 +125,13 @@ public class Personaje implements IPersonaje, Serializable {
 
 	@Override
 	public List<Libro> getLibroRef() {
-		return libroRef;
+		//return libroRef;
+		return null;
 	}
 
 	@Override
 	public void setLibroRef(List<Libro> libroRef) {
-		this.libroRef = libroRef;
+		//this.libroRef = libroRef;
 	}
 
 	@Override
@@ -148,7 +149,7 @@ public class Personaje implements IPersonaje, Serializable {
 	@Override
 	public String toString() {
 		return "Personaje [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", descripcion=" + descripcion
-				+ ", alineamiento=" + alineamiento + ", foto=" + foto + ", libroRef=" + libroRef + "]";
+				+ ", alineamiento=" + alineamiento + ", foto=" + foto + ", libroRef="  + "]";
 	}
 
 }

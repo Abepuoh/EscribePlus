@@ -3,6 +3,7 @@ package controller;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import model.DAO.UsuarioDAO;
 import model.DataObject.Usuario;
 import utils.ConnectionUtil;
 
