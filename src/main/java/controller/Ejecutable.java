@@ -18,7 +18,7 @@ import utils.ConnectionUtil;
 public class Ejecutable {
 
 	public static void main(String[] args) {
-		EntityManager em = createEM();
+		/*EntityManager em = createEM();
         em.getTransaction().begin();
         // LOS CAMBIOS SON EFECTIVOS
         UsuarioDAO a = new UsuarioDAO();
@@ -41,7 +41,7 @@ public class Ejecutable {
 		// FINAL DE LOS CAMBIOS
 		///////////////////////////////////////////////////////////////////////////
 		em.getTransaction().commit();
-		
+		*/
 
 //		ConnectionUtil.transferH2ToMariaDB();
 

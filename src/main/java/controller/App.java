@@ -14,16 +14,17 @@ import javafx.stage.StageStyle;
  * JavaFX App
  */
 public class App extends Application {
-
+	public static Stage rootstage;
     private static Scene scene;
 
     @Override
     public void start(Stage stage) throws IOException {
-    	Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));        
+    	Parent root = FXMLLoader.load(getClass().getResource("MainLibros.fxml"));        
         Scene scene = new Scene(root); 
-        scene.setFill(Color.TRANSPARENT);
+        
+        //scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
+        //stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
 

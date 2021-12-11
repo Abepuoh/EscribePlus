@@ -66,9 +66,7 @@ public class MainLibrosController {
     private static Usuario usuario;
     
     public void initialize() {
-    	UsuarioDAO u = new UsuarioDAO();
-    	usuario=u.getUserByName("Antonio");
-    configuraTablaLibros();
+    	
     }
     /**
      * Setea un usuario recibido por el login;
@@ -80,7 +78,7 @@ public class MainLibrosController {
     
     @FXML
 	void EditarNotas(ActionEvent event) {
-		/*FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditarLibro.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasLibro.fxml"));
 		Parent modal;
 		try {
 			modal = fxmlLoader.load();
@@ -90,24 +88,31 @@ public class MainLibrosController {
 			Scene modalScene = new Scene(modal);
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
-			
-			MySQLlistaReproduccionDAO aux = new MySQLlistaReproduccionDAO();
-			try {
-				ListadeListas.setAll(aux.mostrarTodos());
-				listasPropiasU.setAll(aux.mostrarPorCreador(usuario));
-			} catch (DAOException e) {
-				e.printStackTrace();
-			}
 			modalStage.setResizable(false);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
-	}
+		}
+    }
 
 
     @FXML
     void añadirLibro(ActionEvent event) {
-
+    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditLibros.fxml"));
+		Parent modal;
+		try {
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
     }
 
     @FXML
@@ -133,15 +138,19 @@ public class MainLibrosController {
 
     @FXML
     void editarLibro(ActionEvent event) {
+    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditLibros.fxml"));
+		Parent modal;
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("MainLibros.fxml"));
-			Parent root;
-			root = loader.load();
-			Scene scene = new Scene(root);
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.showAndWait();
-		} catch (IOException e) { 
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
