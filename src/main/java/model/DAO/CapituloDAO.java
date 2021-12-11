@@ -74,7 +74,7 @@ public class CapituloDAO implements ICapituloDAO {
 		List<Capitulo> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Capitulo> q = em.createQuery(getAll, Capitulo.class);
+			TypedQuery<Capitulo> q = em.createNamedQuery("getAll", Capitulo.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;

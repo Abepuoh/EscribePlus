@@ -20,7 +20,7 @@ import model.IDataObject.ICapitulo;
 @Entity
 @Table(name="Capitulo")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT * FROM Capitulo")
+	@NamedQuery(name="getAll", query = "SELECT c FROM Capitulo c")
 })
 public class Capitulo implements ICapitulo, Serializable{
 

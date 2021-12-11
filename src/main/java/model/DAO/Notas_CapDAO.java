@@ -74,7 +74,7 @@ public class Notas_CapDAO implements INotas_capDAO {
 		List<Notas_Cap> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Cap> q = em.createQuery("getAllNotas_Cap", Notas_Cap.class);
+			TypedQuery<Notas_Cap> q = em.createNamedQuery("getAllNotas_Cap", Notas_Cap.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;

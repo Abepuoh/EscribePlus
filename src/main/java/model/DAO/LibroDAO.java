@@ -79,7 +79,7 @@ public class LibroDAO implements ILibroDAO {
 		List<Libro> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Libro> q = em.createQuery("getAllBooks", Libro.class);
+			TypedQuery<Libro> q = em.createNamedQuery("getAllBooks", Libro.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
@@ -95,7 +95,7 @@ public class LibroDAO implements ILibroDAO {
 		Libro result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Libro> q = em.createQuery("getBookById", Libro.class).setParameter("idLibro", id);
+			TypedQuery<Libro> q = em.createNamedQuery("getBookById", Libro.class).setParameter("idLibro", id);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;
@@ -111,7 +111,7 @@ public class LibroDAO implements ILibroDAO {
 		Libro result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Libro> q = em.createQuery("getBookByName", Libro.class).setParameter("nombreLibro", name);
+			TypedQuery<Libro> q = em.createNamedQuery("getBookByName", Libro.class).setParameter("nombreLibro", name);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;
@@ -127,7 +127,7 @@ public class LibroDAO implements ILibroDAO {
 		List<Libro> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Libro> q = em.createQuery("getBookFromAuthor", Libro.class).setParameter("author", author.getId());
+			TypedQuery<Libro> q = em.createNamedQuery("getBookFromAuthor", Libro.class).setParameter("author", author.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
@@ -143,7 +143,7 @@ public class LibroDAO implements ILibroDAO {
 		List<Notas_Lib> result = new ArrayList<Notas_Lib>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Lib> q = em.createQuery("getAllBookNotes", Notas_Lib.class);
+			TypedQuery<Notas_Lib> q = em.createNamedQuery("getAllBookNotes", Notas_Lib.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;

@@ -19,8 +19,8 @@ import model.IDataObject.IPartes;
 @Entity
 @Table(name="Partes")
 @NamedQueries({
-	@NamedQuery(name="getAllPartes", query = "SELECT * FROM Partes"),
-	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p WHERE p.id_libro=:idlibro")
+	@NamedQuery(name="getAllPartes", query = "SELECT p FROM Partes p"),
+	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p ")
 })
 public class Partes implements IPartes, Serializable{
 	

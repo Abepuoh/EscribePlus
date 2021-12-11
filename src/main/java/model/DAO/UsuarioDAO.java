@@ -102,7 +102,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		Usuario result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Usuario> q = em.createNamedQuery("getUserByName", Usuario.class).setParameter("nombreUsuario", name);
+			TypedQuery<Usuario> q = em.createNamedQuery("getUserByName", Usuario.class).setParameter("name", name);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;

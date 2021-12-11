@@ -8,7 +8,7 @@ public class ConnectionUtil {
 	private static EntityManagerFactory emf;
 	public static boolean choice = true; // ----->TRUE LOCAL ------> FALSE NUBE
 	private static final String LOCAL = "AplicacionH2";
-	private static final String REMOTE = "aplicacionMariaDB";
+	private static final String REMOTE = "AplicacionMariaDB";
 
 	public static EntityManagerFactory getInstance(String name) {
 		if (emf == null) {

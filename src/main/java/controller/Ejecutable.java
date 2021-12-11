@@ -16,7 +16,9 @@ public class Ejecutable {
 		Usuario aux = new Usuario("Juan", "jf@gmail.com", "1234", 654321987);
 		em.persist(aux);
 		em.getTransaction().commit();
-		//us.crear(u);
+		
+		UsuarioDAO up = new UsuarioDAO();
+		System.out.println(up.getUserByName("Juan"));
 	}
 	
 	public static EntityManager createEM () {

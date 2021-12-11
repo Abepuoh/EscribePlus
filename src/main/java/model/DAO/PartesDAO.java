@@ -68,7 +68,7 @@ public class PartesDAO implements IPartesDAO {
 	public List<Partes> mostrarTodos() {
 		List<Partes> result = new ArrayList<>();
 		em.getTransaction().begin();
-		TypedQuery<Partes> q = em.createQuery("getAllPartes", Partes.class);
+		TypedQuery<Partes> q = em.createNamedQuery("getAllPartes", Partes.class);
 		result = q.getResultList();
 		em.getTransaction().commit();
 		return result;
@@ -93,7 +93,7 @@ public class PartesDAO implements IPartesDAO {
 		List<Partes> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Partes> q = em.createQuery("getParteFromBook", Partes.class).setParameter("idlibro", l.getId());
+			TypedQuery<Partes> q = em.createNamedQuery("getParteFromBook", Partes.class).setParameter("idlibro", l.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;

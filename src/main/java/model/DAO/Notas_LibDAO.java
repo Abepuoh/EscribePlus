@@ -74,7 +74,7 @@ public class Notas_LibDAO implements INotas_libDAO {
 		List<Notas_Lib> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Lib> q = em.createQuery("getAllNotas_Lib", Notas_Lib.class);
+			TypedQuery<Notas_Lib> q = em.createNamedQuery("getAllNotas_Lib", Notas_Lib.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
