@@ -43,7 +43,7 @@ public class Ejecutable {
 		em.getTransaction().commit();
 		
 
-		ConnectionUtil.transferH2ToMariaDB();
+//		ConnectionUtil.transferH2ToMariaDB();
 
 	}
 
