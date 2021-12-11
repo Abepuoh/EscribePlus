@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -61,6 +58,10 @@ public class Personaje implements IPersonaje, Serializable {
 		//this.libroRef = libroRef;
 	}
 
+	public Personaje(String nombre, int edad, String descripcion, String alineamiento, String foto,
+			List<Libro> libroRef) {
+		this(-1L,nombre,edad,descripcion,alineamiento,foto,libroRef);
+	}
 	@Override
 	public String getAlineamiento() {
 		return alineamiento;

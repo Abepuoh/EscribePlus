@@ -93,8 +93,8 @@ public class Libro implements ILibro, Serializable {
 		this.personajes = new ArrayList<Personaje>();
 	}
 
-	public Libro(Long id, String title, int year, String genre, String description, Usuario usuario,List<Personaje>personaje) {
-		this.id = id;
+	public Libro( String title, int year, String genre, String description, Usuario usuario,List<Personaje>personaje) {
+		this.id = -1L;
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
@@ -223,6 +223,18 @@ public class Libro implements ILibro, Serializable {
 		this.book_notes = book_notes;
 	}
 	
+	public Usuario getUser() {
+		return user;
+	}
+	public void setUser(Usuario user) {
+		this.user = user;
+	}
+	public List<Personaje> getPersonajes() {
+		return personajes;
+	}
+	public void setPersonajes(List<Personaje> personajes) {
+		this.personajes = personajes;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
