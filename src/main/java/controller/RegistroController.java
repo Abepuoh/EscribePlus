@@ -8,6 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.DAO.UsuarioDAO;
 import model.DataObject.Usuario;
+import utils.UsuarioSingleton;
 
 public class RegistroController {
 
@@ -33,15 +34,17 @@ public class RegistroController {
 		String name = this.TFNombre.getText();
 		String email = this.TFEmail.getText();
 		String password = this.TFPassword.getText();
+		UsuarioDAO aux = new UsuarioDAO();
 		//Añadir Telefono;
 
 		if (!this.TFNombre.getText().trim().isEmpty() && !this.TFPassword.getText().trim().isEmpty()
 				&& !this.TFEmail.getText().trim().isEmpty()) {
 			try {
-				UsuarioDAO aux = new UsuarioDAO();
-				if (!aux.logIn(name,password)) {
-					Usuario dummy = new Usuario(name,password,email); 	//Añadir Telefono;
-					aux.crear(dummy);
+				Usuario user = aux.logIn(email, password);
+
+				if (user == null) {
+					UsuarioSingleton usuarioSignleton = UsuarioSingleton.getInstance();
+					usuarioSignleton.setUser(user);
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText(null);
 					alert.setTitle("Informacion");

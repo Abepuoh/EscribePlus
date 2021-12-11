@@ -130,15 +130,23 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public boolean logIn(String nombre, String contraseña) {
-		// TODO Auto-generated method stub
-		return false;
+	public Usuario logIn(String email, String contraseña) {
+		Usuario result = new Usuario();
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Usuario> q = em.createNamedQuery("getUserByMailAndPass", Usuario.class);
+			q.setParameter("email", email);
+			q.setParameter("password", contraseña);
+			result = q.getSingleResult();
+			em.getTransaction().commit();
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+		}
+		return result;
 	}
 
-	@Override
-	public Usuario getUsuarioByNombreContraseña(String nAux, String cAux) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

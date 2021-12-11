@@ -45,8 +45,6 @@ public class Ejecutable {
 
 		ConnectionUtil.transferH2ToMariaDB();
 
-
-
 	}
 
 	public static EntityManager createEM() {
