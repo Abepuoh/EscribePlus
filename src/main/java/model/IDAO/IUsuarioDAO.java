@@ -30,14 +30,5 @@ public interface IUsuarioDAO extends IDAO<Usuario, Long> {
 	 * @return true o false si esta logged
 	 * @throws DAOException
 	 */
-	public boolean logIn(String nombre, String contraseña);
-
-	/**
-	 * Método que devuelve el usuario mediante dos parámetros que introduzcamos
-	 * 
-	 * @param nAux es el nombre del usuario
-	 * @param cAux es la contraseña del usuario
-	 * @throws DAOException
-	 */
-	Usuario getUsuarioByNombreContraseña(String nAux, String cAux);
+	public Usuario logIn(String nombre, String contraseña);
 }

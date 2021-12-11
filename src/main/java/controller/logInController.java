@@ -13,51 +13,58 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DAO.UsuarioDAO;
+import model.DataObject.Usuario;
 import utils.UsuarioSingleton;
 
 public class logInController {
 
-    @FXML
-    private TextField TFEmail;
+	@FXML
+	private TextField TFEmail;
 
-    @FXML
-    private PasswordField TFPassword;
+	@FXML
+	private PasswordField TFPassword;
 
-    @FXML
-    private Button buttAcceder;
-    
-    @FXML
+	@FXML
+	private Button buttAcceder;
+
+	@FXML
 	public void initialize() {
 	}
-    
-    @FXML
-    void logIn(ActionEvent event) {
-    	String email = this.TFEmail.getText();
+
+	@FXML
+	void logIn(ActionEvent event) {
+		String email = this.TFEmail.getText();
 		String password = this.TFPassword.getText();
 		UsuarioDAO aux = new UsuarioDAO();
-		
-		try {
-			if (aux.logIn(email, password)) {
-				this.TFEmail.clear();
-				this.TFPassword.clear();
-				UsuarioSingleton data = UsuarioSingleton.getInstance();
-				data.setUser(aux.getUsuarioByNombreContraseña(email, password));
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("MainLibros.fxml"));
-				Parent root = loader.load();
-				Scene scene = new Scene(root);
-				Stage stage = new Stage();
-				stage.setScene(scene);
-				stage.showAndWait();
+
+		if (!TFEmail.getText().isEmpty() && !TFPassword.getText().isEmpty()) {
+			;
+			Usuario user = aux.logIn(email, password);
+
+			if (user != null) {
+				UsuarioSingleton usuarioSignleton = UsuarioSingleton.getInstance();
+				usuarioSignleton.setUser(user);
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setHeaderText(null);
+				alert.setTitle("CORRECTO");
+				alert.setContentText("El email y la contraseña son correctos");
+				alert.showAndWait();
+				try {
+					App.setRoot("MainScreen");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			} else {
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 				alert.setHeaderText(null);
-				alert.setTitle("Error de acceso");
-				alert.setContentText("Has introducido mal algun dato");
+				alert.setTitle("ERROR");
+				alert.setContentText("Error al introducir email o contraseña");
+				this.TFEmail.clear();
+				this.TFPassword.clear();
 				alert.showAndWait();
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 }
