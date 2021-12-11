@@ -118,6 +118,34 @@ public class Libro implements ILibro, Serializable {
 		this.parts = parts;
 		this.personajes = personajes;
 	}
+	
+	public void addRecodatorio(Recordatorio recordatorio) {
+		this.recordatorios.add(recordatorio);
+	}
+	public void addNota(Notas_Lib nota_lib) {
+		this.book_notes.add(nota_lib);
+	}
+	public void addParte(Partes partes) {
+		this.parts.add(partes);
+	}
+	public void addPersonaje(Personaje personaje) {
+		this.personajes.add(personaje);
+	}
+	
+	
+	public boolean removeRecordatorio(Recordatorio recordatorio) {
+		return this.recordatorios.remove(recordatorio);
+	}
+	public boolean removeNota(Notas_Lib nota_lib) {
+		return this.book_notes.remove(nota_lib);
+	}
+	public boolean removeParte(Partes partes) {
+		return this.parts.remove(partes);
+	}
+	public boolean removePersonaje(Personaje personaje) {
+		return this.personajes.remove(personaje);
+	}
+	
 	/**
 	 * @return the id
 	 */

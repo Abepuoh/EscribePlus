@@ -20,7 +20,10 @@ import model.IDataObject.IRecordatorio;
 @Entity
 @Table (name = "Recordatorio")
 @NamedQueries({
-	@NamedQuery(name="getAllRecordatorios", query = "SELECT p FROM Recordatorio p")
+	@NamedQuery(name="getAllRecordatorios", query = "SELECT r FROM Recordatorio r"),
+	@NamedQuery(name="getRecordatorioById", query = "SELECT r FROM Recordatorio r WHERE r.id=:id"),
+	@NamedQuery(name="getRecordatorioByBook", query = "SELECT r FROM Recordatorio r WHERE r.libro.title=:bookName")
+
 })
 public class Recordatorio implements IRecordatorio, Serializable {
 	
@@ -33,7 +36,7 @@ public class Recordatorio implements IRecordatorio, Serializable {
 	protected LocalDate fecha;
 	@Column(name="Comentario")
 	protected String texto;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="Id_Libro")
 	protected Libro libro;
 	

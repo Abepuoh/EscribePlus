@@ -43,6 +43,7 @@ public class Ejecutable {
 		///////////////////////////////////////////////////////////////////////////
 		em.getTransaction().commit();
 
+
 	}
 
 	public static EntityManager createEM() {
