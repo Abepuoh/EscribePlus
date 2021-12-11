@@ -27,10 +27,9 @@ import model.IDataObject.ILibro;
 @Table(name = "Book")
 @NamedQueries({
 	@NamedQuery(name="getAllBooks", query = "SELECT p FROM Libro p"),
-	@NamedQuery(name="getBookById", query = "SELECT p FROM Libro p "),
-	@NamedQuery(name="getBookByName", query = "SELECT p FROM Libro p "),
-	@NamedQuery(name="getAllBookNotes", query = "SELECT p.book_notes FROM Libro p"),
-	@NamedQuery(name="getBookFromAuthor", query = "SELECT p FROM Libro p ")
+	@NamedQuery(name="getBookById", query = "SELECT p FROM Libro p WHERE p.id =:idLibro"),
+	@NamedQuery(name="getBookByName", query = "SELECT p FROM Libro p WHERE p.title =:titleLibro"),
+	@NamedQuery(name="getBookFromAuthor", query = "SELECT p FROM Libro p WHERE p.user.id =:author")
 })
 public class Libro implements ILibro, Serializable {
 
@@ -277,8 +276,8 @@ public class Libro implements ILibro, Serializable {
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", title=" + title + ", year=" + year + ", genre=" + genre + ", description="
-				+ description + ", id_user=" + user + ", book_notes=" + book_notes + ", recordatorios="
-				+ recordatorios + ", parts=" + parts + "]";
+				+ description + ", id_user=" + user + ", book_notes=" + book_notes.size() + ", recordatorios="
+				+ recordatorios.size() + ", parts=" + parts.size() + "]";
 	}
 
 	

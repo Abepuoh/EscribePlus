@@ -89,7 +89,7 @@ public class PartesDAO implements IPartesDAO {
 		}
 	}
 
-	public List<Partes> mostrarPorLibro(Libro l) {
+	public List<Partes> getByLibro(Libro l) {
 		List<Partes> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();

@@ -107,11 +107,11 @@ public class LibroDAO implements ILibroDAO {
 	}
 
 	@Override
-	public Libro getBookByName(String name) {
+	public Libro getBookByName(String title) {
 		Libro result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Libro> q = em.createNamedQuery("getBookByName", Libro.class).setParameter("nombreLibro", name);
+			TypedQuery<Libro> q = em.createNamedQuery("getBookByName", Libro.class).setParameter("titleLibro", title);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;
@@ -138,12 +138,12 @@ public class LibroDAO implements ILibroDAO {
 		}
 	}
 
-	@Override
-	public List<Notas_Lib> getNotesOfBook() {
+
+	public List<Notas_Lib> getNotesOfBook(String title) {
 		List<Notas_Lib> result = new ArrayList<Notas_Lib>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Lib> q = em.createNamedQuery("getAllBookNotes", Notas_Lib.class);
+			TypedQuery<Notas_Lib> q = em.createNamedQuery("getAllBookNotes", Notas_Lib.class).setParameter("titleLibro", title);;
 			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
@@ -156,7 +156,7 @@ public class LibroDAO implements ILibroDAO {
 
 	@Override
 	public Notas_Lib getNoteOfBook(Long id) {
-		Notas_Lib result = null;
+		/*Notas_Lib result = null;
 		try {
 			List<Notas_Lib> list = getNotesOfBook();
 			for (Notas_Lib notas_Lib : list) {
@@ -169,6 +169,7 @@ public class LibroDAO implements ILibroDAO {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
-		}
+		}*/
+		return null;
 	}
 }

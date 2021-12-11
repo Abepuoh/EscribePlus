@@ -86,7 +86,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		Usuario result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Usuario> q = em.createNamedQuery("getUserById", Usuario.class).setParameter("idUsuario", id);
+			TypedQuery<Usuario> q = em.createNamedQuery("getUserById", Usuario.class).setParameter("id", id);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;
@@ -118,7 +118,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		Usuario result = null;
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Usuario> q = em.createNamedQuery("getUserByEmail", Usuario.class).setParameter("emailUsuario", email);
+			TypedQuery<Usuario> q = em.createNamedQuery("getUserByEmail", Usuario.class).setParameter("email", email);
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 			return result;

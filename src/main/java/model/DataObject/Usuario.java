@@ -21,9 +21,9 @@ import javax.persistence.Table;
 @Table(name="User")
 @NamedQueries({
 	@NamedQuery(name="getAllUsers", query = "SELECT u FROM Usuario u"),
-	@NamedQuery(name="getUserById", query = "SELECT u FROM Usuario u "),
+	@NamedQuery(name="getUserById", query = "SELECT u FROM Usuario u  WHERE u.id=:id"),
 	@NamedQuery(name="getUserByName", query = "SELECT u FROM Usuario u WHERE u.name=:name"),
-	@NamedQuery(name="getUserByEmail", query = "SELECT p FROM Usuario p ")
+	@NamedQuery(name="getUserByEmail", query = "SELECT u FROM Usuario u WHERE u.email=:email")
 })
 public class Usuario implements Serializable {
 
@@ -189,11 +189,12 @@ public class Usuario implements Serializable {
 			return false;
 		return true;
     }
-	
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="
-				+ phone + "]";
+				+ phone + ", books=" + books.size() + "]";
 	}
+	
+	
 }
 

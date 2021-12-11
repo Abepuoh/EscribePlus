@@ -20,7 +20,7 @@ import model.IDataObject.IPartes;
 @Table(name="Partes")
 @NamedQueries({
 	@NamedQuery(name="getAllPartes", query = "SELECT p FROM Partes p"),
-	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p ")
+	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p WHERE p.libro.id=:idlibro ")
 })
 public class Partes implements IPartes, Serializable{
 	
@@ -31,7 +31,7 @@ public class Partes implements IPartes, Serializable{
 	protected Long id;
 	@Column(name="nombre")
 	protected String nombre;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_libro")
 	protected Libro libro;
 	
@@ -96,6 +96,6 @@ public class Partes implements IPartes, Serializable{
 
 	@Override
 	public String toString() {
-		return "Partes [id=" + id + ", nombre=" + nombre + ", libro=" + libro + "]";
+		return "Partes [id=" + id + ", nombre=" + nombre + ", libro=" + libro.title + "]";
 	}
 }
