@@ -10,6 +10,7 @@ import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import model.DataObject.Recordatorio;
+import model.DataObject.Usuario;
 import model.IDAO.IRecordatorioDAO;
 import utils.ConnectionUtil;
 
@@ -85,14 +86,31 @@ public class RecordatorioDAO implements IRecordatorioDAO {
 		Recordatorio result = null;
 		try {
 			em.getTransaction().begin();
-			result = em.find(Recordatorio.class, id);
+			TypedQuery<Recordatorio> q = em.createNamedQuery("getRecordatorioById", Recordatorio.class).setParameter("id", id);
+			result = q.getResultList().get(0);
 			em.getTransaction().commit();
+			return result;
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
 			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
-		return result;
+	}
+
+	@Override
+	public Recordatorio getRecordatorioByBook(String bookName) {
+		Recordatorio result = null;
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Recordatorio> q = em.createNamedQuery("getRecordatorioByBook", Recordatorio.class).setParameter("bookName", bookName);
+			result = q.getResultList().get(0);
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
+		}
 	}
 
 }

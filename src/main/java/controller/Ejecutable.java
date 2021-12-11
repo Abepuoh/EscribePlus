@@ -17,10 +17,38 @@ import utils.ConnectionUtil;
 public class Ejecutable {
 
 	public static void main(String[] args) {
-		EntityManager em = createEM();
-		em.getTransaction().begin();
+//		EntityManager em = createEM();
+//		em.getTransaction().begin();
 
-		///////////////////////////////////////////////////////////////////////////
+		UsuarioDAO u = new UsuarioDAO();
+		LibroDAO l = new LibroDAO();
+		PersonajeDAO p =new PersonajeDAO();
+		
+		Usuario aux = new Usuario("Juan", "jf@gmail.com", "1234", 654321987);
+		u.crear(aux);
+		
+		Personaje p1 = new Personaje(1L,"Miguel",18,"por defecto","malo","string",null);
+		p.crear(p1);
+		
+		Libro l1 = new Libro("Don Quijote", 2021, "Drama", "Loco medieval", aux);
+		l1.addPersonaje(p1);
+		l.crear(l1);
+		
+
+		
+//		Recordatorio r1 = new Recordatorio("Chupala", l1);
+//		RecordatorioDAO rec = new RecordatorioDAO();
+//		rec.crear(r1);
+//		System.out.println(up.getUserByName("Juan"));
+//		System.out.println(up.getById(1L));
+//		System.out.println(up.getUserByEmail("jf@gmail.com"));
+//		System.out.println(up.getAll());
+		
+		System.out.println(l.getAll());
+		
+//		System.out.println(rec.getAll());
+
+	/*	///////////////////////////////////////////////////////////////////////////
 		// LOS CAMBIOS SON EFECTIVOS
 		Usuario user1 = new Usuario("Miguel", "12345", "prueba@prueba.com");
 		Personaje personaje = new Personaje(1L,"Miguel",18,"por defecto","malo","string",null);
@@ -38,7 +66,7 @@ public class Ejecutable {
 		a.crear(book1);
 		//em.persist(user1);
 		//em.getTransaction().commit();
-	
+	*/
 
 	}
 
