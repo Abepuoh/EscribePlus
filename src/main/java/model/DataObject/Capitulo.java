@@ -7,9 +7,12 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -20,7 +23,8 @@ import model.IDataObject.ICapitulo;
 @Entity
 @Table(name="Capitulo")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT c FROM Capitulo c")
+	@NamedQuery(name="getAll", query = "SELECT c FROM Capitulo c"),
+        @NamedQuery(name="getFromPart", query = "SELECT c FROM Capitulo c WHERE c.parte.id=:idparte")
 })
 public class Capitulo implements ICapitulo, Serializable{
 
@@ -35,6 +39,9 @@ public class Capitulo implements ICapitulo, Serializable{
 	protected String text;
 	@OneToMany(mappedBy = "capitulo",cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<Notas_Cap> parts;
+        @ManyToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name="id_parte")
+	protected Partes parte;
 	
 	public Capitulo() {
 		this(-1L,"","",new ArrayList<Notas_Cap>());

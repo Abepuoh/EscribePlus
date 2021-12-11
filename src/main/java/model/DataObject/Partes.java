@@ -1,6 +1,9 @@
 package model.DataObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import model.IDataObject.IPartes;
@@ -20,7 +24,7 @@ import model.IDataObject.IPartes;
 @Table(name="Partes")
 @NamedQueries({
 	@NamedQuery(name="getAllPartes", query = "SELECT p FROM Partes p"),
-	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p WHERE p.libro.id=:idlibro ")
+	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p WHERE p.libro.id=:idlibro")
 })
 public class Partes implements IPartes, Serializable{
 	
@@ -32,8 +36,10 @@ public class Partes implements IPartes, Serializable{
 	@Column(name="nombre")
 	protected String nombre;
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="id_libro")
+        @JoinColumn(name="id_libro")
 	protected Libro libro;
+        @OneToMany(mappedBy = "parte", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	protected List<Capitulo> capitulos = new ArrayList<Capitulo>();
 	
 	public Partes() {
 		this(-1L,"",new Libro());

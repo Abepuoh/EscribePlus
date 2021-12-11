@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
+import model.DataObject.Capitulo;
 
 import model.DataObject.Notas_Cap;
 import model.IDAO.INotas_capDAO;
@@ -99,4 +100,19 @@ public class Notas_CapDAO implements INotas_capDAO {
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
+        
+        public List<Notas_Cap> getFromBook(Capitulo c){
+            List <Notas_Cap> result = new ArrayList();
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Notas_Cap> q = em.createNamedQuery("getNotas_CapFromCap", Notas_Cap.class).setParameter("idcapitulo", c.getId());
+                        result = q.getResultList();
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+		}
+        }
 }
