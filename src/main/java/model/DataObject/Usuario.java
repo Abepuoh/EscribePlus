@@ -62,20 +62,20 @@ public class Usuario implements Serializable {
         this.phone =-1;
         this.books = new ArrayList<Libro>();
     }
-    public Usuario(Long id, String name, String email, String password, int phone) {
-        this.id = id;
-        this.name = name;
+    public Usuario(String name, String email, String password, int phone,List<Libro> books) {
+        this.id = -1L;
+    	this.name = name;
         this.email = email;
         this.password = password;
         this.phone = -1;
-        this.books = new ArrayList<Libro>();
+        this.books = books;
     }
     public Usuario(Long id, String name, String email, String password, int phone, List<Libro> books) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = -1;
+        this.phone = phone;
         this.books = books;  
     }
     
