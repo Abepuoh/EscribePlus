@@ -11,7 +11,6 @@ import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import model.DataObject.Capitulo;
-import model.DataObject.Partes;
 import model.IDAO.ICapituloDAO;
 import utils.ConnectionUtil;
 
@@ -100,19 +99,4 @@ public class CapituloDAO implements ICapituloDAO {
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
-        
-        public List<Capitulo> getFromPart(Partes p){
-            List <Capitulo> result = new ArrayList();
-		try {
-			em.getTransaction().begin();
-			TypedQuery<Capitulo> q = em.createNamedQuery("getFromPart", Capitulo.class).setParameter("idparte", p.getId());
-                        result = q.getResultList();
-			em.getTransaction().commit();
-			return result;
-		} catch (IllegalStateException e) {
-			throw new IllegalStateException("Ya hay una transaccion activa");
-		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
-		}
-        }
 }

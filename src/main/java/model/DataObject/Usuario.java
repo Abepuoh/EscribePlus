@@ -23,8 +23,7 @@ import javax.persistence.Table;
 	@NamedQuery(name="getAllUsers", query = "SELECT u FROM Usuario u"),
 	@NamedQuery(name="getUserById", query = "SELECT u FROM Usuario u  WHERE u.id=:id"),
 	@NamedQuery(name="getUserByName", query = "SELECT u FROM Usuario u WHERE u.name=:name"),
-	@NamedQuery(name="getUserByEmail", query = "SELECT u FROM Usuario u WHERE u.email=:email"),
-	@NamedQuery(name="getUserByMailAndPass", query="SELECT u FROM Usuario u WHERE u.email=:email AND u.password=:password")
+	@NamedQuery(name="getUserByEmail", query = "SELECT u FROM Usuario u WHERE u.email=:email")
 })
 public class Usuario implements Serializable {
 
@@ -60,7 +59,7 @@ public class Usuario implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
-        this.phone =-1;
+        this.phone =phone;
         this.books = new ArrayList<Libro>();
     }
     public Usuario(String name, String email, String password, int phone,List<Libro> books) {
@@ -68,7 +67,7 @@ public class Usuario implements Serializable {
     	this.name = name;
         this.email = email;
         this.password = password;
-        this.phone = -1;
+        this.phone = phone;
         this.books = books;
     }
     public Usuario(Long id, String name, String email, String password, int phone, List<Libro> books) {

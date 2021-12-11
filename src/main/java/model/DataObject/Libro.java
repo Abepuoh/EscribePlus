@@ -276,7 +276,7 @@ public class Libro implements ILibro, Serializable {
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", title=" + title + ", year=" + year + ", genre=" + genre + ", description="
-				+ description + ", id_user=" + user + ", book_notes=" + book_notes.size() + ", recordatorios="
+				+ description + ", id_user=" + user.name + ", book_notes=" + book_notes.size() + ", recordatorios="
 				+ recordatorios.size() + ", parts=" + parts.size() + "]";
 	}
 

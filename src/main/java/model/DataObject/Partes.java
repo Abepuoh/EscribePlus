@@ -3,8 +3,8 @@ package model.DataObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +24,7 @@ import model.IDataObject.IPartes;
 @Table(name="Partes")
 @NamedQueries({
 	@NamedQuery(name="getAllPartes", query = "SELECT p FROM Partes p"),
-	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p WHERE p.libro.id=:idlibro")
+	@NamedQuery(name="getParteFromBook", query = "SELECT p FROM Partes p WHERE p.libro.id=:idlibro ")
 })
 public class Partes implements IPartes, Serializable{
 	
@@ -36,9 +36,9 @@ public class Partes implements IPartes, Serializable{
 	@Column(name="nombre")
 	protected String nombre;
 	@ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name="id_libro")
+    @JoinColumn(name="id_libro")
 	protected Libro libro;
-        @OneToMany(mappedBy = "parte", cascade = { CascadeType.ALL }, orphanRemoval = true)
+	@OneToMany(mappedBy = "parte", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	protected List<Capitulo> capitulos = new ArrayList<Capitulo>();
 	
 	public Partes() {
@@ -55,6 +55,14 @@ public class Partes implements IPartes, Serializable{
 		this.id = id;
 		this.nombre = nombre;
 		this.libro = libro;
+	}
+	
+	public void addCapitulo(Capitulo capitulo) {
+		this.capitulos.add(capitulo);
+	}
+	
+	public boolean removeCapitulo(Capitulo capitulo) {
+		return this.capitulos.remove(capitulo);
 	}
 	
 	public Long getId() {

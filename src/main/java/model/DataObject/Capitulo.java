@@ -23,8 +23,7 @@ import model.IDataObject.ICapitulo;
 @Entity
 @Table(name="Capitulo")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT c FROM Capitulo c"),
-        @NamedQuery(name="getFromPart", query = "SELECT c FROM Capitulo c WHERE c.parte.id=:idparte")
+	@NamedQuery(name="getAll", query = "SELECT c FROM Capitulo c")
 })
 public class Capitulo implements ICapitulo, Serializable{
 
@@ -39,8 +38,8 @@ public class Capitulo implements ICapitulo, Serializable{
 	protected String text;
 	@OneToMany(mappedBy = "capitulo",cascade = CascadeType.ALL, orphanRemoval = true)
 	protected List<Notas_Cap> parts;
-        @ManyToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name="id_parte")
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id_parte")
 	protected Partes parte;
 	
 	public Capitulo() {
