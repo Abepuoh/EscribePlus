@@ -61,7 +61,7 @@ public class LibroDAO implements ILibroDAO {
 
 	@Override
 	public void borrar(Long id) {
-		Libro delete = mostrarPorId(id);
+		Libro delete = getById(id);
 		try {
 			em.getTransaction().begin();
 			em.remove(delete);
@@ -75,7 +75,7 @@ public class LibroDAO implements ILibroDAO {
 	}
 
 	@Override
-	public List<Libro> mostrarTodos() {
+	public List<Libro> getAll() {
 		List<Libro> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
@@ -91,7 +91,7 @@ public class LibroDAO implements ILibroDAO {
 	}
 
 	@Override
-	public Libro mostrarPorId(Long id) {
+	public Libro getById(Long id) {
 		Libro result = null;
 		try {
 			em.getTransaction().begin();
@@ -139,7 +139,7 @@ public class LibroDAO implements ILibroDAO {
 	}
 
 	@Override
-	public List<Notas_Lib> getNotes() {
+	public List<Notas_Lib> getNotesOfBook() {
 		List<Notas_Lib> result = new ArrayList<Notas_Lib>();
 		try {
 			em.getTransaction().begin();
@@ -155,10 +155,10 @@ public class LibroDAO implements ILibroDAO {
 	}
 
 	@Override
-	public Notas_Lib getNote(Long id) {
+	public Notas_Lib getNoteOfBook(Long id) {
 		Notas_Lib result = null;
 		try {
-			List<Notas_Lib> list = getNotes();
+			List<Notas_Lib> list = getNotesOfBook();
 			for (Notas_Lib notas_Lib : list) {
 				if (notas_Lib.getId() == id) {
 					result = notas_Lib;

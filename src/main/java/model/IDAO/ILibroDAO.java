@@ -25,14 +25,13 @@ public interface ILibroDAO  extends IDAO<Libro, Long>{
      * @return la listas de libros
      * @throws Exception Si no existe
      */
-    public List<Notas_Lib> getNotes();
+    public List<Notas_Lib> getNotesOfBook();
     /**
      * Metodo que devuelve una nota buscada por id.
      * @return Nota deseada
      * @throws Exception Si no existe la nota
      */
-    public Notas_Lib getNote(Long id);
-
+    public Notas_Lib getNoteOfBook(Long id);
 
     
 

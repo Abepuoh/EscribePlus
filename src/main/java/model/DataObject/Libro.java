@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -61,11 +60,12 @@ public class Libro implements ILibro, Serializable {
 	@OneToMany(mappedBy = "libro", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	protected List<Partes> parts = new ArrayList<Partes>();
 	
-//	 @ManyToMany(mappedBy = "libroRef")
-//	 private List<Personaje> personajes;
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "personaje_id", joinColumns = { @JoinColumn(name = "libro_id") }, inverseJoinColumns = { @JoinColumn(name = "personaje_id") })
+	 private List<Personaje> personajes;
 
 	public Libro() {
-        this(-1L,"",-1,"","", new Usuario(), new ArrayList<Notas_Lib>(), new ArrayList<Recordatorio>(), new ArrayList<Partes>());
+        this(-1L,"",-1,"","", new Usuario(), new ArrayList<Notas_Lib>(), new ArrayList<Recordatorio>(), new ArrayList<Partes>(),new ArrayList<Personaje>());
 	}
 	public Libro(String title, int year, String genre, String description, Usuario id_user) {
 		this.id = -1L;
@@ -77,6 +77,7 @@ public class Libro implements ILibro, Serializable {
 		this.book_notes = new ArrayList<Notas_Lib>();
 		this.recordatorios =  new ArrayList<Recordatorio>();
 		this.parts = new ArrayList<Partes>();
+		this.personajes = new ArrayList<Personaje>();
 	}
 	public Libro(String title, int year, String genre, String description, Usuario id_user, List<Notas_Lib> notas_libro,
 			List<Partes> partes) {
@@ -89,22 +90,23 @@ public class Libro implements ILibro, Serializable {
 		this.book_notes = notas_libro;
 		this.recordatorios =  new ArrayList<Recordatorio>();
 		this.parts = partes;
+		this.personajes = new ArrayList<Personaje>();
 	}
 
-	public Libro(Long id, String title, int year, String genre, String description) {
+	public Libro(Long id, String title, int year, String genre, String description, Usuario usuario,List<Personaje>personaje) {
 		this.id = id;
 		this.title = title;
 		this.year = year;
 		this.genre = genre;
 		this.description = description;
-		this.user = new Usuario();
+		this.user = usuario;
 		this.book_notes = new ArrayList<Notas_Lib>();
 		this.recordatorios =  new ArrayList<Recordatorio>();
 		this.parts = new ArrayList<Partes>();
+		this.personajes = personaje;
 	}
-
 	public Libro(Long id, String title, int year, String genre, String description, Usuario id_user,
-			List<Notas_Lib> book_notes, List<Recordatorio> recordatorio, List<Partes> parts) {
+			List<Notas_Lib> book_notes, List<Recordatorio> recordatorio, List<Partes> parts, List<Personaje>personajes) {
 		this.id = id;
 		this.title = title;
 		this.year = year;
@@ -114,6 +116,7 @@ public class Libro implements ILibro, Serializable {
 		this.book_notes = book_notes;
 		this.recordatorios = recordatorio;
 		this.parts = parts;
+		this.personajes = personajes;
 	}
 	/**
 	 * @return the id

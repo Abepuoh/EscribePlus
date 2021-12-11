@@ -57,7 +57,7 @@ public class CapituloDAO implements ICapituloDAO {
 
 	@Override
 	public void borrar(Long id) {
-		Capitulo deleted = mostrarPorId(id);
+		Capitulo deleted = getById(id);
 		try {
 			em.getTransaction().begin();
 			em.remove(deleted);
@@ -70,7 +70,7 @@ public class CapituloDAO implements ICapituloDAO {
 	}
 
 	@Override
-	public List<Capitulo> mostrarTodos() {
+	public List<Capitulo> getAll() {
 		List<Capitulo> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
@@ -86,7 +86,7 @@ public class CapituloDAO implements ICapituloDAO {
 	}
 
 	@Override
-	public Capitulo mostrarPorId(Long id) {
+	public Capitulo getById(Long id) {
 		Capitulo result = new Capitulo();
 		try {
 			em.getTransaction().begin();

@@ -193,7 +193,7 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", phone="
-				+ phone + ", books=" + books + "]";
+				+ phone + "]";
 	}
 }
 

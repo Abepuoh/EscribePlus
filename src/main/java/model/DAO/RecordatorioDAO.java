@@ -52,7 +52,7 @@ public class RecordatorioDAO implements IRecordatorioDAO {
 
 	@Override
 	public void borrar(Long id) {
-		Recordatorio delete = mostrarPorId(id);
+		Recordatorio delete = getById(id);
 		try {
 			em.getTransaction().begin();
 			em.remove(delete);
@@ -65,7 +65,7 @@ public class RecordatorioDAO implements IRecordatorioDAO {
 	}
 
 	@Override
-	public List<Recordatorio> mostrarTodos() {
+	public List<Recordatorio> getAll() {
 		List<Recordatorio> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
@@ -81,7 +81,7 @@ public class RecordatorioDAO implements IRecordatorioDAO {
 	}
 
 	@Override
-	public Recordatorio mostrarPorId(Long id) {
+	public Recordatorio getById(Long id) {
 		Recordatorio result = null;
 		try {
 			em.getTransaction().begin();

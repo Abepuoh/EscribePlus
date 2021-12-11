@@ -42,10 +42,8 @@ public class Personaje implements IPersonaje, Serializable {
 	protected String alineamiento;
 	@Column(name = "foto")
 	protected String foto;
-//	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-//	@JoinTable(name = "libro_personaje", joinColumns = { @JoinColumn(name = "personaje_id") }, inverseJoinColumns = {
-//			@JoinColumn(name = "libro_id") })
-//	private List<Libro> libroRef;
+	@ManyToMany(mappedBy = "personajes")
+	private List<Libro> libroRef;
 
 	public Personaje() {
 		this(-1L, "Por defecto", -1, "Por defecto", "Por defecto", "Por defecto", new ArrayList<Libro>());

@@ -58,14 +58,14 @@ public class PartesDAO implements IPartesDAO {
 
 	@Override
 	public void borrar(Long id) {
-		Partes delete = mostrarPorId(id);
+		Partes delete = getById(id);
 		em.getTransaction().begin();
 		em.remove(delete);
 		em.getTransaction().commit();
 	}
 
 	@Override
-	public List<Partes> mostrarTodos() {
+	public List<Partes> getAll() {
 		List<Partes> result = new ArrayList<>();
 		em.getTransaction().begin();
 		TypedQuery<Partes> q = em.createNamedQuery("getAllPartes", Partes.class);
@@ -75,7 +75,7 @@ public class PartesDAO implements IPartesDAO {
 	}
 
 	@Override
-	public Partes mostrarPorId(Long id) {
+	public Partes getById(Long id) {
 		Partes result = new Partes();
 		try {
 			em.getTransaction().begin();

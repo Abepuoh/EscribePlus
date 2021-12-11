@@ -57,7 +57,7 @@ public class Notas_LibDAO implements INotas_libDAO {
 
 	@Override
 	public void borrar(Long id) {
-		INotas_lib delete = mostrarPorId(id);
+		INotas_lib delete = getById(id);
 		try {
 			em.getTransaction().begin();
 			em.remove(delete);
@@ -70,7 +70,7 @@ public class Notas_LibDAO implements INotas_libDAO {
 	}
 
 	@Override
-	public List<Notas_Lib> mostrarTodos() {
+	public List<Notas_Lib> getAll() {
 		List<Notas_Lib> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
@@ -86,7 +86,7 @@ public class Notas_LibDAO implements INotas_libDAO {
 	}
 
 	@Override
-	public Notas_Lib mostrarPorId(Long id) {
+	public Notas_Lib getById(Long id) {
 		Notas_Lib result = new Notas_Lib();
 		try {
 			em.getTransaction().begin();

@@ -63,7 +63,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 
 	@Override
 	public void borrar(Long id) {
-		Personaje delete = mostrarPorId(id);
+		Personaje delete = getById(id);
 		try {
 			em.getTransaction().begin();
 			em.remove(delete);
@@ -76,7 +76,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 	}
 
 	@Override
-	public List<Personaje> mostrarTodos() {
+	public List<Personaje> getAll() {
 		List<Personaje> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
@@ -92,7 +92,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 	}
 
 	@Override
-	public Personaje mostrarPorId(Long id) {
+	public Personaje getById(Long id) {
 		Personaje result = new Personaje();
 		try {
 			em.getTransaction().begin();

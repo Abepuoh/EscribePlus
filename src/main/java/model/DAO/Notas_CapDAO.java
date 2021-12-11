@@ -57,7 +57,7 @@ public class Notas_CapDAO implements INotas_capDAO {
 
 	@Override
 	public void borrar(Long id) {
-		INotas_cap deleted = mostrarPorId(id);
+		INotas_cap deleted = getById(id);
 		try {
 			em.getTransaction().begin();
 			em.remove(deleted);
@@ -70,7 +70,7 @@ public class Notas_CapDAO implements INotas_capDAO {
 	}
 
 	@Override
-	public List<Notas_Cap> mostrarTodos() {
+	public List<Notas_Cap> getAll() {
 		List<Notas_Cap> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
@@ -86,7 +86,7 @@ public class Notas_CapDAO implements INotas_capDAO {
 	}
 
 	@Override
-	public Notas_Cap mostrarPorId(Long id) {
+	public Notas_Cap getById(Long id) {
 		Notas_Cap result = new Notas_Cap();
 		try {
 			em.getTransaction().begin();

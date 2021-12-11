@@ -53,7 +53,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	@Override
 	public void borrar(Long id) {
-		Usuario delete = mostrarPorId(id);
+		Usuario delete = getById(id);
 		try {
 			em.getTransaction().begin();
 			em.remove(delete);
@@ -66,7 +66,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public List<Usuario> mostrarTodos() {
+	public List<Usuario> getAll() {
 		List<Usuario> result = new ArrayList<>();
 		try {
 			em.getTransaction().begin();
@@ -82,7 +82,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public Usuario mostrarPorId(Long id) {
+	public Usuario getById(Long id) {
 		Usuario result = null;
 		try {
 			em.getTransaction().begin();
