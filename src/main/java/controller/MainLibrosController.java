@@ -132,7 +132,7 @@ public class MainLibrosController {
 			try {
 				buttBorrarLibro.setDisable(false);
 	    		LibroDAO l = new LibroDAO();
-	    		//l.borrar(selected.getId());
+	    		l.borrar(selected.getId());
 	    		Libros.remove(selected);
 				configuraTablaLibros();
 
