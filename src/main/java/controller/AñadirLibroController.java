@@ -62,10 +62,10 @@ public class AñadirLibroController {
     		try {
         		nuevo = l.getBookByName(TfTitulo.getText());
 			} catch (Exception e) {}
-        	if (nuevo.getId()<0 && TFAño.getValue().getYear()>1000 && !TFGenero.getText().isEmpty() && !TFDescripcion.getText().isEmpty()) {
+        	if (nuevo.getId()<0 && !TfTitulo.getText().isEmpty() &&TFAño.getValue().getYear()>1000 && !TFGenero.getText().isEmpty() && !TFDescripcion.getText().isEmpty()) {
 
-        		Libro book1 = new Libro("matanza",1995,"Fanta", "Uorlok sin diente", u.getUserByName("Pepe"));
-            	l.crear(l1);
+        		Libro book1 = new Libro(TfTitulo.getText(),TFAño.getValue().getYear(),TFGenero.getText(), TFDescripcion.getText(), usuario);
+            	creaLibro(book1);
     		}else {
     			if (TFGenero.getText().isEmpty()) {
     				Dialog.showWarning("Añadir Nuevo Libro", "Rellene el genero", null);
@@ -78,8 +78,22 @@ public class AñadirLibroController {
 				}
     		}
 		} catch (Exception e) {
-			e.printStackTrace();
-			Dialog.showWarning("Añadir Nuevo Libro", "Error ", null);
+			Dialog.showWarning("Añadir Nuevo Libro", "Rellene los campos ", null);
+		}
+    	
+    }
+    /**
+     * Metodo externalizado al de añadir libro
+     * debido a que daba error en la transaccion.
+     * @param book a guardar.
+     */
+    public void creaLibro(Libro book){
+    	try {
+    		LibroDAO l = new LibroDAO();
+        	l.crear(book);
+        	salir(null);
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
     	
     }

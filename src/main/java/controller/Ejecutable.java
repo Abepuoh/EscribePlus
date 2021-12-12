@@ -22,22 +22,11 @@ public class Ejecutable {
         PersonajeDAO p = new PersonajeDAO();
         PartesDAO pt = new PartesDAO();
 
-       // Usuario user1 = new Usuario("Jesus","test@test.com","1234");
-        /**
-         * List<Personaje> characters = new ArrayList<Personaje>();
-        
-        List<Libro> books = new ArrayList<Libro>();
-        Personaje character1 = new Personaje("Sancho",18,"Señor con panza","Malo" ,"Notas", books);
-        characters.add(character1);
 
-        book1.setPersonajes(characters);
-        books.add(book1);
-        user1.setBooks(books);
-			*/
-       //a.crear(user1);
-        Libro book1 = new Libro("Nuevo",1995,"Fanta", "Un jambo que no va to puesteo", a.getUserByName("Pepe"));
-       // l.crear(book1);
-    	
+        
+        /*Libro book1 = l.getById(9L);
+        book1.setYear(2000);*/
+    	l.borrar(10L);    	
         for (Libro string : l.getAll()) {
             System.out.println(string);
 
