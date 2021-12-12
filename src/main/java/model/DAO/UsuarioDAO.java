@@ -45,7 +45,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
-			throw new IllegalStateException("Ya hay una transaccion activa");
+                    throw new IllegalStateException("Ya hay una transaccion activa");
+                        
 		} catch (RollbackException e) {
 			throw new RollbackException("Error al editar el usuario deshaciendo la transaccion");
 		}
