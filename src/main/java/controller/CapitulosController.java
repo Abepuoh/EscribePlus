@@ -7,10 +7,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.DAO.CapituloDAO;
 import model.DAO.Notas_CapDAO;
 import model.DAO.PartesDAO;
@@ -86,7 +91,22 @@ public class CapitulosController {
     
     @FXML
     void editActos(ActionEvent event) throws IOException {
-    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditPartes.fxml"));
+		Parent modal;
+		try {
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			AñadirLibroController.initController();
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+			CBParte.getItems().addAll(parDao.getByLibro(milibro));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
@@ -96,9 +116,32 @@ public class CapitulosController {
 
     @FXML
     void editarNota(ActionEvent event) throws IOException{
-    	
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasCap.fxml"));
+		Parent modal;
+		try {
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			AñadirLibroController.initController();
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
-    
+    @FXML
+    void irCapitulo(ActionEvent event) {
+    	try {
+			App.setRoot("EscribirCap");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+
     @FXML
     private void switchToLibro() throws IOException {
         App.setRoot("MainLibros");

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="504.0" prefWidth="384.0" styleClass="pane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditPersonajesController">
+   <children>
+      <TextField fx:id="txtDescripcion" layoutX="54.0" layoutY="161.0" prefHeight="262.0" prefWidth="262.0" promptText="Descripción">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <ComboBox fx:id="CBPersonajes" layoutX="109.0" layoutY="38.0" prefWidth="150.0" promptText="Personajes" />
+      <TextField fx:id="TFTNombre" layoutX="110.0" layoutY="79.0" promptText="Nombre" />
+      <TextField fx:id="TFTAlineamiento" layoutX="110.0" layoutY="123.0" promptText="Alineamiento" />
+      <Button fx:id="buttCrear" layoutX="18.0" layoutY="452.0" mnemonicParsing="false" onAction="#crearEditarPersonaje" prefHeight="27.0" prefWidth="134.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="CREAR" />
+      <Button fx:id="buttBorrar" layoutX="218.0" layoutY="452.0" mnemonicParsing="false" onAction="#borrarPersonaje" prefHeight="27.0" prefWidth="141.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="BORRAR">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <ImageView fitHeight="63.0" fitWidth="31.0" layoutX="72.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/buscando-trabajo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="31.0" layoutX="69.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/avatar.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="31.0" layoutX="72.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/aligned.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutY="1.0" prefHeight="25.0" prefWidth="384.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Archivo">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#switchToLibro" text="Volver" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <ImageView fitHeight="63.0" fitWidth="31.0" layoutX="18.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/description.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

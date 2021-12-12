@@ -27,6 +27,9 @@ public class MainLibrosController {
 
     @FXML
     private MenuItem MEditUser;
+
+    @FXML
+    private MenuItem MIEditarPersonajes;
     
     @FXML
     private TableColumn<Libro, Integer> TCLibroAño;
@@ -63,6 +66,7 @@ public class MainLibrosController {
     
     @FXML
     private Button buttEditarNotas;
+    
     
     private ObservableList<Libro> Libros;
     
@@ -159,7 +163,25 @@ public class MainLibrosController {
 		}
 		
     }
-    
+
+    @FXML
+    void editPersonajes(ActionEvent event) {
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("personajes.fxml"));
+		Parent modal;
+		try {
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+    }
 	@FXML
 	public void abrirLibro() {
 		try {
