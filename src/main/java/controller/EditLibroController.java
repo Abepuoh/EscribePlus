@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class EditLibroController {
 
@@ -29,7 +30,8 @@ public class EditLibroController {
 
     @FXML
     void salir(ActionEvent event) {
-
+        Stage stage = (Stage) this.buttSalir.getScene().getWindow();
+        stage.close();	
     }
 
 }

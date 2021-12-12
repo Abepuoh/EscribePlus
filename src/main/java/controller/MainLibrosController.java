@@ -57,6 +57,9 @@ public class MainLibrosController {
     private Button buttEditarLibro;
 
     @FXML
+    private Button buttGoLibro;
+    
+    @FXML
     private Button buttEditarNotas;
     
     private ObservableList<Libro> Libros;
@@ -75,7 +78,6 @@ public class MainLibrosController {
 	public static void initController() {
 		utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
 		usuario = transfer.getUser();
-		System.out.println(usuario.toString());
 	}
     
     @FXML
@@ -91,6 +93,7 @@ public class MainLibrosController {
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
 			modalStage.setResizable(false);
+			configuraTablaLibros();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -192,6 +195,10 @@ public class MainLibrosController {
 		}
 	}
     
+    @FXML
+    void GoLibro(ActionEvent event) {
+
+    }
     /**
      * Método para la configuración de las columnas de la tabla de notas de libros.
      */
