@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="677.0" style="-fx-border-color: #461e1e;" styleClass="pane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.escribirCapController">
+   <children>
+      <MenuBar layoutY="2.0" stylesheets="@../css/styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Archivo">
+            <items>
+              <MenuItem fx:id="MIVolver" mnemonicParsing="false" onAction="#volver" text="Volver a capítulos" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="ButtGuardar" layoutX="258.0" layoutY="448.0" mnemonicParsing="false" onAction="#guardarCap" prefHeight="17.0" prefWidth="150.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Guardar" />
+      <ImageView fitHeight="57.0" fitWidth="50.0" layoutX="471.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="textArea" layoutX="64.0" layoutY="76.0" prefHeight="353.0" prefWidth="538.0" />
+      <Label fx:id="LabelNombre" layoutX="275.0" layoutY="41.0" prefHeight="25.0" prefWidth="117.0" />
+   </children>
+</AnchorPane>

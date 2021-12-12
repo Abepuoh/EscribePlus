@@ -93,8 +93,31 @@ public class CapitulosController {
 
     @FXML
     void editActos(ActionEvent event) throws IOException {
-    	
     	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditPartes.fxml"));
+		Parent modal;
+		try {
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+      initialize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+
+    @FXML
+    void editarCap(ActionEvent event) throws IOException{
+
+    }
+
+    @FXML
+    void editarNota(ActionEvent event) throws IOException{
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasCap.fxml"));
 		Parent modal;
 		try {
 			modal = fxmlLoader.load();
@@ -111,25 +134,11 @@ public class CapitulosController {
     }
 
     @FXML
-    void editarCap(ActionEvent event) throws IOException{
-
-    }
-
-    @FXML
-    void editarNota(ActionEvent event) throws IOException{
-
-    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasCap.fxml"));
-		Parent modal;
-		try {
-			modal = fxmlLoader.load();
-			Stage modalStage = new Stage();
-			modalStage.initModality(Modality.APPLICATION_MODAL);
-			modalStage.initOwner(App.rootstage);
-			Scene modalScene = new Scene(modal);
-			modalStage.setScene(modalScene);
-			modalStage.showAndWait();
-			modalStage.setResizable(false);
+    void irCapitulo(ActionEvent event) {
+    	try {
+			App.setRoot("EscribirCap");
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }

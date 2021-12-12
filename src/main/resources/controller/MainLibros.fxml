@@ -25,6 +25,7 @@
           <Menu mnemonicParsing="false" text="Editar">
             <items>
               <MenuItem fx:id="MEditUser" mnemonicParsing="false" onAction="#editUsuario" text="Usuario" />
+                  <MenuItem fx:id="MIEditarPersonajes" mnemonicParsing="false" onAction="#editPersonajes" text="Personajes" />
             </items>
           </Menu>
         </menus>
