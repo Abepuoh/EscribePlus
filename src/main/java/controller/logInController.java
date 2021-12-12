@@ -41,7 +41,6 @@ public class logInController {
 				UsuarioSingleton usuarioSignleton = UsuarioSingleton.getInstance();
 				usuarioSignleton.setUser(user);
 				try {
-					MainLibrosController.initController();
 					App.setRoot("MainLibros");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

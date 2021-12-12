@@ -64,18 +64,14 @@ public class MainLibrosController {
     private ObservableList<Notas_Lib> Notas;
     
     private static Usuario usuario;
+    
     public static Libro currentBook;
+    
     public void initialize() {
+    	utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
+		usuario = transfer.getUser();
     	configuraTablaLibros();
     }
-    /**
-     * Setea un usuario recibido por el login;
-     * @param u
-     */
-	public static void initController() {
-		utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
-		usuario = transfer.getUser();
-	}
     
     @FXML
 	void EditarNotas(ActionEvent event) {
@@ -242,6 +238,7 @@ public class MainLibrosController {
 		if (libro != null) {
 			buttBorrarLibro.setDisable(false);
 			buttEditarLibro.setDisable(false);
+			currentBook=libro;
 			configuraTablaNotas();
 		} else {
 			buttBorrarLibro.setDisable(true);
