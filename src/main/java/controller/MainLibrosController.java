@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.DAO.LibroDAO;
 import model.DAO.Notas_LibDAO;
-import model.DAO.UsuarioDAO;
 import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
 import model.DataObject.Usuario;
@@ -72,8 +72,10 @@ public class MainLibrosController {
      * Setea un usuario recibido por el login;
      * @param u
      */
-	public static void initController(Usuario u) {
-		usuario=u;
+	public static void initController() {
+		utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
+		usuario = transfer.getUser();
+		System.out.println(usuario.toString());
 	}
     
     @FXML

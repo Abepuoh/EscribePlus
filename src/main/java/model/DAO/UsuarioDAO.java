@@ -137,7 +137,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			TypedQuery<Usuario> q = em.createNamedQuery("getUserByMailAndPass", Usuario.class);
 			q.setParameter("email", email);
 			q.setParameter("password", contraseña);
-			result = q.getSingleResult();
+			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
@@ -146,7 +146,5 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 		return result;
 	}
-
-
 
 }
