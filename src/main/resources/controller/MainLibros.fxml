@@ -31,8 +31,8 @@
       </MenuBar>
       <TableView fx:id="TVLibro" layoutX="14.0" layoutY="35.0" prefHeight="467.0" prefWidth="356.0" style="-fx-border-color: #461e1e;" styleClass="blue-panel" stylesheets="@../css/styles.css" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="35.0">
         <columns>
-          <TableColumn fx:id="TCLibroTitulo" prefWidth="75.0" text="Titulo" />
-          <TableColumn fx:id="TCLibroAño" prefWidth="75.0" text="Año" />
+          <TableColumn fx:id="TCLibroTitulo" onEditStart="#abrirLibro" prefWidth="75.0" text="Titulo" />
+          <TableColumn fx:id="TCLibroAño" onEditStart="#abrirLibro" prefWidth="75.0" text="Año" />
             <TableColumn fx:id="TCLibroGenero" prefWidth="75.0" text="Genero" />
             <TableColumn fx:id="TCLibroDescripcion" prefWidth="75.0" text="Descripcion" />
         </columns>

@@ -19,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    	Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));        
+    	Parent root = FXMLLoader.load(getClass().getResource("MainLibros.fxml"));        
         scene = new Scene(root); 
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
