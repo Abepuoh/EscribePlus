@@ -17,7 +17,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.DAO.LibroDAO;
 import model.DAO.Notas_LibDAO;
-import model.DAO.UsuarioDAO;
 import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
 import model.DataObject.Usuario;
@@ -56,9 +55,6 @@ public class MainLibrosController {
 
     @FXML
     private Button buttEditarLibro;
-
-    @FXML
-    private Button buttGoLibro;
     
     @FXML
     private Button buttEditarNotas;
@@ -68,7 +64,7 @@ public class MainLibrosController {
     private ObservableList<Notas_Lib> Notas;
     
     private static Usuario usuario;
-    
+    public static Libro currentBook;
     public void initialize() {
     	configuraTablaLibros();
     }
@@ -79,7 +75,6 @@ public class MainLibrosController {
 	public static void initController() {
 		utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
 		usuario = transfer.getUser();
-
 	}
     
     @FXML
@@ -139,7 +134,6 @@ public class MainLibrosController {
 			} catch (Exception e) {
 				buttBorrarLibro.setDisable(true);
 				utils.Dialog.showError("Borrar Genero", "Ha surgido un error al borrar el genero", "");
-
 			}
 
 		}
@@ -167,8 +161,14 @@ public class MainLibrosController {
     
 	@FXML
 	public void abrirLibro() {
-		System.out.println("funciona");
-	}
+		try {
+			currentBook=TVLibro.getSelectionModel().getSelectedItem();
+			App.setRoot("Capitulos");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	} 
     /**
      * Método para la configuración de las columnas de la tabla de libros.
      */
@@ -203,10 +203,6 @@ public class MainLibrosController {
 		}
 	}
     
-    @FXML
-    void GoLibro(ActionEvent event) {
-
-    }
     /**
      * Método para la configuración de las columnas de la tabla de notas de libros.
      */
@@ -223,8 +219,7 @@ public class MainLibrosController {
     		TCNotasNombre.setCellValueFactory(cellData -> {
     			return new SimpleObjectProperty<>(cellData.getValue().getId());
     		});
- 
-
+    		
     		TVNotas.getSelectionModel().selectedItemProperty()
     				.addListener((observable, oldvalue, newvalue) -> showNotasButt(newvalue));
     		TVNotas.setItems(Notas);
@@ -247,13 +242,11 @@ public class MainLibrosController {
 		if (libro != null) {
 			buttBorrarLibro.setDisable(false);
 			buttEditarLibro.setDisable(false);
-			buttGoLibro.setDisable(false);
 			configuraTablaNotas();
 		} else {
 			buttBorrarLibro.setDisable(true);
 			buttEditarLibro.setDisable(true);
 			buttEditarNotas.setDisable(true);
-			buttGoLibro.setDisable(true);
 
 		}
 	}

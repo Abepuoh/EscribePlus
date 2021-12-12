@@ -84,6 +84,13 @@ public class Capitulo implements ICapitulo, Serializable{
 		this.parts = part;
 	}
 	
+	public Capitulo(String name, String text, Partes parte) {
+		super();
+		this.id = -1L;
+		this.name = name;
+		this.text = text;
+		this.parte = parte;
+	}
 	public Long getId() {
 		return id;
 	}

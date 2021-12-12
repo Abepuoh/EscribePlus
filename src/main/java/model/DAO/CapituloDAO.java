@@ -11,7 +11,6 @@ import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import model.DataObject.Capitulo;
-import model.DataObject.Libro;
 import model.DataObject.Partes;
 import model.IDAO.ICapituloDAO;
 import utils.ConnectionUtil;
@@ -26,9 +25,6 @@ public class CapituloDAO implements ICapituloDAO {
 
 	EntityManager em = createEM();
 
-	// Queries
-	//private final String getAll = "Select * from Capitulo";
-	//private final String getCapituloFromParte = "SELECT p FROM Capitulo p WHERE p.id_partes=:idpartes";
 	@Override
 	public void crear(Capitulo aux) {
 		try {

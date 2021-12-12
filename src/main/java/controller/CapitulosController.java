@@ -45,11 +45,13 @@ public class CapitulosController {
     @FXML
     private Button buttEditarNota;
     
-    private static Libro milibro=new Libro();
+    private static Libro milibro;
     private PartesDAO parDao=new PartesDAO();
     private CapituloDAO cadao=new CapituloDAO();
     private Notas_CapDAO ndao=new Notas_CapDAO();
+    
     public void initialize() {
+    	milibro=MainLibrosController.currentBook;
     	configuraTablas();
     	CBParte.getItems().addAll(parDao.getByLibro(milibro));
     	CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
@@ -59,6 +61,7 @@ public class CapitulosController {
     		tablaNotas(newValue);
     	});
     }
+    
     public void configuraTablas() {
     	TCCapitulosNombre.setCellValueFactory(cadenaCapNombre->
     		new SimpleStringProperty(cadenaCapNombre.getValue().getName()));
@@ -95,9 +98,7 @@ public class CapitulosController {
     void editarNota(ActionEvent event) throws IOException{
     	
     }
-    public static void setlibro(Libro l) {
-    	milibro=l;
-    }
+    
     @FXML
     private void switchToLibro() throws IOException {
         App.setRoot("MainLibros");

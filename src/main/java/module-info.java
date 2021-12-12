@@ -4,7 +4,7 @@ module controller {
 	requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
-	requires java.persistence;
+	requires transitive java.persistence;
 	requires java.sql;
     requires org.hibernate.orm.core;
     requires org.hibernate.commons.annotations;

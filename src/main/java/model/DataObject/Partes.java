@@ -44,7 +44,20 @@ public class Partes implements IPartes, Serializable{
 	public Partes() {
 		this(-1L,"",new Libro());
 	}
-	
+	public Partes(String nombre, Libro libro, List<Capitulo> capitulos) {
+		this.id = -1L;
+		this.nombre = nombre;
+		this.libro = libro;
+		this.capitulos = capitulos;
+	}
+	public Partes(Long id, String nombre, Libro libro, List<Capitulo> capitulos) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.libro = libro;
+		this.capitulos = capitulos;
+	}
+
 	public Partes(String nombre, Libro libro) {
 		this.id = -1L;
 		this.nombre = nombre;
@@ -110,6 +123,6 @@ public class Partes implements IPartes, Serializable{
 
 	@Override
 	public String toString() {
-		return "Partes [id=" + id + ", nombre=" + nombre + ", libro=" + libro.title + "]";
+		return  nombre ;
 	}
 }

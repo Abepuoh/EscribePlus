@@ -22,7 +22,7 @@ public class EditLibroController {
 
     @FXML
     private Button buttSalir;
-
+    
     @FXML
     void editarLibro(ActionEvent event) {
 

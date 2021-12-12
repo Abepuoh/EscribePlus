@@ -15,8 +15,8 @@ public interface ILibroDAO  extends IDAO<Libro, Long>{
      */
     public Libro getBookByName(String name);
     /**
-     * Metodo
-     * @param author
+     * Metodo que devuelve un libro introduciendo el autor del mismo
+     * @param author del libro
      * @return
      */
     public List<Libro> getBooksByAuthor(Usuario author);

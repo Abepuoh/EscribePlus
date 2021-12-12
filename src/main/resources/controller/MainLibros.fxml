@@ -49,19 +49,18 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="buttAñadirLibro" layoutX="460.0" layoutY="316.0" mnemonicParsing="false" onAction="#añadirLibro" prefHeight="25.0" prefWidth="149.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Añadir libro" />
-      <Button fx:id="buttBorrarLibro" layoutX="460.0" layoutY="393.0" mnemonicParsing="false" onAction="#borrarLibro" prefHeight="25.0" prefWidth="149.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Borrar Libro" />
-      <Button fx:id="buttEditarNotas" layoutX="459.0" layoutY="432.0" mnemonicParsing="false" onAction="#EditarNotas" prefHeight="17.0" prefWidth="150.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Editar Notas" />
+      <Button fx:id="buttAñadirLibro" layoutX="460.0" layoutY="291.0" mnemonicParsing="false" onAction="#añadirLibro" prefHeight="25.0" prefWidth="149.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Añadir libro" />
+      <Button fx:id="buttBorrarLibro" layoutX="460.0" layoutY="381.0" mnemonicParsing="false" onAction="#borrarLibro" prefHeight="25.0" prefWidth="149.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Borrar Libro" />
+      <Button fx:id="buttEditarNotas" layoutX="459.0" layoutY="424.0" mnemonicParsing="false" onAction="#EditarNotas" prefHeight="17.0" prefWidth="150.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Editar Notas" />
       <Text layoutX="473.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NOTAS DE LOS LIBROS">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Text>
-      <Button fx:id="buttEditarLibro" layoutX="459.0" layoutY="354.0" mnemonicParsing="false" onAction="#editarLibro" prefHeight="25.0" prefWidth="149.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Editar Libro" />
+      <Button fx:id="buttEditarLibro" layoutX="460.0" layoutY="337.0" mnemonicParsing="false" onAction="#editarLibro" prefHeight="25.0" prefWidth="149.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Editar Libro" />
       <ImageView fitHeight="57.0" fitWidth="50.0" layoutX="510.0" layoutY="460.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttGoLibro" layoutX="460.0" layoutY="279.0" mnemonicParsing="false" onAction="#GoLibro" prefHeight="25.0" prefWidth="149.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Abrir Libro" />
    </children>
 </AnchorPane>
