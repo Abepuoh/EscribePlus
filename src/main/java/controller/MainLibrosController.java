@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Modality;
@@ -23,6 +24,10 @@ import model.DataObject.Usuario;
 
 public class MainLibrosController {
 	
+
+    @FXML
+    private MenuItem MEditUser;
+    
     @FXML
     private TableColumn<Libro, Integer> TCLibroAño;
 
@@ -262,5 +267,23 @@ public class MainLibrosController {
 		}
 
 	}
+    @FXML
+    void editUsuario(ActionEvent event) {
+
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditUser.fxml"));
+		Parent modal;
+		try {
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 }
    
