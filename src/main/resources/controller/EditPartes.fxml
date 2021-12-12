@@ -33,5 +33,6 @@
       </ImageView>
       <Button fx:id="buttBorrar" layoutX="111.0" layoutY="343.0" mnemonicParsing="false" onAction="#borrarParte" prefHeight="27.0" prefWidth="89.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Borrar" />
       <ComboBox fx:id="CBPartes" layoutX="88.0" layoutY="181.0" prefWidth="150.0" promptText="Partes" />
+
    </children>
 </AnchorPane>

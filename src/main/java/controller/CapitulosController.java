@@ -50,45 +50,47 @@ public class CapitulosController {
     @FXML
     private Button buttEditarNota;
     
+
+
     private static Libro milibro;
     private PartesDAO parDao=new PartesDAO();
     private CapituloDAO cadao=new CapituloDAO();
     private Notas_CapDAO ndao=new Notas_CapDAO();
-    
+
     public void initialize() {
-    	milibro=MainLibrosController.currentBook;
-    	configuraTablas();
-    	CBParte.getItems().addAll(parDao.getByLibro(milibro));
-    	CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
-    		tablacapitulos(newValue);
-    	});
-    	TVCapitulos.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
-    		tablaNotas(newValue);
-    	});
+        milibro=MainLibrosController.currentBook;
+        configuraTablas();
+        CBParte.getItems().addAll(parDao.getByLibro(milibro));
+        CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
+            tablacapitulos(newValue);
+        });
+        TVCapitulos.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
+            tablaNotas(newValue);
+        });
     }
-    
+
     public void configuraTablas() {
-    	TCCapitulosNombre.setCellValueFactory(cadenaCapNombre->
-    		new SimpleStringProperty(cadenaCapNombre.getValue().getName()));
-    	
-    	TCDescripcion.setCellValueFactory(cadenaCapNombre->
-		new SimpleStringProperty(cadenaCapNombre.getValue().getText()));
-    	
-    	
-    	
+        TCCapitulosNombre.setCellValueFactory(cadenaCapNombre->
+            new SimpleStringProperty(cadenaCapNombre.getValue().getName()));
+
+        TCDescripcion.setCellValueFactory(cadenaCapNombre->
+        new SimpleStringProperty(cadenaCapNombre.getValue().getText()));
+
+
+
     }
     private void tablacapitulos(Partes p) {
-    	List<Capitulo> capitulos= cadao.getByParte(p);
-    	TVCapitulos.setItems(FXCollections.observableList(capitulos));
-    	TVCapitulos.refresh();
+        List<Capitulo> capitulos= cadao.getByParte(p);
+        TVCapitulos.setItems(FXCollections.observableList(capitulos));
+        TVCapitulos.refresh();
     }
     private void tablaNotas(Capitulo c) {
-    	List<Notas_Cap> notas= ndao.getFromCapitulos(c);
-    	TVNotas.setItems(FXCollections.observableList(notas));
-    	TVNotas.refresh();
-    	
+        List<Notas_Cap> notas= ndao.getFromCapitulos(c);
+        TVNotas.setItems(FXCollections.observableList(notas));
+        TVNotas.refresh();
+
     }
-    
+
     @FXML
     void editActos(ActionEvent event) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditPartes.fxml"));
@@ -98,12 +100,11 @@ public class CapitulosController {
 			Stage modalStage = new Stage();
 			modalStage.initModality(Modality.APPLICATION_MODAL);
 			modalStage.initOwner(App.rootstage);
-			AñadirLibroController.initController();
 			Scene modalScene = new Scene(modal);
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
 			modalStage.setResizable(false);
-			CBParte.getItems().addAll(parDao.getByLibro(milibro));
+      initialize();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -111,7 +112,7 @@ public class CapitulosController {
 
     @FXML
     void editarCap(ActionEvent event) throws IOException{
-    	
+
     }
 
     @FXML
@@ -123,7 +124,6 @@ public class CapitulosController {
 			Stage modalStage = new Stage();
 			modalStage.initModality(Modality.APPLICATION_MODAL);
 			modalStage.initOwner(App.rootstage);
-			AñadirLibroController.initController();
 			Scene modalScene = new Scene(modal);
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
@@ -132,6 +132,7 @@ public class CapitulosController {
 			e.printStackTrace();
 		}
     }
+
     @FXML
     void irCapitulo(ActionEvent event) {
     	try {
@@ -148,6 +149,6 @@ public class CapitulosController {
     }
     @FXML
     public void closeApp() {
-    	System.exit(0);
+        System.exit(0);
     }
 }
