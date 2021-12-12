@@ -35,16 +35,15 @@ public class RegistroController {
 		String email = this.TFEmail.getText();
 		String password = this.TFPassword.getText();
 		UsuarioDAO aux = new UsuarioDAO();
-		//Añadir Telefono;
 
 		if (!this.TFNombre.getText().trim().isEmpty() && !this.TFPassword.getText().trim().isEmpty()
 				&& !this.TFEmail.getText().trim().isEmpty()) {
+			Usuario user = new Usuario(name,email,password);
 			try {
-				Usuario user = aux.logIn(email, password);
-
-				if (user == null) {
+				if (!aux.getAll().contains(user)) {
 					UsuarioSingleton usuarioSignleton = UsuarioSingleton.getInstance();
 					usuarioSignleton.setUser(user);
+					aux.crear(user);
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText(null);
 					alert.setTitle("Informacion");
