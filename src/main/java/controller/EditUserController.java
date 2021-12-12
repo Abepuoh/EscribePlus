@@ -8,7 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DAO.UsuarioDAO;
 import model.DataObject.Usuario;
-import utils.UsuarioSingleton;
 
 public class EditUserController {
 
@@ -48,14 +47,11 @@ public class EditUserController {
 		Usuario aux = usuario;
 		if (!TFTEmail.getText().isEmpty() && !TFTUsuario.getText().isEmpty() && !TFTContraseña.getText().isEmpty()
 				&& !TFTelefono.getText().isEmpty()) {
-
 			aux.setName(name);
 			aux.setEmail(email);
 			aux.setPassword(password);
 			aux.setPhone(phone);
 			dao.editar(usuario);
-			UsuarioSingleton usuarioSignleton = UsuarioSingleton.getInstance();
-			usuarioSignleton.setUser(usuario);
 			Alert alert = new Alert(Alert.AlertType.INFORMATION);
 			alert.setHeaderText(null);
 			alert.setTitle("Informacion");

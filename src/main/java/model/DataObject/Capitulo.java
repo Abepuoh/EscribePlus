@@ -23,7 +23,8 @@ import model.IDataObject.ICapitulo;
 @Entity
 @Table(name="Capitulo")
 @NamedQueries({
-	@NamedQuery(name="getAll", query = "SELECT c FROM Capitulo c")
+	@NamedQuery(name="getAll", query = "SELECT c FROM Capitulo c"),
+	@NamedQuery(name="getCapituloFromParte", query = "SELECT c FROM Capitulo c WHERE c.parte.id=:idpartes")
 })
 public class Capitulo implements ICapitulo, Serializable{
 
@@ -116,6 +117,12 @@ public class Capitulo implements ICapitulo, Serializable{
 		this.parts = parts;
 	}
 	
+	public Partes getParte() {
+		return parte;
+	}
+	public void setParte(Partes parte) {
+		this.parte = parte;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
