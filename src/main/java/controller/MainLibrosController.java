@@ -70,8 +70,6 @@ public class MainLibrosController {
     private static Usuario usuario;
     
     public void initialize() {
-    	UsuarioDAO u = new UsuarioDAO();
-    	usuario=u.getUserByName("Pepe");
     	configuraTablaLibros();
     }
     /**
@@ -81,6 +79,7 @@ public class MainLibrosController {
 	public static void initController() {
 		utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
 		usuario = transfer.getUser();
+
 	}
     
     @FXML
@@ -113,10 +112,12 @@ public class MainLibrosController {
 			Stage modalStage = new Stage();
 			modalStage.initModality(Modality.APPLICATION_MODAL);
 			modalStage.initOwner(App.rootstage);
+			AñadirLibroController.initController();
 			Scene modalScene = new Scene(modal);
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
 			modalStage.setResizable(false);
+	    	configuraTablaLibros();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -246,11 +247,13 @@ public class MainLibrosController {
 		if (libro != null) {
 			buttBorrarLibro.setDisable(false);
 			buttEditarLibro.setDisable(false);
+			buttGoLibro.setDisable(false);
 			configuraTablaNotas();
 		} else {
 			buttBorrarLibro.setDisable(true);
 			buttEditarLibro.setDisable(true);
 			buttEditarNotas.setDisable(true);
+			buttGoLibro.setDisable(true);
 
 		}
 	}
@@ -269,7 +272,5 @@ public class MainLibrosController {
 		}
 
 	}
-
-    
-
 }
+   

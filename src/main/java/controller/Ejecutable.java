@@ -3,25 +3,29 @@ package controller;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import model.DAO.LibroDAO;
+import model.DAO.PartesDAO;
+import model.DAO.PersonajeDAO;
 import model.DAO.UsuarioDAO;
+import model.DataObject.Libro;
 import model.DataObject.Usuario;
 import utils.ConnectionUtil;
 
 public class Ejecutable {
 
 	public static void main(String[] args) {
-		EntityManager em = createEM();
-        em.getTransaction().begin();
+		/*EntityManager em = createEM();
+        em.getTransaction().begin();*/
         // LOS CAMBIOS SON EFECTIVOS
         UsuarioDAO a = new UsuarioDAO();
-        /**LibroDAO l = new LibroDAO();
+        LibroDAO l = new LibroDAO();
         PersonajeDAO p = new PersonajeDAO();
-        PartesDAO pt = new PartesDAO();*/
+        PartesDAO pt = new PartesDAO();
 
        // Usuario user1 = new Usuario("Jesus","test@test.com","1234");
         /**
          * List<Personaje> characters = new ArrayList<Personaje>();
-        Libro book1 = new Libro("Quijote",1995,"Fantasía", "Un jambo que va to puesteo", user1, characters);
+        
         List<Libro> books = new ArrayList<Libro>();
         Personaje character1 = new Personaje("Sancho",18,"Señor con panza","Malo" ,"Notas", books);
         characters.add(character1);
@@ -31,10 +35,16 @@ public class Ejecutable {
         user1.setBooks(books);
 			*/
        //a.crear(user1);
-        System.out.println(a.getAll());
+        Libro book1 = new Libro("Nuevo",1995,"Fanta", "Un jambo que no va to puesteo", a.getUserByName("Pepe"));
+       // l.crear(book1);
+    	
+        for (Libro string : l.getAll()) {
+            System.out.println(string);
+
+		}
 		// FINAL DE LOS CAMBIOS
 		///////////////////////////////////////////////////////////////////////////
-		em.getTransaction().commit();
+		//em.getTransaction().commit();
 		
 
 //	ConnectionUtil.transferH2ToMariaDB();
