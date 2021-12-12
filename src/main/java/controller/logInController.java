@@ -50,6 +50,7 @@ public class logInController {
 				alert.setContentText("El email y la contraseña son correctos");
 				alert.showAndWait();
 				try {
+					MainLibrosController.initController();
 					App.setRoot("MainLibros");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block

@@ -66,7 +66,7 @@ public class MainLibrosController {
     private static Usuario usuario;
     
     public void initialize() {
-    	
+    	configuraTablaLibros();
     }
     /**
      * Setea un usuario recibido por el login;

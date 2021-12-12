@@ -18,7 +18,7 @@ public class Ejecutable {
         PersonajeDAO p = new PersonajeDAO();
         PartesDAO pt = new PartesDAO();*/
 
-        Usuario user1 = new Usuario("Jesus","test@test.com","1234");
+       // Usuario user1 = new Usuario("Jesus","test@test.com","1234");
         /**
          * List<Personaje> characters = new ArrayList<Personaje>();
         Libro book1 = new Libro("Quijote",1995,"Fantasía", "Un jambo que va to puesteo", user1, characters);
@@ -30,7 +30,8 @@ public class Ejecutable {
         books.add(book1);
         user1.setBooks(books);
 			*/
-       a.crear(user1);
+       //a.crear(user1);
+        System.out.println(a.getAll());
 		// FINAL DE LOS CAMBIOS
 		///////////////////////////////////////////////////////////////////////////
 		em.getTransaction().commit();

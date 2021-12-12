@@ -20,15 +20,18 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
     	Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));        
-        Scene scene = new Scene(root); 
+        scene = new Scene(root); 
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public static void setRoot(String fxml) throws IOException {
+    	Parent root = loadFXML(fxml);
+        scene.getWindow().setHeight(root.prefHeight(0)+30);
+        scene.getWindow().setWidth(root.prefWidth(0)+30);
+        scene.setRoot(root);
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
