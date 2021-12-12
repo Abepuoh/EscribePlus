@@ -17,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.DAO.LibroDAO;
 import model.DAO.Notas_LibDAO;
+import model.DAO.UsuarioDAO;
 import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
 import model.DataObject.Usuario;
@@ -66,6 +67,8 @@ public class MainLibrosController {
     private static Usuario usuario;
     
     public void initialize() {
+    	UsuarioDAO u = new UsuarioDAO();
+    	usuario=u.getUserByName("Pepe");
     	configuraTablaLibros();
     }
     /**
@@ -100,7 +103,7 @@ public class MainLibrosController {
     @FXML
     void añadirLibro(ActionEvent event) {
     	
-    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditLibros.fxml"));
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("AñadirLibro.fxml"));
 		Parent modal;
 		try {
 			modal = fxmlLoader.load();
@@ -125,7 +128,7 @@ public class MainLibrosController {
 			try {
 				buttBorrarLibro.setDisable(false);
 	    		LibroDAO l = new LibroDAO();
-	    		l.borrar(selected.getId());
+	    		//l.borrar(selected.getId());
 	    		Libros.remove(selected);
 				configuraTablaLibros();
 
@@ -158,6 +161,10 @@ public class MainLibrosController {
 		
     }
     
+	@FXML
+	public void abrirLibro() {
+		System.out.println("funciona");
+	}
     /**
      * Método para la configuración de las columnas de la tabla de libros.
      */
@@ -180,7 +187,7 @@ public class MainLibrosController {
     			return new SimpleObjectProperty<>(cellData.getValue().getGenre());
     		});
 
-
+    		TVLibro.setEditable(true);
     		TVLibro.getSelectionModel().selectedItemProperty()
     				.addListener((observable, oldvalue, newvalue) -> showLibroButt(newvalue));
     		TVLibro.setItems(Libros);
@@ -255,6 +262,7 @@ public class MainLibrosController {
 		}
 
 	}
+
     
 
 }
