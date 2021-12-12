@@ -96,7 +96,12 @@ public class Partes implements IPartes, Serializable{
 	public void setLibro(Libro libro) {
 		this.libro = libro;
 	}
-
+	public List<Capitulo> getCapitulos() {
+		return capitulos;
+	}
+	public void setCapitulos(List<Capitulo> capitulos) {
+		this.capitulos = capitulos;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -120,9 +125,10 @@ public class Partes implements IPartes, Serializable{
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return  nombre ;
+		return nombre;
 	}
+
+	
 }

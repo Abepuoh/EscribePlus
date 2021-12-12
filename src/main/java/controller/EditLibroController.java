@@ -75,7 +75,7 @@ public class EditLibroController {
         		n.setYear(TFAño.getValue().getYear());
         		n.setGenre(TFGenero.getText());
         		n.setDescription(TFDescripcion.getText());
-        		l.crear(n);
+        		l.editar(n);
             	salir(null);
     		}else {
     			if (TFGenero.getText().isEmpty()) {
