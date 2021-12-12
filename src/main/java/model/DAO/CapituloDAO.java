@@ -11,6 +11,8 @@ import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
 import model.DataObject.Capitulo;
+import model.DataObject.Libro;
+import model.DataObject.Partes;
 import model.IDAO.ICapituloDAO;
 import utils.ConnectionUtil;
 
@@ -25,8 +27,8 @@ public class CapituloDAO implements ICapituloDAO {
 	EntityManager em = createEM();
 
 	// Queries
-	private final String getAll = "Select * from Capitulo";
-
+	//private final String getAll = "Select * from Capitulo";
+	//private final String getCapituloFromParte = "SELECT p FROM Capitulo p WHERE p.id_partes=:idpartes";
 	@Override
 	public void crear(Capitulo aux) {
 		try {
@@ -91,6 +93,20 @@ public class CapituloDAO implements ICapituloDAO {
 		try {
 			em.getTransaction().begin();
 			result = em.find(Capitulo.class, id);
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+		}
+	}
+	public List<Capitulo> getByParte(Partes p) {
+		List<Capitulo> result = new ArrayList<>();
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Capitulo> q = em.createNamedQuery("getCapituloFromParte", Capitulo.class).setParameter("idpartes", p.getId());
+			result = q.getResultList();
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {

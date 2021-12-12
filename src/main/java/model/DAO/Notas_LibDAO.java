@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.RollbackException;
 import javax.persistence.TypedQuery;
 
+import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
 import model.IDAO.INotas_libDAO;
 import model.IDataObject.INotas_lib;
@@ -99,5 +100,18 @@ public class Notas_LibDAO implements INotas_libDAO {
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
-
+	public List<Notas_Lib> getFromBook(Libro l){
+        List <Notas_Lib> result = new ArrayList();
+	try {
+		em.getTransaction().begin();
+		TypedQuery<Notas_Lib> q = em.createNamedQuery("getNotasfromLibro", Notas_Lib.class).setParameter("idlibro", l.getId());
+                    result = q.getResultList();
+		em.getTransaction().commit();
+		return result;
+	} catch (IllegalStateException e) {
+		throw new IllegalStateException("Ya hay una transaccion activa");
+	} catch (RollbackException e) {
+		throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+	}
+    }
 }
