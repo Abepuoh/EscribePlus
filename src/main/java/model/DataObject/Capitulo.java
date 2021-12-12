@@ -38,58 +38,74 @@ public class Capitulo implements ICapitulo, Serializable{
 	@Column(name="text")
 	protected String text;
 	@OneToMany(mappedBy = "capitulo",cascade = CascadeType.ALL, orphanRemoval = true)
-	protected List<Notas_Cap> parts;
+	protected List<Notas_Cap> notas;
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_parte")
 	protected Partes parte;
 	
 	public Capitulo() {
-		this(-1L,"","",new ArrayList<Notas_Cap>());
+		this(-1L,"","",new ArrayList<Notas_Cap>(),new Partes());
 	}
 	public Capitulo(String name) {
-		this(-1L,name,"",new ArrayList<Notas_Cap>());
+		this(-1L,name,"",new ArrayList<Notas_Cap>(),new Partes());
 	}
 	public Capitulo(String name, String text) {
-		this(-1L,name,text,new ArrayList<Notas_Cap>());
+		this(-1L,name,text,new ArrayList<Notas_Cap>(),new Partes());
 	}
 	public Capitulo(String name, String text, Notas_Cap Note_cap) {
 		this.id = -1L;
 		this.name = name;
 		this.text = text;
-		this.parts = new ArrayList<Notas_Cap>();
-		this.parts.add(Note_cap);
+		this.notas = new ArrayList<Notas_Cap>();
+		this.notas.add(Note_cap);
+		this.parte = new Partes();
+
 	}
 	public Capitulo(String name, String text, List<Notas_Cap> part) {
 		this.id = -1L;
 		this.name = name;
 		this.text = text;
-		this.parts = part;
+		this.notas = part;
+		this.parte = new Partes();
+
+	}
+	public Capitulo(String name, String text, Partes part) {
+		this.id = -1L;
+		this.name = name;
+		this.text = text;
+		this.notas = new ArrayList<Notas_Cap>();
+		this.parte = part;
+
 	}
 	public Capitulo(Long id, String name, String text) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
-		this.parts = new ArrayList<Notas_Cap>();
+		this.notas = new ArrayList<Notas_Cap>();
+		this.parte = new Partes();
 	}
 	public Capitulo(Long id, String name, String text, Notas_Cap Note_cap) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
-		this.parts = new ArrayList<Notas_Cap>();
-		this.parts.add(Note_cap);
+		this.notas = new ArrayList<Notas_Cap>();
+		this.notas.add(Note_cap);
+		this.parte = new Partes();
 	}
 	public Capitulo(Long id, String name, String text, List<Notas_Cap> part) {
 		this.id = id;
 		this.name = name;
 		this.text = text;
-		this.parts = part;
-	}
-	
-	public Capitulo(String name, String text, Partes parte) {
+		this.notas = part;
+		this.parte = new Partes();
+	}	
+
+	public Capitulo(Long id, String name, String text, List<Notas_Cap> notas, Partes parte) {
 		super();
-		this.id = -1L;
+		this.id = id;
 		this.name = name;
 		this.text = text;
+		this.notas = notas;
 		this.parte = parte;
 	}
 	public Long getId() {
@@ -110,13 +126,12 @@ public class Capitulo implements ICapitulo, Serializable{
 	public void setText(String text) {
 		this.text = text;
 	}
-	public List<Notas_Cap> getParts() {
-		return parts;
+	public List<Notas_Cap> getNotas() {
+		return notas;
 	}
-	public void setParts(List<Notas_Cap> parts) {
-		this.parts = parts;
+	public void setNotas(List<Notas_Cap> notas) {
+		this.notas = notas;
 	}
-	
 	public Partes getParte() {
 		return parte;
 	}
@@ -146,9 +161,10 @@ public class Capitulo implements ICapitulo, Serializable{
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return "Capitulo [id=" + id + ", name=" + name + ", text=" + text + ", parts=" + parts + "]";
+		return  name ;
 	}
+
+	
 }

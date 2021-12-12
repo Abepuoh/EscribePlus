@@ -27,7 +27,7 @@
             <Image url="@../images/logo.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="textArea" layoutX="64.0" layoutY="76.0" prefHeight="353.0" prefWidth="538.0" />
+      <TextArea fx:id="textArea" layoutX="64.0" layoutY="76.0" prefHeight="353.0" prefWidth="538.0" wrapText="true" />
       <Label fx:id="LabelNombre" layoutX="275.0" layoutY="41.0" prefHeight="25.0" prefWidth="117.0" />
    </children>
 </AnchorPane>

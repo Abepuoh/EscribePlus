@@ -39,7 +39,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 
 	@Override
-	public void editar(Usuario aux) {
+	public void editar(Usuario aux) { 
 		try {
 			em.getTransaction().begin();
 			em.merge(aux);

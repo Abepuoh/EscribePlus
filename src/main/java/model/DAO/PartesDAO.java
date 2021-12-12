@@ -47,7 +47,7 @@ public class PartesDAO implements IPartesDAO {
 	public void editar(Partes aux) {
 		try {
 			em.getTransaction().begin();
-			em.persist(aux);
+			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
