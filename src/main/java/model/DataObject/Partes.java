@@ -51,7 +51,6 @@ public class Partes implements IPartes, Serializable{
 		this.capitulos = capitulos;
 	}
 	public Partes(Long id, String nombre, Libro libro, List<Capitulo> capitulos) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.libro = libro;
@@ -62,12 +61,14 @@ public class Partes implements IPartes, Serializable{
 		this.id = -1L;
 		this.nombre = nombre;
 		this.libro = libro;
+		this.capitulos = new ArrayList<Capitulo>();
 	}
 	
 	public Partes(Long id, String nombre, Libro libro) {
 		this.id = id;
 		this.nombre = nombre;
 		this.libro = libro;
+		this.capitulos = new ArrayList<Capitulo>();
 	}
 	
 	public void addCapitulo(Capitulo capitulo) {
@@ -96,7 +97,13 @@ public class Partes implements IPartes, Serializable{
 	public void setLibro(Libro libro) {
 		this.libro = libro;
 	}
-
+	public List<Capitulo> getCapitulos() {
+		return capitulos;
+	}
+	public void setCapitulos(List<Capitulo> capitulos) {
+		this.capitulos = capitulos;
+	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

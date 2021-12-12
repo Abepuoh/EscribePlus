@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="329.0" styleClass="pane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditPartesController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="329.0" styleClass="pane" stylesheets="@../css/styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditCapitulosController">
    <children>
       <MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <TextField fx:id="TfTitulo" layoutX="91.0" layoutY="240.0" onKeyPressed="#mostrarBtt" promptText="Nombre" />
-      <Button fx:id="buttAñadir" layoutX="111.0" layoutY="294.0" mnemonicParsing="false" onAction="#añadirParte" prefHeight="27.0" prefWidth="89.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Añadir" />
+      <Button fx:id="buttAñadir" layoutX="111.0" layoutY="294.0" mnemonicParsing="false" onAction="#añadirCapitulo" prefHeight="27.0" prefWidth="89.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Añadir" />
       <ImageView fitHeight="107.0" fitWidth="108.0" layoutX="111.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.png" />
@@ -31,7 +31,7 @@
             <Image url="@../images/title.png" />
          </image>
       </ImageView>
-      <Button fx:id="buttBorrar" layoutX="111.0" layoutY="343.0" mnemonicParsing="false" onAction="#borrarParte" prefHeight="27.0" prefWidth="89.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Borrar" />
-      <ComboBox fx:id="CBPartes" layoutX="88.0" layoutY="181.0" prefWidth="150.0" promptText="Partes" />
+      <Button fx:id="buttBorrar" layoutX="111.0" layoutY="343.0" mnemonicParsing="false" onAction="#borrarCapitulo" prefHeight="27.0" prefWidth="89.0" styleClass="trans-btn-white-border" stylesheets="@../css/styles.css" text="Borrar" />
+      <ComboBox fx:id="CBCapitulos" layoutX="88.0" layoutY="181.0" prefWidth="150.0" promptText="Capitulos" />
    </children>
 </AnchorPane>

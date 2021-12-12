@@ -5,6 +5,7 @@ import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import model.DataObject.Capitulo;
 import model.DataObject.Libro;
 import model.DataObject.Notas_Cap;
 import model.DataObject.Partes;
+import utils.Dialog;
 
 public class CapitulosController {
 
@@ -50,6 +52,10 @@ public class CapitulosController {
     @FXML
     private Button buttEditarNota;
     
+    public static Partes currentParte;
+    
+    private ObservableList<Partes> partes;
+    private ObservableList<Capitulo> capitulos;
 
 
     private static Libro milibro;
@@ -58,15 +64,25 @@ public class CapitulosController {
     private Notas_CapDAO ndao=new Notas_CapDAO();
 
     public void initialize() {
-        milibro=MainLibrosController.currentBook;
-        configuraTablas();
-        CBParte.getItems().addAll(parDao.getByLibro(milibro));
-        CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
-            tablacapitulos(newValue);
-        });
-        TVCapitulos.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
-            tablaNotas(newValue);
-        });
+    	try {
+    		 milibro=MainLibrosController.currentBook;
+    			this.partes = FXCollections.observableArrayList();
+    			this.partes.setAll(parDao.getByLibro(milibro));
+    			buttEditarCap.setDisable(true);
+    	        configuraTablas();
+    	        CBParte.setItems(partes);
+    	        CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
+    	            currentParte=newValue;
+    	        	buttEditarCap.setDisable(false);
+    	        	tablacapitulos(newValue);
+    	        });
+    	        TVCapitulos.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
+    	            //tablaNotas(newValue);
+    	        });
+		} catch (Exception e) {
+			Dialog.showError("Error", "", "");
+		}
+       
     }
 
     public void configuraTablas() {
@@ -80,10 +96,19 @@ public class CapitulosController {
 
     }
     private void tablacapitulos(Partes p) {
-        List<Capitulo> capitulos= cadao.getByParte(p);
-        TVCapitulos.setItems(FXCollections.observableList(capitulos));
+    	carga();
+        TVCapitulos.setItems(capitulos);
         TVCapitulos.refresh();
     }
+
+	public void carga() {
+		try {
+			this.capitulos = FXCollections.observableArrayList();
+			this.capitulos.setAll(cadao.getByParte(currentParte));
+		} catch (Exception e) {
+			System.out.println("hola reventada");
+		}
+	}
     private void tablaNotas(Capitulo c) {
         List<Notas_Cap> notas= ndao.getFromCapitulos(c);
         TVNotas.setItems(FXCollections.observableList(notas));
@@ -105,6 +130,7 @@ public class CapitulosController {
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
 			modalStage.setResizable(false);
+			initialize();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -112,7 +138,21 @@ public class CapitulosController {
 
     @FXML
     void editarCap(ActionEvent event) throws IOException{
-
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditCapitulos.fxml"));
+		Parent modal;
+		try {
+			modal = fxmlLoader.load();
+			Stage modalStage = new Stage();
+			modalStage.initModality(Modality.APPLICATION_MODAL);
+			modalStage.initOwner(App.rootstage);
+			Scene modalScene = new Scene(modal);
+			modalStage.setScene(modalScene);
+			modalStage.showAndWait();
+			modalStage.setResizable(false);
+			initialize();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
