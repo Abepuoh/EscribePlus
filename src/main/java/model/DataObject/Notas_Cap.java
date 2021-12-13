@@ -48,6 +48,12 @@ public class Notas_Cap implements INotas_cap, Serializable{
 		this.id = id;
 		this.text = text;
 	}
+	public Notas_Cap(String text, Capitulo capitulo) {
+		super();
+		this.id = -1L;
+		this.text = text;
+		this.capitulo = capitulo;
+	}
 	
 	public Long getId() {
 		return id;
@@ -60,6 +66,12 @@ public class Notas_Cap implements INotas_cap, Serializable{
 	}
 	public void setText(String text) {
 		this.text = text;
+	}
+	public Capitulo getCapitulo() {
+		return capitulo;
+	}
+	public void setCapitulo(Capitulo capitulo) {
+		this.capitulo = capitulo;
 	}
 	
 	@Override
@@ -76,6 +88,6 @@ public class Notas_Cap implements INotas_cap, Serializable{
 	
 	@Override
 	public String toString() {
-		return "Notas_Cap [id=" + id + ", text=" + text + "]";
+		return text;
 	}
 }

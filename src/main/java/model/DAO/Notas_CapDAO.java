@@ -114,7 +114,7 @@ public class Notas_CapDAO implements INotas_capDAO {
         List <Notas_Cap> result = new ArrayList<Notas_Cap>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Cap> q = em.createNamedQuery("getNotasfromLibro", Notas_Cap.class).setParameter("idcapitulo", c.getId());
+			TypedQuery<Notas_Cap> q = em.createNamedQuery("getFromCapitulos", Notas_Cap.class).setParameter("idcapitulo", c.getId());
 						result = q.getResultList();
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {

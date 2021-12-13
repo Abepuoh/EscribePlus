@@ -71,6 +71,7 @@ public class CapitulosController {
     			this.partes = FXCollections.observableArrayList();
     			this.partes.setAll(parDao.getByLibro(milibro)); 
     			buttEditarCap.setDisable(true);
+    			buttEditarNota.setDisable(true);
     	        CBParte.setItems(partes);
     	        CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
     	        	if(newValue!=null) {
@@ -80,7 +81,6 @@ public class CapitulosController {
     	        	}
     	        });
 		} catch (Exception e) {
-			e.printStackTrace();
 			Dialog.showError("Error", "", "");
 		}
        
@@ -99,7 +99,11 @@ public class CapitulosController {
 
 			TVCapitulos.setEditable(true);
 			TVCapitulos.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
-				configuratablaNotas(newValue);
+				if (newValue!=null) {
+					currentCapitulo=newValue;
+					configuratablaNotas(newValue);
+				}
+
 			});
 			TVCapitulos.setItems(capitulos);
 		} catch (Exception e) {
@@ -113,6 +117,7 @@ public class CapitulosController {
 	 */
 	private void configuratablaNotas(Capitulo c) {
 		try { 
+			buttEditarNota.setDisable(false);
 			this.Notas_Cap = FXCollections.observableArrayList();
 			this.Notas_Cap.setAll(ndao.getFromCapitulos(currentCapitulo));
 			TCDescripcion.setCellValueFactory(
@@ -141,6 +146,11 @@ public class CapitulosController {
 			modalStage.initModality(Modality.APPLICATION_MODAL);
 			modalStage.initOwner(App.rootstage);
 			Scene modalScene = new Scene(modal);
+			if (MainLibrosController.currentBook!=null) {
+				modalStage.setTitle("EDITAR PARTES DE : "+MainLibrosController.currentBook.getTitle());
+			} else {
+				modalStage.setTitle("EDITAR PARTES");
+			}
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
 			modalStage.setResizable(false);
@@ -165,6 +175,11 @@ public class CapitulosController {
 			modalStage.initModality(Modality.APPLICATION_MODAL);
 			modalStage.initOwner(App.rootstage);
 			Scene modalScene = new Scene(modal);
+			if (CBParte.getValue()!=null) {
+				modalStage.setTitle("CAPITULOS DE: "+CBParte.getValue().getNombre());
+			} else {
+				modalStage.setTitle("EDITAR CAPITULOS");
+			}
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
 			modalStage.setResizable(false);
@@ -181,7 +196,7 @@ public class CapitulosController {
 	 */
     @FXML
     void editarNota(ActionEvent event) throws IOException{
-    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasCap.fxml"));
+    	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotas_Capitulo.fxml"));
 		Parent modal;
 		try {
 			modal = fxmlLoader.load();
@@ -189,6 +204,11 @@ public class CapitulosController {
 			modalStage.initModality(Modality.APPLICATION_MODAL);
 			modalStage.initOwner(App.rootstage);
 			Scene modalScene = new Scene(modal);
+			if (TVCapitulos.getSelectionModel().getSelectedItem()!=null) {
+				modalStage.setTitle("EDITAR NOTAS DE : "+TVCapitulos.getSelectionModel().getSelectedItem().getName());
+			} else {
+				modalStage.setTitle("EDITAR NOTAS DE : ");
+			}
 			modalStage.setScene(modalScene);
 			modalStage.showAndWait();
 			modalStage.setResizable(false);
