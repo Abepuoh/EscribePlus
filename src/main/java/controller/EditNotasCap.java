@@ -80,5 +80,8 @@ public class EditNotasCap {
 			e.printStackTrace();
 		}
     }
-
+    @FXML
+    void closeApp(ActionEvent event) {
+    	
+    }
 }
