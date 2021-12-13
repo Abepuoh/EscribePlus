@@ -22,28 +22,22 @@ public class ConnectionUtil {
 	private static EntityManagerFactory emf;
 	public static boolean choice = false; // ----->TRUE NUBE ------> FALSE LOCAL
 	private static final String LOCAL = "AplicacionH2";
-	private static final String REMOTE = "aplicacionMariaDB";
+	private static final String REMOTO = "aplicacionMariaDB";
 	
 	public static EntityManagerFactory getInstance(String name) {
 		if (emf == null) {
-			if (name.equals(LOCAL) || name.equals(REMOTE)) {
+			if (name.equals(LOCAL) || name.equals(REMOTO)) {
 				emf = Persistence.createEntityManagerFactory(name);
 			}
 		}
 		return emf;
 	}
 
-	/*
-	 * public static EntityManagerFactory getRemoteInstance() { if (emf == null) {
-	 * emf = Persistence.createEntityManagerFactory(REMOTE); } return emf; }
-	 * 
-	 * public static EntityManagerFactory getLocalInstance() { if (emf == null) {
-	 * emf = Persistence.createEntityManagerFactory(LOCAL); } return emf; }
-	 */
+	
 	public static EntityManagerFactory getInstance() {
 		if (emf == null) {
 			if (choice) {
-				emf = Persistence.createEntityManagerFactory(REMOTE);
+				emf = Persistence.createEntityManagerFactory(REMOTO);
 			} else {
 				emf = Persistence.createEntityManagerFactory(LOCAL);
 			}
