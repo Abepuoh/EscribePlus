@@ -59,9 +59,9 @@ public class Libro implements ILibro, Serializable {
 	@OneToMany(mappedBy = "libro", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	protected List<Partes> parts = new ArrayList<Partes>();
 	
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(name = "personaje_id", joinColumns = { @JoinColumn(name = "libro_id") }, inverseJoinColumns = { @JoinColumn(name = "personaje_id") })
-	 private List<Personaje> personajes;
+	private List<Personaje> personajes;
 
 	public Libro() {
         this(-1L,"",-1,"","", new Usuario(), new ArrayList<Notas_Lib>(), new ArrayList<Recordatorio>(), new ArrayList<Partes>(),new ArrayList<Personaje>());
@@ -279,6 +279,24 @@ public class Libro implements ILibro, Serializable {
 				+ description + ", id_user=" + user.name + ", book_notes=" + book_notes.size() + ", recordatorios="
 				+ recordatorios.size() + ", parts=" + parts.size() + "]";
 	}
+	
+	public void addCharacter(Personaje p){
+        if(this.personajes == null){
+            this.personajes = new ArrayList<>();
+        }
+        
+        this.personajes.add(p);
+    }
+	
+	public void removeCharacter(Personaje p){
+        if(this.personajes != null){
+           for(Personaje aux : this.personajes) {
+        	   if(p.getNombre().equals(aux.getNombre())) {
+        		   this.personajes.remove(aux);
+        	   }
+           }
+        }
+    }
 
 	
 }

@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 
 import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
+import model.DataObject.Personaje;
 import model.DataObject.Usuario;
 import model.IDAO.ILibroDAO;
 import utils.ConnectionUtil;
@@ -171,5 +172,19 @@ public class LibroDAO implements ILibroDAO {
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}*/
 		return null;
+	}
+	
+	public void addCharactertoBook(Personaje p, Libro l) {
+		try {
+			em.getTransaction().begin();
+			l.addCharacter(p);
+			em.merge(l);
+			em.getTransaction().commit();
+			
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+		}
 	}
 }

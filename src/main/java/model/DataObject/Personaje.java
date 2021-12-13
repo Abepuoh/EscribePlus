@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,6 +63,7 @@ public class Personaje implements IPersonaje, Serializable {
 			List<Libro> libroRef) {
 		this(-1L,nombre,edad,descripcion,alineamiento,foto,libroRef);
 	}
+	
 	@Override
 	public String getAlineamiento() {
 		return alineamiento;
