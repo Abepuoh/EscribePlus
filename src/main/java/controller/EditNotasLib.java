@@ -1,6 +1,5 @@
 package controller;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,16 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.DAO.CapituloDAO;
-import model.DAO.Notas_CapDAO;
-import model.DataObject.Capitulo;
-import model.DataObject.Notas_Cap;
-import model.DataObject.Partes;
+import model.DAO.Notas_LibDAO;
+import model.DataObject.Libro;
+import model.DataObject.Notas_Lib;
 
-public class EditNotasCap {
-
-    @FXML
-    private ComboBox<Notas_Cap> CBNotas_Cap;
+public class EditNotasLib {
+	@FXML
+    private ComboBox<Notas_Lib> CBNotas_Lib;
 
     @FXML
     private TextField TfTitulo;
@@ -31,24 +27,24 @@ public class EditNotasCap {
 
     @FXML
     private Button buttSalir;
-    
-    private Capitulo capitulo;
-    
-    private ObservableList<Notas_Cap> notas_capitulo;
-    
-    private Notas_CapDAO ntcapDao = new Notas_CapDAO();
 
+    private Libro libro;
+    
+    private ObservableList<Notas_Lib> notas_libro;
+    
+    private Notas_LibDAO ntlibDao = new Notas_LibDAO();
+    
     public void initialize() {
     	try {
         	buttBorrar.setDisable(true);
         	buttAñadir.setDisable(true);
-    		capitulo=CapitulosController.currentCapitulo;
-    		this.notas_capitulo = FXCollections.observableArrayList();
-    		this.notas_capitulo.setAll(ntcapDao.getFromCapitulos(capitulo));
-    		System.out.println(notas_capitulo);
+    		libro=MainLibrosController.currentBook;
+    		this.notas_libro = FXCollections.observableArrayList();
+    		this.notas_libro.setAll(ntlibDao.getFromBook(libro));
+    		System.out.println(notas_libro);
 
-        	CBNotas_Cap.setItems(notas_capitulo);
-        	CBNotas_Cap.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
+        	CBNotas_Lib.setItems(notas_libro);
+        	CBNotas_Lib.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
                 buttBorrar.setDisable(false);
             });
 		} catch (Exception e) {
@@ -57,42 +53,43 @@ public class EditNotasCap {
 	}
     
     /**
-     * Método para crear Notas de capitulos.
+     * Método para crear Notas de libros.
      * Gurdandola en local y en la interfaz
      * @param event
      */
     @FXML
-    void añadirNota_Cap(ActionEvent event) {
+    void añadirNota_Lib(ActionEvent event) {
     	try {
     		if (!TfTitulo.getText().isEmpty()) {
-				Notas_Cap n = new Notas_Cap(TfTitulo.getText(),capitulo);
-				ntcapDao.crear(n);
-				notas_capitulo.add(n);
+				Notas_Lib n = new Notas_Lib(TfTitulo.getText(),libro);
+				ntlibDao.crear(n);
+				notas_libro.add(n);
 				TfTitulo.setText("");
 				buttAñadir.setDisable(true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			utils.Dialog.showError("Añadir Nota a Capitulo", "Ha surgido un error al añadir Nota al Capitulo", "");
+			utils.Dialog.showError("Añadir Nota a Libro", "Ha surgido un error al añadir Nota a Libro", "");
 		}
     }
+
     /**
-     * Método para borrar Notas de capitulos.
+     * Método para borrar Notas de libros.
      * Gurdandola en local y en la interfaz.
      * @param event
      */
     @FXML
-    void borrarNota_Cap(ActionEvent event) {
-    	Notas_Cap selected =  CBNotas_Cap.getSelectionModel().getSelectedItem();
-    	Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres borra la Nota?", "Vas a borrar: "+selected.getText());
+    void borrarNota_Lib(ActionEvent event) {
+    	Notas_Lib selected =  CBNotas_Lib.getSelectionModel().getSelectedItem();
+    	Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres borra la Nota?", "Vas a borrar: "+selected.getTexto());
 		if (selected != null && confirmacion) {
 			try {
-	    		ntcapDao.borrar(selected.getId());
-	    		notas_capitulo.remove(selected);
+	    		ntlibDao.borrar(selected.getId());
+	    		notas_libro.remove(selected);
 				buttBorrar.setDisable(true);
 			} catch (Exception e) {
 				buttBorrar.setDisable(true);
-				utils.Dialog.showError("Borrar Nota de Capitulo", "Ha surgido un error al borrar Nota de Capitulo", "");
+				utils.Dialog.showError("Borrar Nota de Libro", "Ha surgido un error al borrar Nota de Libro", "");
 			}
 
 		}
@@ -122,4 +119,3 @@ public class EditNotasCap {
 
     }
 }
-
