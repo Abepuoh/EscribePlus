@@ -115,7 +115,7 @@ public class Notas_LibDAO implements INotas_libDAO {
         List <Notas_Lib> result = new ArrayList<Notas_Lib>();
 		try {
 			em.getTransaction().begin();
-			TypedQuery<Notas_Lib> q = em.createNamedQuery("getNotasfromLibro", Notas_Lib.class).setParameter("idlibro", l.getId());
+			TypedQuery<Notas_Lib> q = em.createNamedQuery("getNotasLibfromLibro", Notas_Lib.class).setParameter("idlibro", l.getId());
 						result = q.getResultList();
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {

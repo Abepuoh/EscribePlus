@@ -21,6 +21,7 @@ import model.DAO.Notas_LibDAO;
 import model.DataObject.Libro;
 import model.DataObject.Notas_Lib;
 import model.DataObject.Usuario;
+import utils.Dialog;
 
 public class MainLibrosController {
 	
@@ -83,21 +84,27 @@ public class MainLibrosController {
     }
     @FXML
 	void EditarNotas(ActionEvent event) {
-		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasLibro.fxml"));
-		Parent modal;
-		try {
-			modal = fxmlLoader.load();
-			Stage modalStage = new Stage();
-			modalStage.initModality(Modality.APPLICATION_MODAL);
-			modalStage.initOwner(App.rootstage);
-			Scene modalScene = new Scene(modal);
-			modalStage.setScene(modalScene);
-			modalStage.showAndWait();
-			modalStage.setResizable(false);
-			configuraTablaLibros();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+       	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotas_Libro.fxml"));
+    		Parent modal;
+    		try {
+    			modal = fxmlLoader.load();
+    			Stage modalStage = new Stage();
+    			modalStage.initModality(Modality.APPLICATION_MODAL);
+    			modalStage.initOwner(App.rootstage);
+    			Scene modalScene = new Scene(modal);
+    			if (TVLibro.getSelectionModel().getSelectedItem()!=null) {
+    				modalStage.setTitle("EDITAR NOTAS DE : "+TVLibro.getSelectionModel().getSelectedItem().getTitle());
+    			} else {
+    				modalStage.setTitle("EDITAR NOTAS DE : ");
+    			}
+    			modalStage.setScene(modalScene);
+    			modalStage.showAndWait();
+    			modalStage.setResizable(false);
+    			initialize();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    			Dialog.showError("Error", "", "");
+    		}
     }
 
 
@@ -192,30 +199,33 @@ public class MainLibrosController {
     /**
      * Método para la configuración de las columnas de la tabla de libros.
      */
-    private void configuraTablaLibros() {
-    	try {
-    		LibroDAO l = new LibroDAO();
-    		this.Libros = FXCollections.observableArrayList();
-    		this.Libros.setAll(l.getBooksByAuthor(usuario));
+	private void configuraTablaLibros() {
+		try {
+			LibroDAO l = new LibroDAO();
+			this.Libros = FXCollections.observableArrayList();
+			this.Libros.setAll(l.getBooksByAuthor(usuario));
 
-    		TCLibroTitulo.setCellValueFactory(cellData -> {
-    			return new SimpleObjectProperty<>(cellData.getValue().getTitle());
-    		});
-    		TCLibroAño.setCellValueFactory(cellData -> {
-    			return new SimpleObjectProperty<>(cellData.getValue().getYear());
-    		});
-    		TCLibroDescripcion.setCellValueFactory(cellData -> {
-    			return new SimpleObjectProperty<>(cellData.getValue().getDescription());
-    		});
-    		TCLibroGenero.setCellValueFactory(cellData -> {
-    			return new SimpleObjectProperty<>(cellData.getValue().getGenre());
-    		});
+			TCLibroTitulo.setCellValueFactory(cellData -> {
+				return new SimpleObjectProperty<>(cellData.getValue().getTitle());
+			});
+			TCLibroAño.setCellValueFactory(cellData -> {
+				return new SimpleObjectProperty<>(cellData.getValue().getYear());
+			});
+			TCLibroDescripcion.setCellValueFactory(cellData -> {
+				return new SimpleObjectProperty<>(cellData.getValue().getDescription());
+			});
+			TCLibroGenero.setCellValueFactory(cellData -> {
+				return new SimpleObjectProperty<>(cellData.getValue().getGenre());
+			});
 
-    		TVLibro.setEditable(true);
-    		TVLibro.getSelectionModel().selectedItemProperty()
-    				.addListener((observable, oldvalue, newvalue) -> showLibroButt(newvalue));
-    		TVLibro.setItems(Libros);
-    		showLibroButt(null);
+			TVLibro.setEditable(true);
+			TVLibro.getSelectionModel().selectedItemProperty().addListener((observable, oldvalue, newvalue) -> {
+					showLibroButt(newvalue);
+					buttEditarNotas.setDisable(false);
+				
+			});
+			TVLibro.setItems(Libros);
+			showLibroButt(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -229,7 +239,7 @@ public class MainLibrosController {
     		Notas_LibDAO n = new Notas_LibDAO();
     		this.Notas = FXCollections.observableArrayList();
     		this.Notas.setAll(n.getAll());
-    		//this.Notas.setAll(n.getByBook(TVLibro.getSelectionModel().getSelectedItem()));
+    		this.Notas.setAll(n.getFromBook(TVLibro.getSelectionModel().getSelectedItem()));
     		TCNotasDescripcion.setCellValueFactory(cellData -> {
     			return new SimpleObjectProperty<>(cellData.getValue().getTexto());
     		});
@@ -255,6 +265,7 @@ public class MainLibrosController {
 		if (libro != null) {
 			buttBorrarLibro.setDisable(false);
 			buttEditarLibro.setDisable(false);
+			buttEditarNotas.setDisable(false);
 			currentBook=libro;
 			configuraTablaNotas();
 		} else {
