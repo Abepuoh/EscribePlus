@@ -15,7 +15,7 @@ import javafx.stage.StageStyle;
  */
 public class App extends Application {
 	public static Stage rootstage;
-    private static Scene scene;
+    private static Scene scene; 
 
     @Override
     public void start(Stage stage) throws IOException {

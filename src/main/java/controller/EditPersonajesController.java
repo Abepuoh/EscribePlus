@@ -41,7 +41,7 @@ public class EditPersonajesController {
 	private TextField txtDescripcion;
 
 	private PersonajeDAO pdao = new PersonajeDAO();
-	private LibroDAO ldao = new LibroDAO();
+	private LibroDAO ldao = new LibroDAO(); 
 	private ObservableList<Personaje> personajes = FXCollections.observableArrayList();
 	private ObservableList<Libro> libros = FXCollections.observableArrayList();
 
@@ -51,8 +51,8 @@ public class EditPersonajesController {
 		this.personajes.setAll(pdao.getAll()); 
 		this.libros.setAll(ldao.getAll());
 		buttBorrar.setDisable(true);
-		CBLibros.setItems(libros);
 		CBPersonajes.setItems(personajes);
+		CBLibros.setItems(libros);
 		CBPersonajes.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
 			buttBorrar.setDisable(false);
 		});
@@ -64,42 +64,53 @@ public class EditPersonajesController {
 
 	@FXML
 	void añadePersonaje(ActionEvent event) {
-
+		Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres añadir al libro "+CBPersonajes.getValue().getNombre()+" ?",
+				"Vas a añadir: "+CBPersonajes.getValue().getNombre()); 
+		if(CBPersonajes.getValue() != null && CBLibros.getValue() != null  && confirmacion) {			
+			try {
+				ldao.addCharactertoBook(CBPersonajes.getValue(),CBLibros.getValue());
+			} catch (Exception e) {
+				e.printStackTrace();
+				buttBorrar.setDisable(true);
+				utils.Dialog.showError("Añadir Personaje", "Ha surgido un error al añadirlo al capítulo", "");
+			}
+		}
 	}
 
 	@FXML
 	void borrarPersonaje(ActionEvent event) {
-		Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres borra la parte?",
+		Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres borra el personaje?",
 				"Vas a borrar: "+CBPersonajes.getValue().getNombre()); 
 		if(CBPersonajes.getValue() != null && CBLibros.getValue() != null  && confirmacion) {			
 			try {
 				ldao.deleteCharacterFromBook(CBPersonajes.getValue(), CBLibros.getValue());
 			} catch (Exception e) {
+				e.printStackTrace();
 				buttBorrar.setDisable(true);
-				utils.Dialog.showError("Borrar Personaje", "Ha surgido un error al borrar la parte", "");
+				utils.Dialog.showError("Borrar Personaje", "Ha surgido un error al borrarlo", "");
 			}
 		}
 	}
 
 	@FXML
 	void crearEditarPersonaje(ActionEvent event) {
+		Personaje person = new Personaje();
 
-		if (CBPersonajes.getValue() != null) {
-			Personaje p = new Personaje();
-			p.setNombre(TFTNombre.getText());
-			p.setDescripcion(txtDescripcion.getText());
-			p.setAlineamiento(TFTAlineamiento.getText());
-			p.addLibro(MainLibrosController.currentBook);
-			pdao.editar(p);
+		if (CBPersonajes.getValue() != null) { 
+			person.setNombre(TFTNombre.getText());
+			person.setDescripcion(txtDescripcion.getText());
+			person.setAlineamiento(TFTAlineamiento.getText());
+			person.addLibro(MainLibrosController.currentBook);
+			pdao.editar(person);
 		} else if (CBPersonajes.getValue() == null) {
-			Personaje p = new Personaje();
-			p.setNombre(TFTNombre.getText());
-			p.setDescripcion(txtDescripcion.getText());
-			p.setAlineamiento(TFTAlineamiento.getText());
-			p.addLibro(MainLibrosController.currentBook);
-			pdao.crear(p);
+			person.setNombre(TFTNombre.getText());
+			person.setDescripcion(txtDescripcion.getText());
+			person.setAlineamiento(TFTAlineamiento.getText());
+			person.addLibro(MainLibrosController.currentBook);
+			pdao.crear(person);
+			personajes.add(person);
 		}
-
+		
 	}
 
 	@FXML
