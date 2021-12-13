@@ -33,9 +33,7 @@ public class logInController {
 		UsuarioDAO aux = new UsuarioDAO(); 
 
 		if (!TFEmail.getText().isEmpty() && !TFPassword.getText().isEmpty()) {
-			;
 			Usuario user = aux.logIn(email, password);
-
 			if (user != null) {
 				UsuarioSingleton usuarioSignleton = UsuarioSingleton.getInstance();
 				usuarioSignleton.setUser(user);

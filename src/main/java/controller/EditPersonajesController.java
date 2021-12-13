@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import model.DAO.LibroDAO;
 import model.DAO.PersonajeDAO;
@@ -15,7 +16,9 @@ import model.DataObject.Libro;
 import model.DataObject.Personaje;
 
 public class EditPersonajesController {
-
+	@FXML
+    private MenuItem MIVolver;
+	
 	@FXML
 	private ComboBox<Libro> CBLibros;
 
@@ -119,10 +122,13 @@ public class EditPersonajesController {
 		}
 		
 	}
-
 	@FXML
-	private void switchToLibro() throws IOException {
-		App.setRoot("MainLibros");
-	}
+    private void switchToLibro()  {
+        try {
+			App.setRoot("MainLibros");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
 
 }
