@@ -39,18 +39,22 @@ public class EditLibroController {
 
     public void initialize() {
     	LibroDAO l = new LibroDAO();
-		currentLibro=l.getBookByName(MainLibrosController.currentBook.getTitle());
-    	TfTitulo.setText(currentLibro.getTitle()); 
-    	TFGenero.setText(currentLibro.getGenre());
-    	TFDescripcion.setText(currentLibro.getDescription());
-    	TFAño.setValue(LocalDate.of(currentLibro.getYear(), 1, 1));
+		try {
+			currentLibro=l.getBookByName(MainLibrosController.currentBook.getTitle());
+			TfTitulo.setText(currentLibro.getTitle()); 
+			TFGenero.setText(currentLibro.getGenre());
+			TFDescripcion.setText(currentLibro.getDescription());
+			TFAño.setValue(LocalDate.of(currentLibro.getYear(), 1, 1));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
     }
     /**
      * Setea un usuario recibido por el login;
      * @param u
      */
-	public static void initController() {
+    public static void initController() {
 		utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
 		usuario = transfer.getUser();
 	}
@@ -89,6 +93,7 @@ public class EditLibroController {
 				}
     		}
 		} catch (Exception e) {
+			e.printStackTrace();
 			Dialog.showWarning("Añadir Nuevo Libro", "Rellene los campos ", null);
 		}
     	

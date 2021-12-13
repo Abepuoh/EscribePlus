@@ -81,7 +81,6 @@ public class MainLibrosController {
 		usuario = transfer.getUser(); 
     	configuraTablaLibros();
     }
-    
     @FXML
 	void EditarNotas(ActionEvent event) {
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasLibro.fxml"));
@@ -135,12 +134,11 @@ public class MainLibrosController {
 	    		l.borrar(selected.getId());
 	    		Libros.remove(selected);
 				configuraTablaLibros();
-
 			} catch (Exception e) {
+				e.printStackTrace();
 				buttBorrarLibro.setDisable(true);
 				utils.Dialog.showError("Borrar Genero", "Ha surgido un error al borrar el genero", "");
 			}
-
 		}
     }
 
@@ -188,7 +186,6 @@ public class MainLibrosController {
 			currentBook=TVLibro.getSelectionModel().getSelectedItem();
 			App.setRoot("Capitulos");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	} 
@@ -218,11 +215,9 @@ public class MainLibrosController {
     		TVLibro.getSelectionModel().selectedItemProperty()
     				.addListener((observable, oldvalue, newvalue) -> showLibroButt(newvalue));
     		TVLibro.setItems(Libros);
-
     		showLibroButt(null);
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
     
@@ -235,23 +230,18 @@ public class MainLibrosController {
     		this.Notas = FXCollections.observableArrayList();
     		this.Notas.setAll(n.getAll());
     		//this.Notas.setAll(n.getByBook(TVLibro.getSelectionModel().getSelectedItem()));
-
     		TCNotasDescripcion.setCellValueFactory(cellData -> {
     			return new SimpleObjectProperty<>(cellData.getValue().getTexto());
     		});
     		TCNotasNombre.setCellValueFactory(cellData -> {
     			return new SimpleObjectProperty<>(cellData.getValue().getId());
-    		});
-    		
+    		});		
     		TVNotas.getSelectionModel().selectedItemProperty()
     				.addListener((observable, oldvalue, newvalue) -> showNotasButt(newvalue));
     		TVNotas.setItems(Notas);
-
-    		showNotasButt(null);
-    		
+    		showNotasButt(null);    		
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 
@@ -271,7 +261,6 @@ public class MainLibrosController {
 			buttBorrarLibro.setDisable(true);
 			buttEditarLibro.setDisable(true);
 			buttEditarNotas.setDisable(true);
-
 		}
 	}
 	/**
@@ -285,13 +274,10 @@ public class MainLibrosController {
 			buttEditarNotas.setDisable(false);
 		} else {
 			buttEditarNotas.setDisable(true);
-
 		}
-
 	}
     @FXML
     void editUsuario(ActionEvent event) {
-
     	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditUser.fxml"));
 		Parent modal;
 		try {

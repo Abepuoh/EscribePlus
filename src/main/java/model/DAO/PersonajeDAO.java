@@ -40,11 +40,14 @@ public class PersonajeDAO implements IPersonajeDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
+			e.printStackTrace();
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
-			throw new IllegalStateException(e);
-		} catch (RollbackException e) { 
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -55,9 +58,11 @@ public class PersonajeDAO implements IPersonajeDAO {
 			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -69,9 +74,11 @@ public class PersonajeDAO implements IPersonajeDAO {
 			em.remove(delete);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -84,10 +91,11 @@ public class PersonajeDAO implements IPersonajeDAO {
 			result = q.getResultList();
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
-			
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 		return result;
 		
@@ -100,12 +108,14 @@ public class PersonajeDAO implements IPersonajeDAO {
 			em.getTransaction().begin();
 			result = em.find(Personaje.class, id);
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 	public List<Personaje> mostrarPorLibro(Libro l) {
@@ -115,32 +125,15 @@ public class PersonajeDAO implements IPersonajeDAO {
 			TypedQuery<Personaje> q = em.createNamedQuery("getPersonajeFromBook", Personaje.class).setParameter("idlibro", l.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
-	/**
-	public List<Personaje> borrarPorLibro(Personaje p,Libro l) {
-		List<Personaje> result = new ArrayList<>();  
-		try {
-			em.getTransaction().begin();
-			TypedQuery<Personaje> q = em.createNamedQuery("removePersonajeFromBook", Personaje.class);
-					q.setParameter("personaje", p.getId());
-					q.setParameter("libro", l.getId()); 
-			result = q.getResultList();
-			em.getTransaction().commit();
-			return result;
-		} catch (IllegalStateException e) {
-			throw new IllegalStateException("Ya hay una transaccion activa");
-		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
-		}
-	}
-	*/
-
 	@Override
 	public Personaje getCharacterByName(String nombre) {
 		Personaje result = null;
@@ -156,8 +149,10 @@ public class PersonajeDAO implements IPersonajeDAO {
 			return null;}
 		} catch (IllegalStateException e) {
 			result = null;
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			result=null;
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
@@ -173,10 +168,11 @@ public class PersonajeDAO implements IPersonajeDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
-
 }

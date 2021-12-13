@@ -26,7 +26,7 @@ public class AñadirLibroController {
     private TextField TfTitulo;
 
     @FXML
-    private Button buttAñadir;
+    private Button buttAñadir; 
 
     @FXML
     private Button buttSalir;

@@ -35,11 +35,14 @@ public class Notas_LibDAO implements INotas_libDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
+			e.printStackTrace();
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -50,9 +53,11 @@ public class Notas_LibDAO implements INotas_libDAO {
 			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -64,9 +69,11 @@ public class Notas_LibDAO implements INotas_libDAO {
 			em.remove(delete);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -78,12 +85,14 @@ public class Notas_LibDAO implements INotas_libDAO {
 			TypedQuery<Notas_Lib> q = em.createNamedQuery("getAllNotas_Lib", Notas_Lib.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 	@Override
@@ -93,25 +102,29 @@ public class Notas_LibDAO implements INotas_libDAO {
 			em.getTransaction().begin();
 			result = em.find(Notas_Lib.class, id);
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 	public List<Notas_Lib> getFromBook(Libro l){
-        List <Notas_Lib> result = new ArrayList();
-	try {
-		em.getTransaction().begin();
-		TypedQuery<Notas_Lib> q = em.createNamedQuery("getNotasfromLibro", Notas_Lib.class).setParameter("idlibro", l.getId());
-                    result = q.getResultList();
-		em.getTransaction().commit();
+        List <Notas_Lib> result = new ArrayList<Notas_Lib>();
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Notas_Lib> q = em.createNamedQuery("getNotasfromLibro", Notas_Lib.class).setParameter("idlibro", l.getId());
+						result = q.getResultList();
+			em.getTransaction().commit();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
+		}
 		return result;
-	} catch (IllegalStateException e) {
-		throw new IllegalStateException("Ya hay una transaccion activa");
-	} catch (RollbackException e) {
-		throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
-	}
     }
 }

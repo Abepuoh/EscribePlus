@@ -24,12 +24,7 @@ public class LibroDAO implements ILibroDAO {
 	}
 
 	EntityManager em = createEM();
-	// Queries
-//	private final String getAll = "SELECT * FROM Book";
-//	private String getById = "SELECT p FROM Book p WHERE p.id = :idLibro";
-//	private String getByName = "SELECT p FROM Book p WHERE p.nombre = :nombreLibro";
-//	private String getAllNotes = "SELECT p.book_notes FROM Book p ";
-//	private String getFromAuthor = "SELECT p FROM Partes p WHERE p.id_libro=:idlibro";
+
 
 	@Override
 	public void crear(Libro aux) {
@@ -38,10 +33,13 @@ public class LibroDAO implements ILibroDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
+			e.printStackTrace();
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -53,8 +51,10 @@ public class LibroDAO implements ILibroDAO {
 			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 
@@ -68,8 +68,10 @@ public class LibroDAO implements ILibroDAO {
 			em.remove(delete);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 
@@ -85,8 +87,10 @@ public class LibroDAO implements ILibroDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -101,8 +105,10 @@ public class LibroDAO implements ILibroDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -121,8 +127,10 @@ public class LibroDAO implements ILibroDAO {
 			}
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -137,12 +145,13 @@ public class LibroDAO implements ILibroDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
-
 
 	public List<Notas_Lib> getNotesOfBook(String title) {
 		List<Notas_Lib> result = new ArrayList<Notas_Lib>();
@@ -153,31 +162,14 @@ public class LibroDAO implements ILibroDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
 
-	@Override
-	public Notas_Lib getNoteOfBook(Long id) {
-		/*Notas_Lib result = null;
-		try {
-			List<Notas_Lib> list = getNotesOfBook();
-			for (Notas_Lib notas_Lib : list) {
-				if (notas_Lib.getId() == id) {
-					result = notas_Lib;
-				}
-			}
-			return result;
-		} catch (IllegalStateException e) {
-			throw new IllegalStateException("Ya hay una transaccion activa");
-		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
-		}*/
-		return null;
-	}
-	
 	public void addCharactertoBook(Personaje p, Libro l) {
 		try {
 			em.getTransaction().begin();
@@ -186,11 +178,13 @@ public class LibroDAO implements ILibroDAO {
 			em.getTransaction().commit();
 			
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
-	}
+	}	
 	
 	public void deleteCharacterFromBook(Personaje p, Libro l) {
 		try {
@@ -200,12 +194,12 @@ public class LibroDAO implements ILibroDAO {
 			aux.remove(p);
 			l.setPersonajes(aux);
 			em.merge(l);
-			em.getTransaction().commit();
-			
-			
+			em.getTransaction().commit();			
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}

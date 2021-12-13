@@ -64,7 +64,17 @@ public class EditPersonajesController {
 
 	@FXML
 	void añadePersonaje(ActionEvent event) {
-
+		Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres añadir al libro "+CBPersonajes.getValue().getNombre()+" ?",
+				"Vas a añadir: "+CBPersonajes.getValue().getNombre()); 
+		if(CBPersonajes.getValue() != null && CBLibros.getValue() != null  && confirmacion) {			
+			try {
+				ldao.addCharactertoBook(CBPersonajes.getValue(),CBLibros.getValue());
+			} catch (Exception e) {
+				e.printStackTrace();
+				buttBorrar.setDisable(true);
+				utils.Dialog.showError("Añadir Personaje", "Ha surgido un error al añadirlo al capítulo", "");
+			}
+		}
 	}
 
 	@FXML
@@ -75,6 +85,7 @@ public class EditPersonajesController {
 			try {
 				ldao.deleteCharacterFromBook(CBPersonajes.getValue(), CBLibros.getValue());
 			} catch (Exception e) {
+				e.printStackTrace();
 				buttBorrar.setDisable(true);
 				utils.Dialog.showError("Borrar Personaje", "Ha surgido un error al borrar la parte", "");
 			}
@@ -90,14 +101,22 @@ public class EditPersonajesController {
 			p.setDescripcion(txtDescripcion.getText());
 			p.setAlineamiento(TFTAlineamiento.getText());
 			p.addLibro(MainLibrosController.currentBook);
-			pdao.editar(p);
+			try {
+				pdao.editar(p);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (CBPersonajes.getValue() == null) {
 			Personaje p = new Personaje();
 			p.setNombre(TFTNombre.getText());
 			p.setDescripcion(txtDescripcion.getText());
 			p.setAlineamiento(TFTAlineamiento.getText());
 			p.addLibro(MainLibrosController.currentBook);
-			pdao.crear(p);
+			try {
+				pdao.crear(p);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}

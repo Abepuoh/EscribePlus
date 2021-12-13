@@ -27,11 +27,17 @@ public class escribirCapController {
     
     private static Capitulo currentCapitulo;
     public CapituloDAO capDAO = new CapituloDAO();
+
     @FXML
     public void initialize() {
-    	currentCapitulo=capDAO.getById(CapitulosController.currentCapitulo.getId());
-    	textArea.setText(currentCapitulo.getText()); 	
+      try {    
+        currentCapitulo=capDAO.getById(CapitulosController.currentCapitulo.getId());
+        textArea.setText(currentCapitulo.getText()); 	
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
+
     @FXML
     void guardarCap(ActionEvent event) {
     	String texto = textArea.getText();
@@ -41,7 +47,6 @@ public class escribirCapController {
 				capDAO.editar(currentCapitulo);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
     	
@@ -51,9 +56,7 @@ public class escribirCapController {
     	  try {
 			App.setRoot("Capitulos");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-
+  }
 }

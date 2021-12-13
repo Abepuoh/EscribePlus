@@ -1,7 +1,7 @@
 module controller {
 	
 	requires javafx.graphics;
-	requires javafx.base;
+	requires  javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
 	requires transitive java.persistence;

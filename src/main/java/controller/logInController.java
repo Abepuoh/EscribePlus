@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -43,18 +42,11 @@ public class logInController {
 				try {
 					App.setRoot("MainLibros");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			} else {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setHeaderText(null);
-				alert.setTitle("ERROR");
-				alert.setContentText("Error al introducir email o contraseña");
-				this.TFEmail.clear();
-				this.TFPassword.clear();
-				alert.showAndWait();
+				utils.Dialog.showError("Error", "Usuario o contraseña incorrectos",
+				"Por favor introduzca un usuario y contraseña correctos");
 			}
 		}
 	}
