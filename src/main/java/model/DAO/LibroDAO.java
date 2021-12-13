@@ -113,8 +113,12 @@ public class LibroDAO implements ILibroDAO {
 		try {
 			em.getTransaction().begin();
 			TypedQuery<Libro> q = em.createNamedQuery("getBookByName", Libro.class).setParameter("titleLibro", title);
-			result = q.getResultList().get(0);
 			em.getTransaction().commit();
+			if(q.getResultList().size()>0) {
+			result = q.getResultList().get(0);
+			}else {
+				result = null;
+			}
 			return result;
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");
@@ -180,6 +184,24 @@ public class LibroDAO implements ILibroDAO {
 			l.addCharacter(p);
 			em.merge(l);
 			em.getTransaction().commit();
+			
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+		}
+	}
+	
+	public void deleteCharacterFromBook(Personaje p, Libro l) {
+		try {
+			List aux;
+			em.getTransaction().begin();
+			aux = l.getPersonajes();
+			aux.remove(p);
+			l.setPersonajes(aux);
+			em.merge(l);
+			em.getTransaction().commit();
+			
 			
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException("Ya hay una transaccion activa");

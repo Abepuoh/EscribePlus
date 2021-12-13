@@ -51,6 +51,8 @@ public class EditPersonajesController {
 		this.personajes.setAll(pdao.getAll()); 
 		this.libros.setAll(ldao.getAll());
 		buttBorrar.setDisable(true);
+		CBLibros.setItems(libros);
+		CBPersonajes.setItems(personajes);
 		CBPersonajes.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
 			buttBorrar.setDisable(false);
 		});
@@ -71,7 +73,7 @@ public class EditPersonajesController {
 				"Vas a borrar: "+CBPersonajes.getValue().getNombre()); 
 		if(CBPersonajes.getValue() != null && CBLibros.getValue() != null  && confirmacion) {			
 			try {
-				//pdao.borrarPorLibro(CBPersonajes.getValue(),CBLibros.getValue());	    	
+				ldao.deleteCharacterFromBook(CBPersonajes.getValue(), CBLibros.getValue());
 			} catch (Exception e) {
 				buttBorrar.setDisable(true);
 				utils.Dialog.showError("Borrar Personaje", "Ha surgido un error al borrar la parte", "");

@@ -57,7 +57,7 @@ public class AñadirLibroController {
     		try {
         		nuevo = l.getBookByName(TfTitulo.getText());
 			} catch (Exception e) {}
-        	if (nuevo.getId()<0 && !TfTitulo.getText().isEmpty() &&TFAño.getValue().getYear()>1000 && !TFGenero.getText().isEmpty() && !TFDescripcion.getText().isEmpty()) {
+        	if (nuevo == null && !TfTitulo.getText().isEmpty() &&TFAño.getValue().getYear()>1000 && !TFGenero.getText().isEmpty() && !TFDescripcion.getText().isEmpty()) {
 
         		Libro book1 = new Libro(TfTitulo.getText(),TFAño.getValue().getYear(),TFGenero.getText(), TFDescripcion.getText(), usuario);
             	creaLibro(book1);
