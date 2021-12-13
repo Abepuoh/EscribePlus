@@ -1,7 +1,5 @@
 package controller;
 
-import javax.persistence.EntityManager;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +7,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.DAO.LibroDAO;
-import model.DAO.UsuarioDAO;
 import model.DataObject.Libro;
 import model.DataObject.Usuario;
 import utils.Dialog;
@@ -54,9 +51,7 @@ public class AñadirLibroController {
      */
     @FXML
     void añadirLibro(ActionEvent event) {
-    	UsuarioDAO u=new UsuarioDAO();
     	LibroDAO l = new LibroDAO();
-    	Libro l1 = new Libro();
     	try {
     		Libro nuevo = new Libro();
     		try {

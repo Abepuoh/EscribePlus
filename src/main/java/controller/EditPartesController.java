@@ -1,17 +1,13 @@
 package controller;
 
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import model.DAO.LibroDAO;
 import model.DAO.PartesDAO;
 import model.DataObject.Libro;
 import model.DataObject.Partes;
@@ -37,7 +33,7 @@ public class EditPartesController {
     
     private ObservableList<Partes> partes;
 
-    
+     
     private PartesDAO parDao=new PartesDAO();
     
     public void initialize() {
@@ -46,18 +42,17 @@ public class EditPartesController {
     		this.partes = FXCollections.observableArrayList();
     		this.partes.setAll(parDao.getByLibro(libro));
         	buttBorrar.setDisable(true);
-        	buttAñadir.setDisable(true);
-        	CBPartes.setItems(partes);
+        	buttAñadir.setDisable(true); 
             CBPartes.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
                 buttBorrar.setDisable(false);
             });
-		} catch (Exception e) {}
+		} catch (Exception e) {} 
 	}
     
     @FXML
     public void mostrarBtt() {
     	buttAñadir.setDisable(false);
-    }
+    } 
     
     @FXML
     void añadirParte(ActionEvent event) {

@@ -43,7 +43,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
 			throw new IllegalStateException(e);
-		} catch (RollbackException e) {
+		} catch (RollbackException e) { 
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -109,7 +109,7 @@ public class PersonajeDAO implements IPersonajeDAO {
 	}
 
 	public List<Personaje> mostrarPorLibro(Libro l) {
-		List<Personaje> result = new ArrayList<>();
+		List<Personaje> result = new ArrayList<>(); 
 		try {
 			em.getTransaction().begin();
 			TypedQuery<Personaje> q = em.createNamedQuery("getPersonajeFromBook", Personaje.class).setParameter("idlibro", l.getId());
@@ -122,6 +122,24 @@ public class PersonajeDAO implements IPersonajeDAO {
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
+	/**
+	public List<Personaje> borrarPorLibro(Personaje p,Libro l) {
+		List<Personaje> result = new ArrayList<>();  
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Personaje> q = em.createNamedQuery("removePersonajeFromBook", Personaje.class);
+					q.setParameter("personaje", p.getId());
+					q.setParameter("libro", l.getId()); 
+			result = q.getResultList();
+			em.getTransaction().commit();
+			return result;
+		} catch (IllegalStateException e) {
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+		}
+	}
+	*/
 
 	@Override
 	public Personaje getCharacterByName(String nombre) {

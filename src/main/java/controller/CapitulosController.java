@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -61,7 +60,7 @@ public class CapitulosController {
 
 
     private static Libro milibro;
-    private static Capitulo currentCapitulo;
+    public static Capitulo currentCapitulo;
     private PartesDAO parDao=new PartesDAO();
     private CapituloDAO cadao=new CapituloDAO();
     private Notas_CapDAO ndao=new Notas_CapDAO();
@@ -70,7 +69,7 @@ public class CapitulosController {
     	try {
     		 milibro=MainLibrosController.currentBook;
     			this.partes = FXCollections.observableArrayList();
-    			this.partes.setAll(parDao.getByLibro(milibro));
+    			this.partes.setAll(parDao.getByLibro(milibro)); 
     			buttEditarCap.setDisable(true);
     	        CBParte.setItems(partes);
     	        CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
@@ -102,7 +101,7 @@ public class CapitulosController {
 	}
 
 	private void configuratablaNotas(Capitulo c) {
-		try {
+		try { 
 			this.Notas_Cap = FXCollections.observableArrayList();
 			this.Notas_Cap.setAll(ndao.getFromCapitulos(currentCapitulo));
 			TCDescripcion.setCellValueFactory(
@@ -175,6 +174,7 @@ public class CapitulosController {
     @FXML
     void irCapitulo() {
     	try {
+    		currentCapitulo=TVCapitulos.getSelectionModel().getSelectedItem();
 			App.setRoot("EscribirCap");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

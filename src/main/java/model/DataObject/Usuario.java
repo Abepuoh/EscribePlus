@@ -65,7 +65,7 @@ public class Usuario implements Serializable {
     }
     public Usuario(String name, String email, String password, int phone,List<Libro> books) {
         this.id = -1L;
-    	this.name = name;
+    	this.name = name; 
         this.email = email;
         this.password = password;
         this.phone = phone;

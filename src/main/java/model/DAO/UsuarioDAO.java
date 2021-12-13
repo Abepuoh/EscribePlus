@@ -22,7 +22,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	EntityManager em = createEM();
 
-
 	@Override
 	public void crear(Usuario aux) {
 		try {
@@ -137,7 +136,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.getTransaction().begin();
 			TypedQuery<Usuario> q = em.createNamedQuery("getUserByMailAndPass", Usuario.class);
 			q.setParameter("email", email);
-			q.setParameter("password", contraseña);
+			q.setParameter("password", contraseña); 
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {

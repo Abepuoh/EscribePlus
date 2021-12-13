@@ -10,9 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import model.DAO.CapituloDAO;
-import model.DAO.PartesDAO;
 import model.DataObject.Capitulo;
-import model.DataObject.Libro;
 import model.DataObject.Partes;
 
 public class EditCapitulosController {
@@ -27,7 +25,7 @@ public class EditCapitulosController {
 	private Button buttAñadir;
 
 	@FXML
-	private Button buttBorrar;
+	private Button buttBorrar; 
 
 	@FXML
 	private Button buttSalir;
@@ -37,7 +35,7 @@ public class EditCapitulosController {
     private ObservableList<Capitulo> capitulos;
     
     private CapituloDAO capDao=new CapituloDAO();
-
+    
     public void initialize() {
     	try {
     		parte=CapitulosController.currentParte;

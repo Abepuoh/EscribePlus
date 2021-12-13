@@ -72,7 +72,7 @@ public class Libro implements ILibro, Serializable {
 		this.year = year;
 		this.genre = genre;
 		this.description = description;
-		this.user = id_user;
+		this.user = id_user; 
 		this.book_notes = new ArrayList<Notas_Lib>();
 		this.recordatorios =  new ArrayList<Recordatorio>();
 		this.parts = new ArrayList<Partes>();

@@ -12,93 +12,97 @@ import javafx.scene.control.TextField;
 import model.DAO.LibroDAO;
 import model.DAO.PersonajeDAO;
 import model.DataObject.Libro;
-import model.DataObject.Partes;
 import model.DataObject.Personaje;
-import model.DataObject.Usuario;
 
 public class EditPersonajesController {
 
-    @FXML
-    private ComboBox<Libro> CBPersonajes;
+	@FXML
+	private ComboBox<Libro> CBLibros;
 
-    @FXML
-    private TextField TFTAlineamiento;
+	@FXML
+	private ComboBox<Personaje> CBPersonajes;
 
-    @FXML
-    private TextField TFTNombre;
-    
+	@FXML
+	private TextField TFTAlineamiento;
 
-    @FXML
-    private Button buttBorrar;
+	@FXML
+	private TextField TFTNombre;
 
-    @FXML
-    private Button buttCrear;
+	@FXML
+	private Button buttBorrar;
 
-    @FXML
-    private TextField txtDescripcion;
-    
-    private LibroDAO ldao = new LibroDAO();
-    private PersonajeDAO pdao = new PersonajeDAO();
-    private ObservableList<Libro> libros;
-    private static Usuario usuario;
-    
-    @FXML
-    void initialize() {
-    	utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
-		usuario = transfer.getUser();
-    	try {
-    		this.libros = FXCollections.observableArrayList();
-    		this.libros.setAll(ldao.getBooksByAuthor(usuario));
-        	CBPersonajes.setItems(libros);
-            CBPersonajes.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
-               
-            });
-		} catch (Exception e) {}
-    }
+	@FXML
+	private Button buttCrear;
 
-    @FXML
-    void borrarPersonaje(ActionEvent event) {
+	@FXML 
+	private Button buttAñadir;
 
-    	if(!TFTNombre.getText().isEmpty()) {
-    		Personaje p = pdao.getCharacterByName(TFTNombre.getText());
-        	
-        	if(p==null) {
-        		pdao.borrar(p.getId());
-        	}else {
-        		//mensaje de error
-        	}
-    	}
-    	
-    }
+	@FXML
+	private TextField txtDescripcion;
 
-    @FXML
-    void crearEditarPersonaje(ActionEvent event) {
-    	
-    	
-    	if(!TFTAlineamiento.getText().isEmpty() && !TFTNombre.getText().isEmpty() && !txtDescripcion.getText().isEmpty()) {
-    		Libro l = CBPersonajes.getSelectionModel().getSelectedItem();
-    		Personaje p = pdao.getCharacterByName(TFTNombre.getText());
-        	System.out.println(p);
-        	if(p==null) {
-        		p = new Personaje();
-        		p.setNombre(TFTNombre.getText());
-        		p.setAlineamiento(TFTAlineamiento.getText());
-        		p.setDescripcion(txtDescripcion.getText());
-        		pdao.crear(p);
-        		ldao.addCharactertoBook(p, l);
-        	}else {
-        		p.setAlineamiento(TFTAlineamiento.getText());
-        		p.setDescripcion(txtDescripcion.getText());
-        		pdao.editar(p);
-        	}
-    	}
+	private PersonajeDAO pdao = new PersonajeDAO();
+	private LibroDAO ldao = new LibroDAO();
+	private ObservableList<Personaje> personajes = FXCollections.observableArrayList();
+	private ObservableList<Libro> libros = FXCollections.observableArrayList();
 
-    	
-    }
-    
-    @FXML
-    private void switchToLibro() throws IOException {
-        App.setRoot("MainLibros");
-    }
+	@FXML
+	void initialize() {
+
+		this.personajes.setAll(pdao.getAll()); 
+		this.libros.setAll(ldao.getAll());
+		buttBorrar.setDisable(true);
+		CBPersonajes.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
+			buttBorrar.setDisable(false);
+		});
+		CBLibros.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
+			buttBorrar.setDisable(false);
+		});
+
+	}
+
+	@FXML
+	void añadePersonaje(ActionEvent event) {
+
+	}
+
+	@FXML
+	void borrarPersonaje(ActionEvent event) {
+		Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres borra la parte?",
+				"Vas a borrar: "+CBPersonajes.getValue().getNombre()); 
+		if(CBPersonajes.getValue() != null && CBLibros.getValue() != null  && confirmacion) {			
+			try {
+				//pdao.borrarPorLibro(CBPersonajes.getValue(),CBLibros.getValue());	    	
+			} catch (Exception e) {
+				buttBorrar.setDisable(true);
+				utils.Dialog.showError("Borrar Personaje", "Ha surgido un error al borrar la parte", "");
+			}
+		}
+	}
+
+	@FXML
+	void crearEditarPersonaje(ActionEvent event) {
+
+		if (CBPersonajes.getValue() != null) {
+			Personaje p = new Personaje();
+			p.setNombre(TFTNombre.getText());
+			p.setDescripcion(txtDescripcion.getText());
+			p.setAlineamiento(TFTAlineamiento.getText());
+			p.addLibro(MainLibrosController.currentBook);
+			pdao.editar(p);
+		} else if (CBPersonajes.getValue() == null) {
+			Personaje p = new Personaje();
+			p.setNombre(TFTNombre.getText());
+			p.setDescripcion(txtDescripcion.getText());
+			p.setAlineamiento(TFTAlineamiento.getText());
+			p.addLibro(MainLibrosController.currentBook);
+			pdao.crear(p);
+		}
+
+	}
+
+	@FXML
+	private void switchToLibro() throws IOException {
+		App.setRoot("MainLibros");
+	}
 
 }

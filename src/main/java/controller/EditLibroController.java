@@ -29,7 +29,7 @@ public class EditLibroController {
 
     @FXML
     private Button buttEditar;
-
+ 
     @FXML
     private Button buttSalir;
 
@@ -40,7 +40,7 @@ public class EditLibroController {
     public void initialize() {
     	LibroDAO l = new LibroDAO();
 		currentLibro=l.getBookByName(MainLibrosController.currentBook.getTitle());
-    	TfTitulo.setText(currentLibro.getTitle());
+    	TfTitulo.setText(currentLibro.getTitle()); 
     	TFGenero.setText(currentLibro.getGenre());
     	TFDescripcion.setText(currentLibro.getDescription());
     	TFAño.setValue(LocalDate.of(currentLibro.getYear(), 1, 1));

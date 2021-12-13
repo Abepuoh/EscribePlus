@@ -31,7 +31,7 @@ public class logInController {
 	void logIn(ActionEvent event) {
 		String email = this.TFEmail.getText();
 		String password = this.TFPassword.getText();
-		UsuarioDAO aux = new UsuarioDAO();
+		UsuarioDAO aux = new UsuarioDAO(); 
 
 		if (!TFEmail.getText().isEmpty() && !TFPassword.getText().isEmpty()) {
 			;
