@@ -46,6 +46,7 @@ public class RegistroController {
 					aux.crear(user);
 					utils.Dialog.showDialog(Alert.AlertType.INFORMATION, "Registro", "Registro exitoso",
 							"Usuario registrado correctamente");
+					App.setRoot("MainLibros");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

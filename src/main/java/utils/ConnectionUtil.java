@@ -20,7 +20,7 @@ import model.DataObject.Usuario;
 public class ConnectionUtil {
 
 	private static EntityManagerFactory emf;
-	public static boolean choice = true; // ----->TRUE LOCAL ------> FALSE NUBE
+	public static boolean choice = false; // ----->TRUE NUBE ------> FALSE LOCAL
 	private static final String LOCAL = "AplicacionH2";
 	private static final String REMOTE = "aplicacionMariaDB";
 	
@@ -43,9 +43,9 @@ public class ConnectionUtil {
 	public static EntityManagerFactory getInstance() {
 		if (emf == null) {
 			if (choice) {
-				emf = Persistence.createEntityManagerFactory(LOCAL);
-			} else {
 				emf = Persistence.createEntityManagerFactory(REMOTE);
+			} else {
+				emf = Persistence.createEntityManagerFactory(LOCAL);
 			}
 		}
 		return emf;

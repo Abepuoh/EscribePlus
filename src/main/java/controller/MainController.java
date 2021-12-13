@@ -53,7 +53,9 @@ public class MainController implements Initializable {
     @FXML
     void conectar(ActionEvent event) {
     	if(CBBBDD.getSelectionModel().getSelectedItem()!=null) {
-    		ConnectionUtil.transferH2ToMariaDB();
+    		if(CBBBDD.getValue()=="aplicacionMariaDB") {
+    			ConnectionUtil.choice=true;
+    		}
     	}
     }
 
