@@ -62,7 +62,7 @@ public class CapitulosController {
     private static Libro milibro;
     public static Capitulo currentCapitulo;
     private PartesDAO parDao=new PartesDAO();
-    private CapituloDAO cadao=new CapituloDAO();
+    private CapituloDAO cadao=new CapituloDAO(); 
     private Notas_CapDAO ndao=new Notas_CapDAO();
 
     public void initialize() {
@@ -73,9 +73,11 @@ public class CapitulosController {
     			buttEditarCap.setDisable(true);
     	        CBParte.setItems(partes);
     	        CBParte.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
-    	            currentParte=newValue;
-    	        	buttEditarCap.setDisable(false);
-    	        	configuratablacapitulos(newValue);
+    	        	if(newValue!=null) {
+    	        		currentParte=newValue;
+    	        		buttEditarCap.setDisable(false);
+    	        		configuratablacapitulos(newValue);    	        		
+    	        	}
     	        });
 		} catch (Exception e) {
 			e.printStackTrace();

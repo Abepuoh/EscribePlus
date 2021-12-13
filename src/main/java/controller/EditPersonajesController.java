@@ -41,7 +41,7 @@ public class EditPersonajesController {
 	private TextField txtDescripcion;
 
 	private PersonajeDAO pdao = new PersonajeDAO();
-	private LibroDAO ldao = new LibroDAO();
+	private LibroDAO ldao = new LibroDAO(); 
 	private ObservableList<Personaje> personajes = FXCollections.observableArrayList();
 	private ObservableList<Libro> libros = FXCollections.observableArrayList();
 
@@ -51,8 +51,8 @@ public class EditPersonajesController {
 		this.personajes.setAll(pdao.getAll()); 
 		this.libros.setAll(ldao.getAll());
 		buttBorrar.setDisable(true);
-		CBLibros.setItems(libros);
 		CBPersonajes.setItems(personajes);
+		CBLibros.setItems(libros);
 		CBPersonajes.getSelectionModel().selectedItemProperty().addListener((Observable, oldValue, newValue) -> {
 			buttBorrar.setDisable(false);
 		});
@@ -79,7 +79,7 @@ public class EditPersonajesController {
 
 	@FXML
 	void borrarPersonaje(ActionEvent event) {
-		Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres borra la parte?",
+		Boolean confirmacion=utils.Dialog.showConfirm("Confirmación", "¿Quieres borra el personaje?",
 				"Vas a borrar: "+CBPersonajes.getValue().getNombre()); 
 		if(CBPersonajes.getValue() != null && CBLibros.getValue() != null  && confirmacion) {			
 			try {
@@ -87,14 +87,13 @@ public class EditPersonajesController {
 			} catch (Exception e) {
 				e.printStackTrace();
 				buttBorrar.setDisable(true);
-				utils.Dialog.showError("Borrar Personaje", "Ha surgido un error al borrar la parte", "");
+				utils.Dialog.showError("Borrar Personaje", "Ha surgido un error al borrarlo", "");
 			}
 		}
 	}
 
 	@FXML
 	void crearEditarPersonaje(ActionEvent event) {
-
 		if (CBPersonajes.getValue() != null) {
 			Personaje p = new Personaje();
 			p.setNombre(TFTNombre.getText());
@@ -118,7 +117,7 @@ public class EditPersonajesController {
 				e.printStackTrace();
 			}
 		}
-
+		
 	}
 
 	@FXML

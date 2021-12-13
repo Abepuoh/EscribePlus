@@ -40,7 +40,7 @@ public class EditPartesController {
     	try {
     		libro=MainLibrosController.currentBook;
     		this.partes = FXCollections.observableArrayList();
-    		this.partes.setAll(parDao.getByLibro(libro));
+    		this.partes.setAll(parDao.getByLibro(libro)); 
         	buttBorrar.setDisable(true);
         	buttAñadir.setDisable(true); 
             CBPartes.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{

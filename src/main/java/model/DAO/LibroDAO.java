@@ -187,8 +187,8 @@ public class LibroDAO implements ILibroDAO {
 	}	
 	
 	public void deleteCharacterFromBook(Personaje p, Libro l) {
-		try {
-			List aux;
+		try { 
+			List aux; 
 			em.getTransaction().begin();
 			aux = l.getPersonajes();
 			aux.remove(p);
