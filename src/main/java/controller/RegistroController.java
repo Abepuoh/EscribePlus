@@ -44,26 +44,15 @@ public class RegistroController {
 					UsuarioSingleton usuarioSignleton = UsuarioSingleton.getInstance();
 					usuarioSignleton.setUser(user);
 					aux.crear(user);
-					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setHeaderText(null);
-					alert.setTitle("Informacion");
-					alert.setContentText("Se ha añadido correctamente");
-					alert.showAndWait();
+					utils.Dialog.showDialog(Alert.AlertType.INFORMATION, "Registro", "Registro exitoso",
+							"Usuario registrado correctamente");
 				}
 			} catch (Exception e) {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-				alert.setHeaderText(null);
-				alert.setTitle("Error de creacion");
-				alert.setContentText("El usuario ya existe");
-				alert.showAndWait();
+				e.printStackTrace();
+				utils.Dialog.showDialog(Alert.AlertType.ERROR, "Registro", "Error", "Error al registrar usuario");
 			}
 		} else {
-			Alert alert = new Alert(Alert.AlertType.ERROR);
-			alert.setHeaderText(null);
-			alert.setTitle("Error de creacion");
-			alert.setContentText("Porfavor no deje ningun dato vacío");
-			alert.showAndWait();
+			utils.Dialog.showDialog(Alert.AlertType.ERROR, "Registro", "Error", "No se puede dejar campos vacios");
 		}
 	}
-
 }

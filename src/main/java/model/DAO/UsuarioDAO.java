@@ -29,10 +29,13 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
+			e.printStackTrace();
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -44,9 +47,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
-                    throw new IllegalStateException("Ya hay una transaccion activa");
-                        
+			e.printStackTrace();
+            throw new IllegalStateException("Ya hay una transaccion activa");       
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al editar el usuario deshaciendo la transaccion");
 		}
 	}
@@ -59,8 +63,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.remove(delete);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al editar el usuario deshaciendo la transaccion");
 		}
 	}
@@ -75,8 +81,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -91,8 +99,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -107,8 +117,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -123,8 +135,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			em.getTransaction().commit();
 			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 	}
@@ -140,8 +154,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 			result = q.getResultList().get(0);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
+			e.printStackTrace();
 			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
 		}
 		return result;

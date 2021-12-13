@@ -61,7 +61,7 @@ public class EditNotasCap {
     	
     }
     
-    @FXML
+    @FXML 
     void crearNota(ActionEvent event) {
 
     }

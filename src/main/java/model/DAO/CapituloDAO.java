@@ -32,11 +32,14 @@ public class CapituloDAO implements ICapituloDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
+			e.printStackTrace();
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -47,9 +50,11 @@ public class CapituloDAO implements ICapituloDAO {
 			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -61,9 +66,11 @@ public class CapituloDAO implements ICapituloDAO {
 			em.remove(deleted);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -75,12 +82,14 @@ public class CapituloDAO implements ICapituloDAO {
 			TypedQuery<Capitulo> q = em.createNamedQuery("getAll", Capitulo.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 	@Override
@@ -90,12 +99,14 @@ public class CapituloDAO implements ICapituloDAO {
 			em.getTransaction().begin();
 			result = em.find(Capitulo.class, id);
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 	public List<Capitulo> getByParte(Partes p) {
 		List<Capitulo> result = new ArrayList<>();
@@ -104,11 +115,13 @@ public class CapituloDAO implements ICapituloDAO {
 			TypedQuery<Capitulo> q = em.createNamedQuery("getCapituloFromParte", Capitulo.class).setParameter("idpartes", p.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 }

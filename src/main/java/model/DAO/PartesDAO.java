@@ -35,11 +35,14 @@ public class PartesDAO implements IPartesDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
+			e.printStackTrace();
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -50,27 +53,45 @@ public class PartesDAO implements IPartesDAO {
 			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
 	@Override
 	public void borrar(Long id) {
-		Partes delete = getById(id);
-		em.getTransaction().begin();
-		em.remove(delete);
-		em.getTransaction().commit();
+		try {
+			Partes delete = getById(id);
+			em.getTransaction().begin();
+			em.remove(delete);
+			em.getTransaction().commit();		
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
+		}
 	}
 
 	@Override
 	public List<Partes> getAll() {
 		List<Partes> result = new ArrayList<>();
-		em.getTransaction().begin();
-		TypedQuery<Partes> q = em.createNamedQuery("getAllPartes", Partes.class);
-		result = q.getResultList();
-		em.getTransaction().commit();
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Partes> q = em.createNamedQuery("getAllPartes", Partes.class);
+			result = q.getResultList();
+			em.getTransaction().commit();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
+		}
 		return result;
 	}
 
@@ -81,12 +102,14 @@ public class PartesDAO implements IPartesDAO {
 			em.getTransaction().begin();
 			result = em.find(Partes.class, id);
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 	public List<Partes> getByLibro(Libro l) {
@@ -96,12 +119,14 @@ public class PartesDAO implements IPartesDAO {
 			TypedQuery<Partes> q = em.createNamedQuery("getParteFromBook", Partes.class).setParameter("idlibro", l.getId());
 			result = q.getResultList();
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 }

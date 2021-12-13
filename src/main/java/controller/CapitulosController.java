@@ -80,12 +80,15 @@ public class CapitulosController {
     	        	}
     	        });
 		} catch (Exception e) {
+			e.printStackTrace();
 			Dialog.showError("Error", "", "");
 		}
        
     }
-
-    
+	/**
+	 * Metodo que configura la tabla de capitulos con los datos de la base de datos
+	 * @param p Parte del libro seleccionado
+	 */
 	private void configuratablacapitulos(Partes p) {
 		try {
 			capitulos = FXCollections.observableArrayList();
@@ -99,9 +102,15 @@ public class CapitulosController {
 				configuratablaNotas(newValue);
 			});
 			TVCapitulos.setItems(capitulos);
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.showError("Error", "", "");
+		}
 	}
-
+	/**
+	 * Metodo que configura la tabla de notas con los datos de la base de datos	
+	 * @param c Capitulo seleccionado
+	 */
 	private void configuratablaNotas(Capitulo c) {
 		try { 
 			this.Notas_Cap = FXCollections.observableArrayList();
@@ -112,10 +121,16 @@ public class CapitulosController {
 			TVNotas.setItems(Notas_Cap);
 			TVNotas.refresh();
 		} catch (Exception e) {
+			e.printStackTrace();
+			Dialog.showError("Error", "", "");
 		}
 
 	}
-
+	/**
+	 * Metodo que abre la ventana de edicion de capitulos
+	 * @param event Evento de click
+	 * @throws IOException Excepcion de entrada/salida
+	 */
     @FXML
     void editActos(ActionEvent event) throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditPartes.fxml"));
@@ -132,9 +147,14 @@ public class CapitulosController {
 			initialize();
 		} catch (IOException e) {
 			e.printStackTrace();
+			Dialog.showError("Error", "", "");
 		}
     }
-
+	/**
+	 * Metodo que abre la ventana de edicion de capitulos
+	 * @param event Evento de click
+	 * @throws IOException Excepcion de entrada/salida
+	 */
     @FXML
     void editarCap(ActionEvent event) throws IOException{
     	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditCapitulos.fxml"));
@@ -151,9 +171,14 @@ public class CapitulosController {
 			initialize();
 		} catch (IOException e) {
 			e.printStackTrace();
+			Dialog.showError("Error", "", "");
 		}
     }
-
+	/**
+	 * Metodo que abre la ventana de edicion de notas
+	 * @param event Evento de click	
+	 * @throws IOException Excepcion de entrada/salida
+	 */
     @FXML
     void editarNota(ActionEvent event) throws IOException{
     	FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("EditNotasCap.fxml"));
@@ -170,24 +195,35 @@ public class CapitulosController {
 			initialize();
 		} catch (IOException e) {
 			e.printStackTrace();
+			Dialog.showError("Error", "", "");
 		}
     }
-
+	/**
+	 * Método que abre la ventana de edicion de capitulos doble click y podemos editar el capitulo.
+	 */
     @FXML
     void irCapitulo() {
     	try {
     		currentCapitulo=TVCapitulos.getSelectionModel().getSelectedItem();
 			App.setRoot("EscribirCap");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
-
+	/**
+	 * Método que nos permite volver a la ventana de libros
+	 */
     @FXML
-    private void switchToLibro() throws IOException {
-        App.setRoot("MainLibros");
+    private void switchToLibro()  {
+        try {
+			App.setRoot("MainLibros");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
+	/**
+	 * Método que nos permite cerra la aplicacion
+	 */
     @FXML
     public void closeApp() {
         System.exit(0);

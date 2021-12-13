@@ -94,21 +94,28 @@ public class EditPersonajesController {
 
 	@FXML
 	void crearEditarPersonaje(ActionEvent event) {
-		Personaje person = new Personaje();
-
-		if (CBPersonajes.getValue() != null) { 
-			person.setNombre(TFTNombre.getText());
-			person.setDescripcion(txtDescripcion.getText());
-			person.setAlineamiento(TFTAlineamiento.getText());
-			person.addLibro(MainLibrosController.currentBook);
-			pdao.editar(person);
+		if (CBPersonajes.getValue() != null) {
+			Personaje p = new Personaje();
+			p.setNombre(TFTNombre.getText());
+			p.setDescripcion(txtDescripcion.getText());
+			p.setAlineamiento(TFTAlineamiento.getText());
+			p.addLibro(MainLibrosController.currentBook);
+			try {
+				pdao.editar(p);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} else if (CBPersonajes.getValue() == null) {
-			person.setNombre(TFTNombre.getText());
-			person.setDescripcion(txtDescripcion.getText());
-			person.setAlineamiento(TFTAlineamiento.getText());
-			person.addLibro(MainLibrosController.currentBook);
-			pdao.crear(person);
-			personajes.add(person);
+			Personaje p = new Personaje();
+			p.setNombre(TFTNombre.getText());
+			p.setDescripcion(txtDescripcion.getText());
+			p.setAlineamiento(TFTAlineamiento.getText());
+			p.addLibro(MainLibrosController.currentBook);
+			try {
+				pdao.crear(p);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 	}

@@ -51,15 +51,15 @@ public class EditUserController {
 			aux.setEmail(email);
 			aux.setPassword(password);
 			aux.setPhone(phone);
-			dao.editar(usuario);
-			Alert alert = new Alert(Alert.AlertType.INFORMATION);
-			alert.setHeaderText(null);
-			alert.setTitle("Informacion");
-			alert.setContentText("Se ha editado correctamente");
-			alert.showAndWait();
-
+			try {	
+				dao.editar(usuario);
+			} catch (Exception e) {
+				e.printStackTrace();
+				utils.Dialog.showError(  "Error al editar el usuario", "Error", e.getMessage());
+			}		
+		} else {
+			utils.Dialog.showError("Error al editar el usuario", "Error", "Debe llenar todos los campos");
 		}
-
 	}
 
 	@FXML

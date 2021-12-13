@@ -44,9 +44,11 @@ public class EditarNotasController {
 
     @FXML
     private Button buttEditarNota;
+
     private static Usuario autor= new Usuario();
     Notas_LibDAO nldao=new Notas_LibDAO();
     LibroDAO ldao=new LibroDAO();
+
     public void initialize() {
     	CBEditNLibros.getItems().addAll(ldao.getBooksByAuthor(autor));
     	CBEditNLibros.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
@@ -60,55 +62,80 @@ public class EditarNotasController {
     	});
     }
     
-    
     private void choiceNotas(Libro lb) {
-    	List<Notas_Lib> nl=nldao.getFromBook(lb);
-    	CBEditNotas.getItems().clear();
-    	CBEditNotas.getItems().addAll(nl);
+        try {
+            List<Notas_Lib> nl=nldao.getFromBook(lb);
+            CBEditNotas.getItems().clear();
+            CBEditNotas.getItems().addAll(nl);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     	
     }
-    private void choiceremoveNotas(Libro lb) {
-    	List<Notas_Lib> nl=nldao.getFromBook(lb);
-    	CBEditNotas.getItems().clear();
-    	CBRemoveNota.getItems().addAll(nl);
-    	
-    }
+    /**
+     * Metodo que nos permite borrar una nota
+     * @param event Evento que se produce al pulsar el boton
+     */
     @FXML
     public void borrarNota(ActionEvent event) {
     	if(!CBRemoveNota.getSelectionModel().isEmpty()) {
-    		Long id=CBRemoveNota.getSelectionModel().getSelectedItem().getId();
-    		nldao.borrar(id);
+            try {
+                Long id=CBRemoveNota.getSelectionModel().getSelectedItem().getId();
+                nldao.borrar(id);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     	}
     }
-
+    /**
+     * Metodo que nos permite crear una nota
+     * @param event Evento que se produce al pulsar el boton
+     */
     @FXML
     public void crearNota(ActionEvent event) {
     	if(!CBCREARNLibros.getSelectionModel().isEmpty()&&!TFCrearNDescripcion.getText().isBlank()) {
     		String descripcion=TFCrearNDescripcion.getText();
     		Libro lb=CBCREARNLibros.getSelectionModel().getSelectedItem();
-    		Notas_Lib nl=new Notas_Lib(descripcion, lb);
-    		nldao.crear(nl);
+    		try {
+                Notas_Lib nl=new Notas_Lib(descripcion, lb);
+                nldao.crear(nl);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     	}
     }
-
+    /**
+     * Metodo que nos permite editar una nota
+     * @param event Evento que se produce al pulsar el boton
+     */
     @FXML
     public void editarNota(ActionEvent event) {
     	if(!CBEditNLibros.getSelectionModel().isEmpty()&&!CBEditNotas.getSelectionModel().isEmpty()) {
     		String descripcion=TFNotaDescripcion.getText();
     		Long id=CBEditNotas.getSelectionModel().getSelectedItem().getId();
     		Libro lb=CBEditNLibros.getSelectionModel().getSelectedItem();
-    		Notas_Lib nl=new Notas_Lib(id, descripcion, lb);
-    		nldao.editar(nl);
+    		try {
+                Notas_Lib nl=new Notas_Lib(id, descripcion, lb);
+                nldao.editar(nl);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
     	}
     }
     public static void setautor(Usuario u) {
     	autor=u;
     }
-    
+    /**
+     * Método que nos permite volver a la vista anterior
+     * @throws IOException
+     */
     @FXML
     private void switchToLibro() throws IOException {
         App.setRoot("MainLibros");
     }
+    /**
+     * Método que nos permite cerrar la aplicación
+     */
     @FXML
     public void closeApp() {
     	System.exit(0);

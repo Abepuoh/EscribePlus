@@ -46,7 +46,9 @@ public class EditPartesController {
             CBPartes.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
                 buttBorrar.setDisable(false);
             });
-		} catch (Exception e) {} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
 	}
     
     @FXML
@@ -65,6 +67,7 @@ public class EditPartesController {
 				buttAñadir.setDisable(true);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			utils.Dialog.showError("Añadir Parte", "Ha surgido un error al añadir la parte", "");
 		}
     }
@@ -77,7 +80,8 @@ public class EditPartesController {
 			try {
 	    		parDao.borrar(selected.getId());
 	    		partes.remove(selected);
-			} catch (Exception e) {
+			} catch (Exception e) { 
+				e.printStackTrace();
 				buttBorrar.setDisable(true);
 				utils.Dialog.showError("Borrar Parte", "Ha surgido un error al borrar la parte", "");
 			}

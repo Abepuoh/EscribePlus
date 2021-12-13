@@ -34,11 +34,14 @@ public class Notas_CapDAO implements INotas_capDAO {
 			em.persist(aux);
 			em.getTransaction().commit();
 		} catch (EntityExistsException e) {
+			e.printStackTrace();
 			throw new EntityExistsException("El usuario ya existe");
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -49,9 +52,11 @@ public class Notas_CapDAO implements INotas_capDAO {
 			em.merge(aux);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -63,9 +68,11 @@ public class Notas_CapDAO implements INotas_capDAO {
 			em.remove(deleted);
 			em.getTransaction().commit();
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
 	}
 
@@ -77,12 +84,14 @@ public class Notas_CapDAO implements INotas_capDAO {
 			TypedQuery<Notas_Cap> q = em.createNamedQuery("getAllNotas_Cap", Notas_Cap.class);
 			result = q.getResultList();
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 
 	@Override
@@ -92,25 +101,29 @@ public class Notas_CapDAO implements INotas_capDAO {
 			em.getTransaction().begin();
 			result = em.find(Notas_Cap.class, id);
 			em.getTransaction().commit();
-			return result;
 		} catch (IllegalStateException e) {
+			e.printStackTrace();
 			throw new IllegalStateException("Ya hay una transaccion activa");
 		} catch (RollbackException e) {
-			throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
 		}
+		return result;
 	}
 	public List<Notas_Cap> getFromCapitulos(Capitulo c){
-        List <Notas_Cap> result = new ArrayList();
-	try {
-		em.getTransaction().begin();
-		TypedQuery<Notas_Cap> q = em.createNamedQuery("getNotasfromLibro", Notas_Cap.class).setParameter("idcapitulo", c.getId());
-                    result = q.getResultList();
-		em.getTransaction().commit();
+        List <Notas_Cap> result = new ArrayList<Notas_Cap>();
+		try {
+			em.getTransaction().begin();
+			TypedQuery<Notas_Cap> q = em.createNamedQuery("getNotasfromLibro", Notas_Cap.class).setParameter("idcapitulo", c.getId());
+						result = q.getResultList();
+			em.getTransaction().commit();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			throw new IllegalStateException("Ya hay una transaccion activa");
+		} catch (RollbackException e) {
+			e.printStackTrace();
+			throw new RollbackException("Error al crear el recordatorio deshaciendo la transaccion");
+		}
 		return result;
-	} catch (IllegalStateException e) {
-		throw new IllegalStateException("Ya hay una transaccion activa");
-	} catch (RollbackException e) {
-		throw new RollbackException("Error al crear el usuario deshaciendo la transaccion");
-	}
     }
 }

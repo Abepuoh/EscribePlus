@@ -47,9 +47,14 @@ public class EditCapitulosController {
         	CBCapitulos.getSelectionModel().selectedItemProperty().addListener((Observable,oldValue,newValue)->{
                 buttBorrar.setDisable(false);
             });
-		} catch (Exception e) {}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-    
+    /**
+	 * Método que nos permite añadir un nuevo capítulo
+	 * @param event Evento que se produce al pulsar el botón
+	 */
 	@FXML
 	void añadirCapitulo(ActionEvent event) {
     	try {
@@ -62,10 +67,14 @@ public class EditCapitulosController {
 				buttAñadir.setDisable(true);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			utils.Dialog.showError("Añadir Parte", "Ha surgido un error al añadir el Capitulo", "");
 		}
 	}
-
+	/**
+	 * Método que nos permite borrar un capítulo
+	 * @param event Evento que se produce al pulsar el botón
+	 */
 	@FXML
 	void borrarCapitulo(ActionEvent event) {
 		Capitulo selected =  CBCapitulos.getSelectionModel().getSelectedItem();
@@ -75,13 +84,16 @@ public class EditCapitulosController {
 	    		capDao.borrar(selected.getId());
 	    		capitulos.remove(selected);
 			} catch (Exception e) {
+				e.printStackTrace();
 				buttBorrar.setDisable(true);
 				utils.Dialog.showError("Borrar Parte", "Ha surgido un error al borrar el Capitulo", "");
 			}
 
 		}
 	}
-
+	/**
+	 * Método que nos muestra un botón
+	 */
 	@FXML
 	void mostrarBtt(KeyEvent event) {
 		buttAñadir.setDisable(false);
