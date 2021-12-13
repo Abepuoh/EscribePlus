@@ -78,7 +78,7 @@ public class MainLibrosController {
     
     public void initialize() {
     	utils.UsuarioSingleton transfer = utils.UsuarioSingleton.getInstance();
-		usuario = transfer.getUser();
+		usuario = transfer.getUser(); 
     	configuraTablaLibros();
     }
     

@@ -23,7 +23,9 @@ import model.IDataObject.IPersonaje;
 @NamedQueries({ @NamedQuery(name = "getAllPersonajes", query = "SELECT p FROM Personaje p"),
 		@NamedQuery(name = "getPersonajeByName", query = "SELECT p FROM Personaje p WHERE p.nombre = :nombrepersonaje"),
 		@NamedQuery(name = "getPersonajeFromBook", query = "SELECT p FROM Personaje p "),
-		@NamedQuery(name = "getPersonajeFromUser", query = "SELECT p FROM Personaje p ") })
+		@NamedQuery(name = "getPersonajeFromUser", query = "SELECT p FROM Personaje p "),
+		//@NamedQuery(name = "removePersonajeFromBook", query = "DELETE FROM Personaje p WHERE p.libroRef.id =: libro ")
+		})
 public class Personaje implements IPersonaje, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,7 +48,10 @@ public class Personaje implements IPersonaje, Serializable {
 	public Personaje() {
 		this(-1L, "Por defecto", -1, "Por defecto", "Por defecto", "Por defecto", new ArrayList<Libro>());
 	}
-
+	
+	public Personaje(String nombre, String descripcion, String alineamiento) {
+		this(-1L, nombre, -1, descripcion, alineamiento, "Por defecto", new ArrayList<Libro>());
+	} 
 	public Personaje(Long id, String nombre, int edad, String descripcion, String alineamiento, String foto,
 			List<Libro> libroRef) {
 
@@ -63,7 +68,16 @@ public class Personaje implements IPersonaje, Serializable {
 			List<Libro> libroRef) {
 		this(-1L,nombre,edad,descripcion,alineamiento,foto,libroRef);
 	}
-	
+	/**
+	 * Añadir libro a la lista de libros del personaje
+	 */
+	public void addLibro(Libro libro) {
+		if (libroRef == null) {
+			libroRef = new ArrayList<Libro>();
+		}
+		libroRef.add(libro);
+	}
+
 	@Override
 	public String getAlineamiento() {
 		return alineamiento;
@@ -114,7 +128,7 @@ public class Personaje implements IPersonaje, Serializable {
 		this.descripcion = descripcion;
 	}
 
-	@Override
+	@Override 
 	public String getFoto() {
 		return foto;
 	}
@@ -149,8 +163,7 @@ public class Personaje implements IPersonaje, Serializable {
 
 	@Override
 	public String toString() {
-		return "Personaje [id=" + id + ", nombre=" + nombre + ", edad=" + edad + ", descripcion=" + descripcion
-				+ ", alineamiento=" + alineamiento + ", foto=" + foto + ", libroRef="  + "]";
+		return nombre;
 	}
 
 }

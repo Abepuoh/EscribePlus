@@ -33,8 +33,6 @@ public class EditarNotasController {
 
     @FXML
     private TextField TFCrearNDescripcion;
-
-
     @FXML
     private TextField TFNotaDescripcion;
 
